@@ -2,8 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,intellij,gradle,images
 
 ### Adicionales agregados manualmente ###
-log_preguntas
+*log_preguntas
 log_preguntas.txt
+/log_preguntas.txt
 /.idea/
 *.class
 /.gradle/

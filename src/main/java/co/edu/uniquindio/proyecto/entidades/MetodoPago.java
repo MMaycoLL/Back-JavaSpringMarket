@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public enum MetodoPado {
+public enum MetodoPago {
     NEQUI,
     PAYPAL,
     TARJETA_CREDITO,

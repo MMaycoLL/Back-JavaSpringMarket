@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -11,16 +12,20 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
-public class Imagen implements Serializable {
+public class Envio implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idImagen;
+    private Integer idEnvio;
 
-    private Integer idProducto;
 
     @Column(nullable = false)
-    private String urlImagen;
+    private String direccionEnvio;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaEnvio;
+
+    @Column(nullable = false)
+    private String estadoEnvio;
 }

@@ -24,9 +24,9 @@ public class Producto implements Serializable {
     private Integer idUsuario;
 
     @Column(length = 100, nullable = false)
-    private String nombre;
+    private String nombreProducto;
 
-    private String descripcion;
+    private String descripcionProducto;
 
     @PositiveOrZero
     @Column(nullable = false)

@@ -19,7 +19,7 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
 
     @Column(nullable = false)
-    private String nombre;
+    private String nombreCategoria;
 
-    private String descripcion;
+    private String descripcionCategoria;
 }

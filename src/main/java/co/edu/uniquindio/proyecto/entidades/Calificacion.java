@@ -29,5 +29,5 @@ public class Calificacion implements Serializable {
     @Column(nullable = false)
     private Integer valorCalificacion;
 
-    private String comentario;
+    private String comentarioCalificacion;
 }

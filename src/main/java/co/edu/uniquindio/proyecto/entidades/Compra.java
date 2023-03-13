@@ -26,6 +26,9 @@ public class Compra implements Serializable {
 
     private String idMetodoPago;
 
+
+    private Integer idEnvio;
+
     @PositiveOrZero
     @Column(nullable = false)
     private Integer totalCompra;
@@ -35,6 +38,6 @@ public class Compra implements Serializable {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MetodoPado metodoPago;
+    private MetodoPago metodoPago;
     // se esta agregando el metodo de pago para que se pueda hacer la relacion con la tabla metodo de pago
 }
