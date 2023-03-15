@@ -1,11 +1,14 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
@@ -15,16 +18,12 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Descuento implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDescuento;
 
-    private Integer idProducto;
-
-    private Integer idUsuario;
-
-    @PositiveOrZero
+    @Positive
     @Column(nullable = false)
     private Integer porcentajeDescuento;
 
@@ -33,5 +32,6 @@ public class Descuento implements Serializable {
 
     @Column(nullable = false)
     private LocalDateTime fechaFinDescuento;
-}
 
+
+}

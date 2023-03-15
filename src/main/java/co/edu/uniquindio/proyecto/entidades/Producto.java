@@ -1,12 +1,14 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,28 +18,29 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Producto implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProducto;
 
-    private Integer idUsuario;
-
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false, length = 100)
     private String nombreProducto;
 
+    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
     private String descripcionProducto;
 
     @PositiveOrZero
     @Column(nullable = false)
     private Integer precioActual;
 
-    private Boolean disponibilidad;
+    @PositiveOrZero
+    @Column(nullable = false)
+    private Integer disponibilidad;
 
     @Column(nullable = false)
-    private LocalDate fechaLimite;
+    private LocalDateTime fechaLimite;
 
+    @Column(nullable = false)
     private String estadoProducto;
 
 }
-

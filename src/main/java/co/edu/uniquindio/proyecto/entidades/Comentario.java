@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.io.Serializable;
@@ -14,18 +16,16 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Comentario implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idComentario;
-
-    private String idUsuario;
-
-    private String idProducto;
+    private Integer idComentario;
 
     @Column(nullable = false)
     private LocalDateTime fechaComentario;
 
+    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
     private String comentario;
-}
 
+
+}

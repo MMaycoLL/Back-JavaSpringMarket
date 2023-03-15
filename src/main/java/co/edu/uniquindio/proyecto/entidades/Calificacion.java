@@ -1,10 +1,13 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
+
 
 @Entity
 @Getter
@@ -14,20 +17,15 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Calificacion implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCalificacion;
 
-    private Integer idUsuario;
-
-    private Integer idProducto;
-
-    private Integer IdCompra;
-
-    @PositiveOrZero
+    @Positive
     @Column(nullable = false)
     private Integer valorCalificacion;
 
+    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
     private String comentarioCalificacion;
 }

@@ -1,11 +1,9 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 public enum MetodoPago {
-    NEQUI,
-    PAYPAL,
+    EFECTIVO,
     TARJETA_CREDITO,
     TARJETA_DEBITO,
-    TRANSFERENCIA_BANCARIA,
-    PSE,
-
+    PAYPAL,
+    TRANSFERENCIA_BANCARIA
 }

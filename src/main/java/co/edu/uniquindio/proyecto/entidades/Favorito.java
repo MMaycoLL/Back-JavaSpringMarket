@@ -1,10 +1,13 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,16 +17,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Favorito implements Serializable {
+
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idFavorito;
 
-    private Integer idUsuario;
-
-    private Integer idProducto;
-
     @Column(nullable = false)
-    private LocalDate fechaAgregado;
-
+    private LocalDateTime fechaAgregado;
 }

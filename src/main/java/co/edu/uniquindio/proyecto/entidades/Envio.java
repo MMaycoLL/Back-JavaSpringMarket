@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,13 +14,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Envio implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEnvio;
-
 
     @Column(nullable = false)
     private String direccionEnvio;
@@ -26,6 +27,6 @@ public class Envio implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaEnvio;
 
-    @Column(nullable = false)
-    private String estadoEnvio;
+
+
 }
