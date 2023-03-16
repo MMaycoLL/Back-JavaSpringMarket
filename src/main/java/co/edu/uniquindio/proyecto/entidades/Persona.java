@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Getter
@@ -13,11 +12,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)//Comparte atributos de herencia
+@MappedSuperclass //Hereda
 public class Persona implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPersona;
 
     @Column(length = 100, nullable = false)

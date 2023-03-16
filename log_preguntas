@@ -1,0 +1,7 @@
+@positiveOrZero
+
+utiliar element colection para la imagen utilizando un Map
+
+@ElementCollecion
+private Map<String>
+esto va en producto

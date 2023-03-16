@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
@@ -21,6 +19,7 @@ public class Descuento implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDescuento;
 
     @Positive
@@ -31,7 +30,9 @@ public class Descuento implements Serializable {
     private LocalDateTime fechaInicioDescuento;
 
     @Column(nullable = false)
-    private LocalDateTime fechaFinDescuento;
+    private LocalDateTime fechaFinalDescuento;
 
+    @ManyToOne
+    private Producto producto;
 
 }

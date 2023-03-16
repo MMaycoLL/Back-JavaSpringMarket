@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,10 +16,13 @@ public class Imagen implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idImagen;
 
     @Column(nullable = false, length = 100)
     private String urlImagen;
 
+    @ManyToOne
+    private Producto producto;
 
 }

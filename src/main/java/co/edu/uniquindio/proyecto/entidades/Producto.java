@@ -1,14 +1,12 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Positive;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +19,7 @@ public class Producto implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProducto;
 
     @Column(nullable = false, length = 100)
@@ -42,5 +41,20 @@ public class Producto implements Serializable {
 
     @Column(nullable = false)
     private String estadoProducto;
+
+    @OneToMany(mappedBy = "producto")
+    private List<Descuento> descuentos;
+
+    @OneToMany(mappedBy = "producto")
+    private List<Imagen> imagen;
+
+    @OneToMany(mappedBy = "producto")
+    private List<Comentario> comentario;
+
+    @OneToMany(mappedBy = "producto")
+    private List<Favorito> favorito;
+
+    @ManyToOne
+    private Usuario usuario;
 
 }

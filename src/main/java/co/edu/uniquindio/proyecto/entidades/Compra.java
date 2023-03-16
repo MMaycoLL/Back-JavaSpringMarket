@@ -18,6 +18,7 @@ public class Compra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCompra;
 
     @Positive
@@ -31,9 +32,8 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private MetodoPago metodoPago;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private  EstadoEnvio estadoEnvio;
 
+    @ManyToOne
+    private Usuario usuario;
 
 }
