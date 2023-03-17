@@ -1,12 +1,10 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,25 +13,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Descuento implements Serializable {
+public class ProductoCompra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDescuento;
-
-    @Positive
-    @Column(nullable = false)
-    private Integer porcentajeDescuento;
+    private Integer idProductoCompra;
 
     @Column(nullable = false)
-    private LocalDateTime fechaInicioDescuento;
+    private Integer cantidad;
 
     @Column(nullable = false)
-    private LocalDateTime fechaFinalDescuento;
+    private float precioCompra;
+
+    @OneToMany(mappedBy = "productoCompra")
+    @ToString.Exclude
+    private List<Calificacion> calificacion;
 
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto producto;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Compra compra;
 }

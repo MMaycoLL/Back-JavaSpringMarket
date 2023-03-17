@@ -23,13 +23,16 @@ public class Comentario implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaComentario;
 
-    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
+    //@Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String comentario;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Producto producto;
-    
+
 }

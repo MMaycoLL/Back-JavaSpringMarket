@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Calificacion implements Serializable {
@@ -25,9 +24,14 @@ public class Calificacion implements Serializable {
     @Column(nullable = false)
     private Integer valorCalificacion;
 
-    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String comentarioCalificacion;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private ProductoCompra productoCompra;
 }

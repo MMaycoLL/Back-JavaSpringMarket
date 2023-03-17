@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -25,16 +26,16 @@ public class Producto implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombreProducto;
 
-    @Column(nullable = false, length = 1000, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String descripcionProducto;
 
     @PositiveOrZero
     @Column(nullable = false)
-    private Integer precioActual;
+    private float precioActual;
 
     @PositiveOrZero
     @Column(nullable = false)
-    private Integer disponibilidad;
+    private Integer unidadesDisponibles;
 
     @Column(nullable = false)
     private LocalDateTime fechaLimite;
@@ -45,16 +46,31 @@ public class Producto implements Serializable {
     @OneToMany(mappedBy = "producto")
     private List<Descuento> descuentos;
 
-    @OneToMany(mappedBy = "producto")
-    private List<Imagen> imagen;
+    @ElementCollection
+    private Map<String, String> Imagen;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Categoria categoria;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> comentario;
 
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Favorito> favorito;
 
+    @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
+    private List<ProductoCompra> productoCompra;
+
+    @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
+    private List<ProductoModerador> productoModerador;
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
 }

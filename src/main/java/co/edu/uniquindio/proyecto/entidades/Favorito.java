@@ -24,8 +24,10 @@ public class Favorito implements Serializable {
     private LocalDateTime fechaAgregado;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Producto producto;
 }
