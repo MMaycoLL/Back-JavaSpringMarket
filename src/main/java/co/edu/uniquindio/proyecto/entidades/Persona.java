@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)//Comparte atributos de herencia
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)//Comparte atributos de herencia
 @MappedSuperclass //Hereda
 public class Persona implements Serializable {
 

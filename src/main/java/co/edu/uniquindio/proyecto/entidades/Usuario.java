@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,9 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Usuario extends Persona implements Serializable {
-
 
 
     @Column(length = 20, nullable = false)
@@ -42,5 +43,14 @@ public class Usuario extends Persona implements Serializable {
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     private List<Producto> producto;
+
+    @Builder
+    public Usuario(Integer idPersona, String nombreCompleto, String email, String cedula, String contrasenia, String telefono) {
+        super(idPersona, nombreCompleto, email, cedula, contrasenia);
+        this.telefono = telefono;
+        this.direccion = direccion;
+
+
+    }
 
 }
