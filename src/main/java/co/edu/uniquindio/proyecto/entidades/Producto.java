@@ -15,13 +15,13 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@ToString(callSuper = true)
 public class Producto implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProducto;
+    private int idProducto;
 
     @Column(nullable = false, length = 100)
     private String nombreProducto;
@@ -35,7 +35,7 @@ public class Producto implements Serializable {
 
     @PositiveOrZero
     @Column(nullable = false)
-    private Integer unidadesDisponibles;
+    private int unidadesDisponibles;
 
     @Column(nullable = false)
     private LocalDateTime fechaLimite;

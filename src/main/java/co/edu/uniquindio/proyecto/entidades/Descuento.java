@@ -14,17 +14,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@ToString(callSuper = true)
 public class Descuento implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDescuento;
+    private int idDescuento;
 
     @Positive
     @Column(nullable = false)
-    private Integer porcentajeDescuento;
+    private int porcentajeDescuento;
 
     @Column(nullable = false)
     private LocalDateTime fechaInicioDescuento;

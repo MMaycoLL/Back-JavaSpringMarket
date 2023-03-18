@@ -2,9 +2,9 @@ package co.edu.uniquindio.proyecto.dto;
 
 public class UsuarioGetDTO {
 
-    private int codigo;
+    private int idUsuario;
 
-    private String nombre;
+    private String nombreCompleto;
 
     private String email;
 

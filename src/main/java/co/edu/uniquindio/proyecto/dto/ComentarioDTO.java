@@ -1,7 +1,16 @@
 package co.edu.uniquindio.proyecto.dto;
 
-public class ComentarioDTO {
-    private String mensaje;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-    private int codigoProducto;
+@AllArgsConstructor
+@Getter
+@Setter
+public class ComentarioDTO {
+    private String comentario;
+
+    private int idProducto;
+
+    private int idUsuario;
 }

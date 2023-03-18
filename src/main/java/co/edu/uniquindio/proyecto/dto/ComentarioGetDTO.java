@@ -1,13 +1,25 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
+@Getter
+@Setter
 public class ComentarioGetDTO {
 
-    //Atributos
-    private String codigo;
+    private int idComentario;
 
-    private String mensaje;
+    private LocalDateTime fechaComentario;
 
-    private String codigoProducto;
+    private String comentario;
+
+    private int idProducto;
+
+    private int idUsuario;
 
 
 }

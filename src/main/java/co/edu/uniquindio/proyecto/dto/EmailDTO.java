@@ -7,11 +7,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DetalleCompraDTO {
+public class EmailDTO {
 
-    private int cantidad;
+    private String asunto;
 
-    private float precioCompra;
+    private String cuerpo;
 
-    private int idProducto;
+    private String destinatario;
+
 }

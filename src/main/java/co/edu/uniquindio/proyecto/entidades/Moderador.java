@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Moderador extends Persona implements Serializable {
 
     @OneToMany(mappedBy = "moderador")

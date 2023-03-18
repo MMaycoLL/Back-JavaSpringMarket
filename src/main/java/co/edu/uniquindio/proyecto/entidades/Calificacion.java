@@ -12,17 +12,17 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@ToString(callSuper = true)
 public class Calificacion implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCalificacion;
+    private int idCalificacion;
 
     @Positive
     @Column(nullable = false)
-    private Integer valorCalificacion;
+    private int valorCalificacion;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comentarioCalificacion;

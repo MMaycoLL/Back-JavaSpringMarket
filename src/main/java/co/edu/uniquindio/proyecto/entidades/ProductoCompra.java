@@ -12,16 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@ToString(callSuper = true)
 public class ProductoCompra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProductoCompra;
+    private int idProductoCompra;
 
     @Column(nullable = false)
-    private Integer cantidad;
+    private int cantidad;
 
     @Column(nullable = false)
     private float precioCompra;

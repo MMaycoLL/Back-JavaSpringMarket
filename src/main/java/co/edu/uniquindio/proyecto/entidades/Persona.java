@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+@ToString(callSuper = true)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)//Comparte atributos de herencia
 @MappedSuperclass //Hereda
 public class Persona implements Serializable {
@@ -19,7 +19,7 @@ public class Persona implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPersona;
+    private int idPersona;
 
     @Column(length = 100, nullable = false)
     private String nombreCompleto;
