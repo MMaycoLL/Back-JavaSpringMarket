@@ -5,3 +5,92 @@ utiliar element colection para la imagen utilizando un Map
 @ElementCollecion
 private Map<String>
 esto va en producto
+
+usuario producto hacerla de tipo many to many
+
+@ManyToMany
+@JoinTable(name="favorito")
+@ToString.Exclude
+private List<Producto> favoritos;
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+crear servicios
+package servicio;
+estos seran interfaces
+
+ejemplo ComentarioServicio y ProductoServicio
+
+public interface ProductoServicio {
+
+    int crearProducto( ProductoDTO productoDTO);
+
+    int eliminarProducto(int codigoProducto);
+
+    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+
+
+    int actualizarPorEstado(int codigoProducto, Estado estado);
+
+    int actualizarPorCantidad(int codigoProducto, int unidades);
+
+    ProdcutoGetDTO obtenerProducto(int codigoProducto);
+
+    List< ProdcutoGetDTO>listarProductosCategoria(Categoria categoria
+
+    List< ProdcutoGetDTO>listarProductosUsuario(int codigoUsuario);
+
+    List< ProdcutoGetDTO>listarProductosEstado(Estado estado);
+
+    List< ProdcutoGetDTO>listarProductosNombre(String nombre);
+
+    List< ProdcutoGetDTO>listarProductosPrecio(float precioMin, float precioMax);
+
+    List< ProdcutoGetDTO>listarFavoritosUsuarios(int codigoUsuario);
+
+
+
+
+
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CREAR PAQUETE DTO
+Y CLASE ProductoDTO
+
+public class ProductoDTO {
+
+    private String nombre;
+    private String descripcion;
+    private Int unidades;
+    private Float precio;
+    private int codigoVendedor;
+    private List<String> imagenes;
+    private list<Categoria> categorias;
+
+}
+
+Regularmente hay 2 DTOs por entidad, uno para crear y otro para actualizar.
+
+ver OPENAPI+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+CREAR OTRO DTO
+
+ProductoGetDTO
+
+public class ProductoGetDTO {
+
+    private int codigoProducto;
+    private LocalDate fechaLimite;
+
+    private String nombre;
+    private String descripcion;
+    private Int unidades;
+    private Float precio;
+    private int codigoVendedor;
+    private List<String> imagenes;
+    private list<Categoria> categorias;
+
+}
+
