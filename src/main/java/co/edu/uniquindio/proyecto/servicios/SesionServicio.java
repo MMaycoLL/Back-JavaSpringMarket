@@ -7,4 +7,5 @@ public interface SesionServicio {
     TokenDTO login(SesionDTO sesionDTO);
 
     void logout(int idUsuario);
+
 }

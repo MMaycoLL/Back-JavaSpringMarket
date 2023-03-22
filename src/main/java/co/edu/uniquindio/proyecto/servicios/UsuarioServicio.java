@@ -15,5 +15,4 @@ public interface UsuarioServicio {
 
     UsuarioGetDTO obtenerUsuario(int idUsuario);
 
-
 }
