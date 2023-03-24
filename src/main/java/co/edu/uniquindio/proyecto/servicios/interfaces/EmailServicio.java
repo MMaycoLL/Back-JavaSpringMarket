@@ -4,5 +4,5 @@ import co.edu.uniquindio.proyecto.dto.EmailDTO;
 
 public interface EmailServicio {
 
-    String enviarEmail (EmailDTO emailDTO);
+    String enviarEmail(EmailDTO emailDTO);
 }

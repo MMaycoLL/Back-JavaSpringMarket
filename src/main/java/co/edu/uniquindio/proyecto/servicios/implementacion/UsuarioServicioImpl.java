@@ -17,19 +17,23 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepo usuarioRepo;
 
     @Override
-    public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception{
+    public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
-        Usuario buscado = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
-
-        if(buscado!=null){
-            throw new Exception("El correo "+usuarioDTO.getEmail()+" ya está en uso");
+        Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
+        if (emailExistente != null) {
+            throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
+
+        Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
+        if (cedulaExistente != null) {
+            throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
+        }
+
 
         Usuario usuario = convertir(usuarioDTO);
 
 
-
-        return usuarioRepo.save( usuario ).getIdPersona();
+        return usuarioRepo.save(usuario).getIdPersona();
     }
 
     @Override
@@ -38,75 +42,76 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public int actualizarUsuario(int codigoUsuario, UsuarioDTO usuarioDTO) throws Exception{
+    public int actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
-        /**
-         * TODO Validar que el correo no se repita
-         */
+        Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
+        if (emailExistente != null && emailExistente.getIdPersona() != idUsuario) {
+            throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
+        }
 
-        validarExiste(codigoUsuario);
+        Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
+        if (cedulaExistente != null && cedulaExistente.getIdPersona() != idUsuario) {
+            throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
+        }
+
+        validarExiste(idUsuario);
+
 
         Usuario usuario = convertir(usuarioDTO);
-        usuario.setIdPersona(codigoUsuario);
+        usuario.setIdPersona(idUsuario);
 
         return usuarioRepo.save(usuario).getIdPersona();
     }
 
 
-
     @Override
-    public int eliminarUsuario(int idUsuario) throws Exception{
+    public int eliminarUsuario(int idUsuario) throws Exception {
         validarExiste(idUsuario);
         usuarioRepo.deleteById(idUsuario);
         return idUsuario;
     }
 
     @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception{
-        return convertir( obtener(codigoUsuario) );
+    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
+        return convertir(obtener(codigoUsuario));
     }
 
-    private Usuario obtener(int codigoUsuario) throws Exception{
+    private Usuario obtener(int codigoUsuario) throws Exception {
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
-        if(usuario.isEmpty() ){
-            throw new Exception("El código "+codigoUsuario+" no está asociado a ningún usuario");
+        if (usuario.isEmpty()) {
+            throw new Exception("El código " + codigoUsuario + " no está asociado a ningún usuario");
         }
 
         return usuario.get();
     }
 
-    private void validarExiste(int codigoUsuario) throws Exception{
+    private void validarExiste(int codigoUsuario) throws Exception {
         boolean existe = usuarioRepo.existsById(codigoUsuario);
 
-        if( !existe ){
-            throw new Exception("El código "+codigoUsuario+" no está asociado a ningún usuario");
+        if (!existe) {
+            throw new Exception("El código " + codigoUsuario + " no está asociado a ningún usuario");
         }
 
     }
 
-    private UsuarioGetDTO convertir(Usuario usuario){
+    private UsuarioGetDTO convertir(Usuario usuario) {
 
-        UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
-                usuario.getIdPersona(),
-                usuario.getNombreCompleto(),
-                usuario.getEmail(),
-                usuario.getDireccion(),
-                usuario.getTelefono());
+        UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(usuario.getIdPersona(), usuario.getNombreCompleto(), usuario.getEmail(), usuario.getDireccion(), usuario.getTelefono());
 
 
         return usuarioDTO;
     }
 
-    private Usuario convertir(UsuarioDTO usuarioDTO){
+    private Usuario convertir(UsuarioDTO usuarioDTO) {
 
         Usuario usuario = new Usuario();
-        usuario.setNombreCompleto( usuarioDTO.getNombreCompleto() );
-        usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setDireccion( usuarioDTO.getDireccion() );
-        usuario.setCedula( usuarioDTO.getCedula() );
-        usuario.setTelefono( usuarioDTO.getTelefono() );
-        usuario.setContrasenia( usuarioDTO.getContrasenia() );
+        usuario.setNombreCompleto(usuarioDTO.getNombreCompleto());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setDireccion(usuarioDTO.getDireccion());
+        usuario.setCedula(usuarioDTO.getCedula());
+        usuario.setTelefono(usuarioDTO.getTelefono());
+        usuario.setContrasenia(usuarioDTO.getContrasenia());
 
         return usuario;
     }

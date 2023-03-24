@@ -5,7 +5,7 @@ plugins {
 }
 group 'co.edu.uniquindio.proyecto'
 version '1.0-SNAPSHOT'
-description 'Esta es una tienda On-line, donde se podran publicar, vender y comprar productos'
+description 'UniMarket es una tienda On-line, donde se podran publicar, vender y comprar productos'
 sourceCompatibility = '17'
 configurations {
     compileOnly {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductoServicio {
 
-    int crearProducto( ProductoDTO productoDTO);
+    int crearProducto(ProductoDTO productoDTO);
 
     int eliminarProducto(int idProducto);
 
@@ -21,16 +21,16 @@ public interface ProductoServicio {
 
     ProductoGetDTO obtenerProducto(int idProducto);
 
-    List< ProductoGetDTO> listarProductosUsuario(int idUsuario);
+    List<ProductoGetDTO> listarProductosUsuario(int idUsuario);
 
-    List< ProductoGetDTO> listarProductosCategoria(Categoria categoria);
+    List<ProductoGetDTO> listarProductosCategoria(Categoria categoria);
 
-    List< ProductoGetDTO>listarProductosEstado(EstadoAutorizacion estadoAutorizacion);
+    List<ProductoGetDTO> listarProductosEstado(EstadoAutorizacion estadoAutorizacion);
 
-    List< ProductoGetDTO>listarProductosNombre(String nombreProducto);
+    List<ProductoGetDTO> listarProductosNombre(String nombreProducto);
 
-    List< ProductoGetDTO>listarProductosPrecio(float precioMinimo, float precioMaximo);
+    List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
-    List< ProductoGetDTO>listarFavoritosUsuarios(int idUsuario);
+    List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario);
 
 }

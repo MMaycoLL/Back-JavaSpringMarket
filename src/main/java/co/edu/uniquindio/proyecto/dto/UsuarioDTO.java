@@ -13,34 +13,34 @@ import org.hibernate.validator.constraints.Length;
 public class UsuarioDTO {
 
     //El @NotBlank es solo para los string
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =100, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String nombreCompleto;
 
 
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =100, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String email;
 
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =10, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 10, message = "El nombre no puede tener más de 100 caracteres")
     private String cedula;
 
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =100, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String direccion;
 
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =20, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 20, message = "El nombre no puede tener más de 100 caracteres")
     private String telefono;
 
-    @NotBlank(message =  "El nombre no puede estar vacío" )
-    @NotNull(message =  "El nombre no puede ser nulo" )
-    @Length(max =100, message =  "El nombre no puede tener más de 100 caracteres" )
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String contrasenia;
 }

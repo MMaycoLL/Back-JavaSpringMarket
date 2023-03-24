@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UsuarioGetDTO  {
+public class UsuarioGetDTO {
 
     private int idUsuario;
 

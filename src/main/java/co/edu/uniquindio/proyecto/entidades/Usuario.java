@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class Usuario extends Persona implements Serializable  {
+public class Usuario extends Persona implements Serializable {
 
 
     @Column(length = 20, nullable = false)
