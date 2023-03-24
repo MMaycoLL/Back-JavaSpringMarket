@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class Usuario extends Persona implements Serializable {
+public class Usuario extends Persona implements Serializable  {
 
 
     @Column(length = 20, nullable = false)
@@ -44,13 +44,5 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Producto> producto;
 
-    @Builder
-    public Usuario(Integer idPersona, String nombreCompleto, String email, String cedula, String contrasenia, String telefono) {
-        super(idPersona, nombreCompleto, email, cedula, contrasenia);
-        this.telefono = telefono;
-        this.direccion = direccion;
-
-
-    }
 
 }
