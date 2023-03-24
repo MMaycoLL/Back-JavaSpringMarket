@@ -14,4 +14,5 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
 
     @Query("select u from Usuario u where u.cedula = :cedula")
     Usuario buscarUsuarioPorCedula(String cedula);
+
 }

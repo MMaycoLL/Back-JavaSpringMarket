@@ -18,7 +18,7 @@ public class UsuarioTest {
     public void crearUsuarioTest() {
 
         try {
-            UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito 4", "pepe3@email.com", "1230487", "Calle 12 #12", "343", "1234");
+            UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito 4", "pepe4@email.com", "12304807", "Calle 12 #12", "343", "1234");
             usuarioServicio.crearUsuario(usuarioDTO);
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class UsuarioTest {
     @Test
     public void actualizarUsuarioTest() {
         try {
-            UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito Perez ", "pepe6@email.com", "123487", "Calle 123", "2782", "1234");
+            UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito Perez ", "pepe1@email.com", "1234879", "Calle 123", "2782", "1234");
             usuarioServicio.actualizarUsuario(1, usuarioDTO);
         } catch (Exception e) {
             e.printStackTrace();

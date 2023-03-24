@@ -21,5 +21,7 @@ public class UsuarioGetDTO {
 
     private String telefono;
 
+    private String cedula;
+
 
 }
