@@ -8,21 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-
+// @Transactional
 public class UsuarioTest {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @Test
-    public void crearUsuarioTest() {
+    public void crearUsuarioTest() throws Exception{
 
-        try {
+
             UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito 4", "pepe4@email.com", "12304807", "Calle 12 #12", "343", "1234");
+
             usuarioServicio.crearUsuario(usuarioDTO);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
 
     }
 
@@ -38,13 +38,12 @@ public class UsuarioTest {
 
 
     @Test
-    public void actualizarUsuarioTest() {
-        try {
+    public void actualizarUsuarioTest() throws Exception {
+
             UsuarioDTO usuarioDTO = new UsuarioDTO("Pepito Perez ", "pepe1@email.com", "1234879", "Calle 123", "2782", "1234");
+
             usuarioServicio.actualizarUsuario(1, usuarioDTO);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
     }
 

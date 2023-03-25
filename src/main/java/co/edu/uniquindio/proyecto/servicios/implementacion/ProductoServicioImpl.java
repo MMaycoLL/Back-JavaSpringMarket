@@ -4,14 +4,25 @@ import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.entidades.EstadoAutorizacion;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
 public class ProductoServicioImpl implements ProductoServicio {
+
+
+    private final ProductoRepo productoRepo; // siempre final y @AllArgsConstructor
+
     @Override
     public int crearProducto(ProductoDTO productoDTO) {
         return 0;
+
+
     }
 
     @Override
