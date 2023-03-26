@@ -42,7 +42,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public int actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
+    public UsuarioGetDTO actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
         Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
         if (emailExistente != null && emailExistente.getIdPersona() != idUsuario) {
@@ -60,7 +60,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuario = convertir(usuarioDTO);
         usuario.setIdPersona(idUsuario);
 
-        return usuarioRepo.save(usuario).getIdPersona();
+        return convertir(usuarioRepo.save(usuario));
     }
 
 
