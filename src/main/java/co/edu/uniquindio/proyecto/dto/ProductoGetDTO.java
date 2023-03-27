@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Getter
@@ -17,7 +18,8 @@ public class ProductoGetDTO {
     @NotNull(message = "El id del producto no puede ser nulo")
     private int idProducto;
 
-    private boolean estadoProducto;
+    private boolean ACTIVO = true;
+
 
     @NotNull(message = "La fecha de publicación no puede ser nula")
     private LocalDateTime fechaLimite;
@@ -46,11 +48,12 @@ public class ProductoGetDTO {
 
     @NotNull(message = "La lista de imágenes no puede ser nula")
     @Size(min = 1, message = "El producto debe tener al menos una imagen")
-    private List<String> imagenes;
+    private Map<String, String> imagenes;
 
     @NotNull(message = "La lista de categorías no puede ser nula")
-    @Size(min = 1, message = "El producto debe tener al menos una categoría")
+   // @Size(min = 1, message = "El producto debe tener al menos una categoría")
     private List<Categoria> categorias;
+
 
 
 }

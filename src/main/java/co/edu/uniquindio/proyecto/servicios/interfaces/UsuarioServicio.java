@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.interfaces;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.UsuarioGetDTO;
+import co.edu.uniquindio.proyecto.entidades.Usuario;
 
 public interface UsuarioServicio {
 
@@ -15,4 +16,5 @@ public interface UsuarioServicio {
 
     UsuarioGetDTO obtenerUsuario(int idUsuario) throws Exception;
 
+    Usuario obtener(int idUsuario) throws Exception;
 }

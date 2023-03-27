@@ -12,6 +12,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class ProductoDTO {
 
     @NotNull(message = "El nombre del producto no puede ser nulo")
@@ -34,13 +35,16 @@ public class ProductoDTO {
     private float precioActual;
 
     @NotNull(message = "El precio del producto no puede ser nulo")
-    private int idUsuario;
+    private int idPersona;
 
     @NotNull(message = "El mapa de imágenes no puede ser nulo")
     @Size(min = 1, message = "El producto debe tener al menos una imagen")
     private Map<String, String> imagenes;
 
     @NotNull(message = "La lista de categorías no puede ser nula")
-    @Size(min = 1, message = "El producto debe tener al menos una categoría")
+   // @Size(min = 1, message = "El producto debe tener al menos una categoría")
     private List<Categoria> categorias;
+
+    private boolean ACTIVO;
+
 }

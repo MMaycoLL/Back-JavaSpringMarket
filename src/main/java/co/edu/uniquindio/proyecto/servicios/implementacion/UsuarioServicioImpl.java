@@ -36,6 +36,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.save(usuario).getIdPersona();
     }
 
+
+
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
         return 0;
@@ -76,7 +78,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return convertir(obtener(codigoUsuario));
     }
 
-    private Usuario obtener(int codigoUsuario) throws Exception {
+    public  Usuario obtener(int codigoUsuario) throws Exception {
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
         if (usuario.isEmpty()) {
@@ -97,7 +99,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private UsuarioGetDTO convertir(Usuario usuario) {
 
-        UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(usuario.getIdPersona(), usuario.getNombreCompleto(), usuario.getEmail(), usuario.getDireccion(), usuario.getTelefono(), usuario.getCedula());
+        UsuarioGetDTO usuarioDTO = new UsuarioGetDTO(
+                usuario.getIdPersona(),
+                usuario.getNombreCompleto(),
+                usuario.getEmail(),
+                usuario.getDireccion(),
+                usuario.getTelefono(),
+                usuario.getCedula());
 
 
         return usuarioDTO;
