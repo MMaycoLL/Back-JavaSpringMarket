@@ -6,10 +6,10 @@ import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import java.util.List;
 
 public interface CompraServicio {
-    int crearCompra(CompraDTO compraDTO);
+    int crearCompra(CompraDTO compraDTO) throws Exception;
 
-    List<CompraGetDTO> listarComprasUsuarios(int idUsuario);
+    List<CompraGetDTO> listarComprasUsuarios(int idUsuario) throws Exception;
 
-    CompraGetDTO obtenerCompra(int idCompra);
+    CompraGetDTO obtenerCompra(int idCompra) throws Exception;
 
 }

@@ -51,7 +51,7 @@ public class ProductoGetDTO {
     private Map<String, String> imagenes;
 
     @NotNull(message = "La lista de categorías no puede ser nula")
-   // @Size(min = 1, message = "El producto debe tener al menos una categoría")
+   @Size(min = 1, message = "El producto debe tener al menos una categoría")
     private List<Categoria> categorias;
 
 

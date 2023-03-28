@@ -44,7 +44,7 @@ public class Producto implements Serializable {
     private LocalDateTime fechaCreacion;
 
     @Column(nullable = false)
-    private boolean ACTIVO = true;
+    private boolean ACTIVO = true ;
 
     @OneToMany(mappedBy = "producto")
     private List<Descuento> descuentos;
@@ -53,8 +53,8 @@ public class Producto implements Serializable {
     private Map<String, String> Imagen;
 
     @Enumerated(EnumType.STRING)
-   // @Column(nullable = false, length = 50)
-    private List<Categoria> categorias;
+   @Column(nullable = false, length = 50)
+    private List <Categoria> categorias;
 
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude

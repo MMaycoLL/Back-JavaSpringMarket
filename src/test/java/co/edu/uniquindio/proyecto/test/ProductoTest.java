@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,14 +49,13 @@ public class ProductoTest {
 
         //Se crea el producto y se usa el código dado por el servicio de registro de usuario para asignar el vendedor
         ProductoDTO productoDTO = new ProductoDTO(
-                "Producto 1",
-                "Descripción del producto 1",
+                "Producto de prueba",
+                "Descripción del producto de prueba",
                 10,
-                100000,
+                10000,
                 codigoVendedor,
                 imagenes,
-                List.of(Categoria.ELECTRONICA, Categoria.HOGAR),
-                true
+                List.of (Categoria.ELECTRONICA)
         );
 
         //Se llama el servicio para crear el producto

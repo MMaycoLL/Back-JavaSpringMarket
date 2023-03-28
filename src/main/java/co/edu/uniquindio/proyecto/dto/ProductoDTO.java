@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +43,10 @@ public class ProductoDTO {
     private Map<String, String> imagenes;
 
     @NotNull(message = "La lista de categorías no puede ser nula")
-   // @Size(min = 1, message = "El producto debe tener al menos una categoría")
+    @Size(min = 1, message = "El producto debe tener al menos una categoría")
     private List<Categoria> categorias;
 
-    private boolean ACTIVO;
+
+
 
 }

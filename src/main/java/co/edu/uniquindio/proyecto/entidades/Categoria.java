@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-public enum Categoria {
+import java.io.Serializable;
+
+public enum Categoria   {
 
     ELECTRONICA,
     HOGAR,

@@ -27,4 +27,5 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select p from Producto p where p.precioActual between :precioMinimo and :precioMaximo and p.ACTIVO = true")
     List<Producto> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
+
 }

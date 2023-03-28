@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,24 +26,20 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
-        Producto producto = new Producto();
-        producto.setNombreProducto(productoDTO.getNombreProducto());
-        producto.setDescripcionProducto(productoDTO.getDescripcionProducto());
-        producto.setUnidadesDisponibles(productoDTO.getUnidadesDisponibles());
-        producto.setPrecioActual(productoDTO.getPrecioActual());
-        producto.setUsuario(usuarioServicio.obtener(productoDTO.getIdPersona()));
-        producto.setImagen(productoDTO.getImagenes());
-        producto.setCategorias(productoDTO.getCategorias());
-        producto.setACTIVO(true);
-        producto.setFechaCreacion(LocalDateTime.now());
-        producto.setFechaLimite(LocalDateTime.now().plusDays(60));
+        Producto producto = convertir(productoDTO);
 
         return productoRepo.save(producto).getIdProducto();
     }
 
     @Override
-    public int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
-        return 0;
+    public int actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
+
+        validarExistenciaProducto(idProducto);
+
+        Producto producto = convertir(productoDTO);
+        producto.setIdProducto(idProducto);
+
+        return productoRepo.save(producto).getIdProducto();
     }
 
     @Override
@@ -56,13 +53,15 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int eliminarProducto(int codigoProducto) throws Exception {
-        return 0;
+    public int eliminarProducto(int idProducto) throws Exception {
+        validarExistenciaProducto(idProducto);
+        productoRepo.deleteById(idProducto);
+        return idProducto;
     }
 
     @Override
-    public ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception {
-        return null;
+    public ProductoGetDTO obtenerProducto(int idProducto) throws Exception {
+        return convertir(obtener(idProducto));
     }
 
     @Override
@@ -77,7 +76,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return respuesta;
     }
-
 
 
     @Override
@@ -100,8 +98,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception {
-        // listar productos favoritos de un usuario
-
 
         return null;
     }
@@ -132,6 +128,24 @@ public class ProductoServicioImpl implements ProductoServicio {
         return respuesta;
     }
 
+    private Producto obtener(int idProducto) throws Exception {
+        Optional<Producto> producto = productoRepo.findById(idProducto);
+
+        if (producto.isEmpty()) {
+            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
+        }
+        return producto.get();
+    }
+
+    private void validarExistenciaProducto(int idProducto) throws Exception {
+        boolean existe = productoRepo.existsById(idProducto);
+
+        if (!existe) {
+            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
+        }
+
+    }
+
     private ProductoGetDTO convertir(Producto producto) {
 
         ProductoGetDTO productoDTO = new ProductoGetDTO(
@@ -149,5 +163,21 @@ public class ProductoServicioImpl implements ProductoServicio {
         );
 
         return productoDTO;
+    }
+
+    private Producto convertir(ProductoDTO productoDTO) throws Exception {
+        Producto producto = new Producto();
+        producto.setNombreProducto(productoDTO.getNombreProducto());
+        producto.setDescripcionProducto(productoDTO.getDescripcionProducto());
+        producto.setUnidadesDisponibles(productoDTO.getUnidadesDisponibles());
+        producto.setPrecioActual(productoDTO.getPrecioActual());
+        producto.setUsuario(usuarioServicio.obtener(productoDTO.getIdPersona()));
+        producto.setImagen(productoDTO.getImagenes());
+        producto.setCategorias(productoDTO.getCategorias());
+        producto.setACTIVO(true);
+        producto.setFechaCreacion(LocalDateTime.now());
+        producto.setFechaLimite(LocalDateTime.now().plusDays(60));
+
+        return producto;
     }
 }

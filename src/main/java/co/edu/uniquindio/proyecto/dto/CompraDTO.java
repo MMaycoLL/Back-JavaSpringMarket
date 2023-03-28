@@ -20,7 +20,7 @@ public class CompraDTO {
     private MetodoPago metodoPago;
 
     @NotNull(message = "El id del usuario no puede ser nulo")
-    private int idUsuario;
+    private int idPersona;
 
     @NotNull(message = "El detalle de la compra no puede ser nulo")
     @Size(min = 1, message = "Debe haber al menos un elemento en la lista")
