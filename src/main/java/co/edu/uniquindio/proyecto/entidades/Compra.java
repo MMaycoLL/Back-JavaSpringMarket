@@ -30,7 +30,7 @@ public class Compra implements Serializable {
     private LocalDateTime fechaCompra;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private MetodoPago metodoPago;
 
     @ManyToOne

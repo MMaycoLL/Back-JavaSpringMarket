@@ -27,7 +27,7 @@ public class ProductoModerador implements Serializable {
     private LocalDateTime fechaAutorizacion;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private EstadoAutorizacion estadoAutorizacion;
     @ManyToOne
     @JoinColumn(name = "idModerador", nullable = false)

@@ -19,23 +19,41 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
+        // Verificar que el correo no esté en uso
         Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
         if (emailExistente != null) {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
-
+        // Verificar que la cédula no esté en uso
         Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
         if (cedulaExistente != null) {
             throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
 
+        // Verificar que el nombre no exceda un número máximo de caracteres permitidos
+        if (usuarioDTO.getNombreCompleto() != null && usuarioDTO.getNombreCompleto().length() > 100) {
+            throw new Exception("El nombre no debe exceder los 100 caracteres.");
+        }
+
+        // Verificar que la cédula no exceda un número máximo de caracteres permitidos
+        if (usuarioDTO.getCedula() != null && usuarioDTO.getCedula().length() > 10) {
+            throw new Exception("La cédula no debe exceder los 10 caracteres.");
+        }
+
+        // Verificar que el nombre no sea nulo
+        if (usuarioDTO.getNombreCompleto() == null) {
+            throw new Exception("El nombre no puede ser nulo.");
+        }
+
+        // Verificar que la cédula no sea nula
+        if (usuarioDTO.getCedula() == null) {
+            throw new Exception("La cédula no puede ser nula.");
+        }
 
         Usuario usuario = convertir(usuarioDTO);
 
-
         return usuarioRepo.save(usuario).getIdPersona();
     }
-
 
 
     @Override
@@ -46,15 +64,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public UsuarioGetDTO actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
+        // Verificar que el correo no esté en uso
         Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
         if (emailExistente != null && emailExistente.getIdPersona() != idUsuario) {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
-
+        // Verificar que la cédula no esté en uso
         Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
         if (cedulaExistente != null && cedulaExistente.getIdPersona() != idUsuario) {
             throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
+
 
         validarExiste(idUsuario);
 
@@ -68,8 +88,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int eliminarUsuario(int idUsuario) throws Exception {
+
+        // Verificar que el usuario exista
         validarExiste(idUsuario);
+
         usuarioRepo.deleteById(idUsuario);
+
         return idUsuario;
     }
 
@@ -78,7 +102,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return convertir(obtener(codigoUsuario));
     }
 
-    public  Usuario obtener(int codigoUsuario) throws Exception {
+    public Usuario obtener(int codigoUsuario) throws Exception {
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
         if (usuario.isEmpty()) {

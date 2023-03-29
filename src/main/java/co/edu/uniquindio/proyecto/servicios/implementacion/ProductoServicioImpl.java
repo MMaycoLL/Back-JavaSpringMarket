@@ -26,20 +26,41 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
+
+        // Verificar que la descripción del producto no exceda un número máximo de caracteres permitidos
+        if (productoDTO.getDescripcionProducto() != null && productoDTO.getDescripcionProducto().length() > 1000) {
+            throw new Exception("La descripción del producto no debe exceder los 1000 caracteres.");
+        }
+
+        // Verificar que el nombre del producto no exceda un número máximo de caracteres permitidos
+        if (productoDTO.getNombreProducto() != null && productoDTO.getNombreProducto().length() > 100) {
+            throw new Exception("El nombre del producto no debe exceder los 100 caracteres.");
+        }
+
+        // Verificar que el precio del producto no sea negativo
+        if (productoDTO.getPrecioActual() < 0) {
+            throw new Exception("El precio del producto no puede ser negativo.");
+        }
+
+        // Verificar que el número de unidades disponibles del producto no sea negativo
+        if (productoDTO.getUnidadesDisponibles() < 0) {
+            throw new Exception("El número de unidades disponibles del producto no puede ser negativo.");
+        }
+
         Producto producto = convertir(productoDTO);
 
         return productoRepo.save(producto).getIdProducto();
     }
 
     @Override
-    public int actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
+    public ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
 
         validarExistenciaProducto(idProducto);
 
         Producto producto = convertir(productoDTO);
         producto.setIdProducto(idProducto);
 
-        return productoRepo.save(producto).getIdProducto();
+        return convertir(productoRepo.save(producto));
     }
 
     @Override
@@ -93,7 +114,15 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosEstado(EstadoAutorizacion estadoAutorizacion) throws Exception {
-        return null;
+
+        List<Producto> lista = productoRepo.listarProductosEstado(estadoAutorizacion);
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for (Producto p : lista) {
+            respuesta.add(convertir(p));
+        }
+
+        return respuesta;
     }
 
     @Override

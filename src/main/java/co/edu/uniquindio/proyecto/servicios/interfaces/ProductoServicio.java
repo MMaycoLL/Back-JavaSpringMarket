@@ -13,7 +13,7 @@ public interface ProductoServicio {
 
     int eliminarProducto(int idProducto)throws Exception;
 
-    int actualizarProducto(int idProducto, ProductoDTO productoDTO)throws Exception;
+    ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO)throws Exception;
 
     int actualizarPorEstado(int idProducto, EstadoAutorizacion estadoAutorizacion)throws Exception;
 

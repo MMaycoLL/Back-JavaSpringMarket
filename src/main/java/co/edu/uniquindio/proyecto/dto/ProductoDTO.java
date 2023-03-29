@@ -29,10 +29,12 @@ public class ProductoDTO {
     @NotNull(message = "El precio del producto no puede ser nulo")
     @Min(value = 1, message = "El número de unidades disponibles debe ser mayor o igual a 1")
     @Max(value = 100, message = "El número de unidades disponibles no puede ser mayor a 100")
+    @PositiveOrZero
     private int unidadesDisponibles;
 
     @NotNull(message = "El precio del producto no puede ser nulo")
     @Positive(message = "El precio del producto debe ser mayor que cero")
+    @PositiveOrZero
     private float precioActual;
 
     @NotNull(message = "El precio del producto no puede ser nulo")

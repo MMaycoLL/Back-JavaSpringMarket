@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.implementacion;
 
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
+import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.entidades.Compra;
 import co.edu.uniquindio.proyecto.repositorios.CompraRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CompraServicio;
@@ -22,7 +23,12 @@ public class CompraServicioImpl implements CompraServicio {
         Compra compra = new Compra();
         compra.setMetodoPago(compraDTO.getMetodoPago());
         compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
-        //compra.setDetalleCompra(compraDTO.getDetalleCompraDTO());
+
+        double total = 0;
+
+        for(DetalleCompraDTO dc : compraDTO.getDetalleCompraDTO()){
+            total += dc.getPrecioCompra()*dc.getCantidad();
+        }
 
 
         return compraRepo.save(compra).getIdCompra();

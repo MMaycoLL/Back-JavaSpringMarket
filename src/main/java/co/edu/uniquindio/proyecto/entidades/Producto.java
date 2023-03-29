@@ -26,14 +26,13 @@ public class Producto implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombreProducto;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false,  columnDefinition = "TEXT", length = 1000)
     private String descripcionProducto;
 
     @PositiveOrZero
     @Column(nullable = false)
     private float precioActual;
 
-    @PositiveOrZero
     @Column(nullable = false)
     private int unidadesDisponibles;
 
@@ -43,8 +42,9 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
+
     @Column(nullable = false)
-    private boolean ACTIVO = true ;
+    private boolean ACTIVO = true;
 
     @OneToMany(mappedBy = "producto")
     private List<Descuento> descuentos;
@@ -52,8 +52,10 @@ public class Producto implements Serializable {
     @ElementCollection
     private Map<String, String> Imagen;
 
+
+    @ElementCollection
     @Enumerated(EnumType.STRING)
-   @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private List <Categoria> categorias;
 
     @OneToMany(mappedBy = "producto")

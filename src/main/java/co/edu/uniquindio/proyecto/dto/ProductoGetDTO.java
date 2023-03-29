@@ -18,7 +18,7 @@ public class ProductoGetDTO {
     @NotNull(message = "El id del producto no puede ser nulo")
     private int idProducto;
 
-    private boolean ACTIVO = true;
+    private boolean ACTIVO;
 
 
     @NotNull(message = "La fecha de publicación no puede ser nula")
