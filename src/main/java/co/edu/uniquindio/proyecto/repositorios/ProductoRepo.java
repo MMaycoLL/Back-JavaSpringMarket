@@ -17,20 +17,24 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     List<Producto> listarProductosUsuario(int codigoUsuario);
 
     // listar productos por nombre
-    @Query("select p from Producto p where p.nombreProducto like concat( '%', :nombre, '%' ) ")
+    @Query("select p from Producto p where p.nombreProducto like concat( '%', :nombre, '%' ) and p.ACTIVO = true")
     List<Producto> listarProductosNombre(String nombre);
 
     // listar productos por categoria
-    @Query("select p from Producto p where p.categorias = :categoria ")
+    @Query("select p from Producto p where p.categorias = :categoria and p.ACTIVO = true")
     List<Producto> listarProductosCategoria(Categoria categoria);
 
     // listar productos por precio minimo y maximo
-    @Query("select p from Producto p where p.precioActual between :precioMinimo and :precioMaximo ")
+    @Query("select p from Producto p where p.precioActual between :precioMinimo and :precioMaximo and p.ACTIVO = true")
     List<Producto> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
     // listar productos por estado moderador
     @Query("select p from ProductoModerador pm join pm.producto p where pm.estadoAutorizacion = :estadoAutorizacion")
     List<Producto> listarProductosEstado(EstadoAutorizacion estadoAutorizacion);
+
+    // Actualizar unidades de un producto
+    @Query("update Producto p set p.unidadesDisponibles = :unidades where p.idProducto = :idProducto")
+    void actualizarUnidades(int idProducto, int unidades);
 
 
 }

@@ -22,7 +22,6 @@ public class Descuento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDescuento;
 
-    @Positive
     @Column(nullable = false)
     private int porcentajeDescuento;
 

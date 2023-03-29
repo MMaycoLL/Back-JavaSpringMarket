@@ -20,7 +20,6 @@ public class Calificacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCalificacion;
 
-    @Positive
     @Column(nullable = false)
     private int valorCalificacion;
 

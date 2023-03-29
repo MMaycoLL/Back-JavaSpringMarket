@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
+@Transactional
 
 public class ProductoTest {
 
@@ -28,12 +29,12 @@ public class ProductoTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
-    public void crearProducto() throws Exception {
+    public void crearProductoTest() throws Exception {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO(
                 "Pepito 77",
-                "pepe12000709@email.com",
-                "100100000",
+                "pepe129@email.com",
+                "1000000",
                 "Calle 12 #12",
                 "343",
                 "1234");
@@ -67,12 +68,12 @@ public class ProductoTest {
 
 
     @Test
-    public void actualizarProducto() throws Exception {
+    public void actualizarProductoTest() throws Exception {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO(
                 "Pepito 77",
-                "pepe127@email.com",
-                "123007007",
+                "pepe1234@email.com",
+                "1023007",
                 "Calle 12 #12",
                 "343",
                 "1234");
@@ -146,14 +147,94 @@ public class ProductoTest {
         int codigoProducto = productoServicio.crearProducto(productoDTO);
 
         // una vez creado el producto se elimina
-        productoServicio.eliminarProducto(codigoProducto);
+        int productoEliminado = productoServicio.eliminarProducto(codigoProducto);
 
         // se espera que el producto no exista
-        Assertions.assertNull(productoServicio.obtenerProducto(codigoProducto));
+        Assertions.assertThrows(Exception.class, () -> productoServicio.obtenerProducto(productoEliminado));
+
+
+    }
+
+    @Test
+    public void obtenerProductoTest() throws Exception {
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+                "Pepito 77",
+                "pepe127@email.com",
+                "123007007",
+                "Calle 12 #12",
+                "343",
+                "1234");
+
+
+        //El servicio del usuario nos retorna el código con el que quedó en la base de datos
+        int codigoVendedor = usuarioServicio.crearUsuario(usuarioDTO);
+
+        //Se crea la colección de imágenes para el producto.
+        Map<String, String> imagenes = new HashMap<>();
+        imagenes.put("im1", "http://www.google.com/images/imagenasus.png");
+        imagenes.put("im2", "http://www.google.com/images/imagenasus_original.png");
+
+        //Se crea el producto y se usa el código dado por el servicio de registro de usuario para asignar el vendedor
+        ProductoDTO productoDTO = new ProductoDTO(
+                "Producto de prueba",
+                "Descripción del producto de prueba",
+                10,
+                10000,
+                codigoVendedor,
+                imagenes,
+                List.of(Categoria.ELECTRONICA));
+
+        //Se llama el servicio para crear el producto
+        int codigoProducto = productoServicio.crearProducto(productoDTO);
+
+        // sa llama el servicio para obtener el producto dado su codigo
+
+        ProductoGetDTO productoObtenido = productoServicio.obtenerProducto(codigoProducto);
+
+        Assertions.assertEquals(10000, productoObtenido.getPrecioActual());
     }
 
 
+    @Test
+    public void actualizarPorUnidadesTest() throws Exception {
 
+    }
+
+    @Test
+    public void actualizarPorEstadoTest() throws Exception {
+
+    }
+    @Test
+    public void listarProductosUsuarioTest() throws Exception {
+
+    }
+
+    @Test
+    public void listarProductosCategoriaTest() throws Exception {
+
+    }
+
+    @Test
+    public void listarProductosEstadoTest() throws Exception {
+
+    }
+
+    @Test
+    public void listarFavoritosUsuarioTest() throws Exception {
+
+    }
+
+    @Test
+    public void listarProductosNombreTest() throws Exception {
+
+    }
+
+    @Test
+    public void listarProductosPrecioTest() throws Exception {
+
+    }
 
 }
+
 

@@ -29,6 +29,7 @@ public class ProductoModerador implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoAutorizacion estadoAutorizacion;
+
     @ManyToOne
     @JoinColumn(name = "idModerador", nullable = false)
     private Moderador moderador;

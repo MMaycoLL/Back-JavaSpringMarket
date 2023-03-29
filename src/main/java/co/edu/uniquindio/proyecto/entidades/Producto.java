@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.io.Serializable;
@@ -26,10 +25,9 @@ public class Producto implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombreProducto;
 
-    @Column(nullable = false,  columnDefinition = "TEXT", length = 1000)
+    @Column(nullable = false, columnDefinition = "TEXT", length = 1000)
     private String descripcionProducto;
 
-    @PositiveOrZero
     @Column(nullable = false)
     private float precioActual;
 
@@ -56,7 +54,7 @@ public class Producto implements Serializable {
     @ElementCollection
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private List <Categoria> categorias;
+    private List<Categoria> categorias;
 
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude

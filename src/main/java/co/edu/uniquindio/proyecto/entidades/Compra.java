@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
@@ -22,7 +21,6 @@ public class Compra implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCompra;
 
-    @Positive
     @Column(nullable = false)
     private float totalCompra;
 
