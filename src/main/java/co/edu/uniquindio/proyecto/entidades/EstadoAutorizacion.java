@@ -1,7 +1,0 @@
-package co.edu.uniquindio.proyecto.entidades;
-
-public enum EstadoAutorizacion {
-    SIN_REVISAR,
-    AUTORIZADOS,
-    DENEGADOS
-}
