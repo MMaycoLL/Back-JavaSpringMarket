@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unimarket.entidades;
+package co.edu.uniquindio.unimarket.entidades.enumeraciones;
 
 public enum EstadoAutorizacion {
     SIN_REVISAR,

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unimarket.entidades;
 
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -2,8 +2,8 @@ package co.edu.uniquindio.unimarket.servicios.interfaces;
 
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Categoria;
-import co.edu.uniquindio.unimarket.entidades.EstadoAutorizacion;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 
 import java.util.List;
 

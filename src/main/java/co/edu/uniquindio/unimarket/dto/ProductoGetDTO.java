@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unimarket.dto;
 
-import co.edu.uniquindio.unimarket.entidades.Categoria;
-import co.edu.uniquindio.unimarket.entidades.EstadoProducto;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

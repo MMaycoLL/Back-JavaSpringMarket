@@ -1,6 +1,6 @@
 package co.edu.uniquindio.unimarket.dto;
 
-import co.edu.uniquindio.unimarket.entidades.MetodoPago;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.MetodoPago;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unimarket.repositorios;
 
-import co.edu.uniquindio.unimarket.entidades.Categoria;
-import co.edu.uniquindio.unimarket.entidades.EstadoAutorizacion;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

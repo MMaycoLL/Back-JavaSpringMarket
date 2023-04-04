@@ -1,6 +1,6 @@
 package co.edu.uniquindio.unimarket.dto;
 
-import co.edu.uniquindio.unimarket.entidades.Categoria;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
