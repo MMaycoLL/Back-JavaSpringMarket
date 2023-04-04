@@ -5,12 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class UsuarioDTO {
 
     //El @NotBlank es solo para los string
@@ -45,4 +47,6 @@ public class UsuarioDTO {
     @NotNull(message = "El nombre no puede ser nulo")
     @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
     private String contrasenia;
+
+
 }

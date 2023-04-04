@@ -38,16 +38,6 @@ public class ProductoServicioImpl implements ProductoServicio {
             throw new Exception("El nombre del producto no debe exceder los 100 caracteres.");
         }
 
-        // Verificar que el precio del producto no sea negativo
-        if (productoDTO.getPrecioActual() < 0) {
-            throw new Exception("El precio del producto no puede ser negativo.");
-        }
-
-        // Verificar que el número de unidades disponibles del producto no sea negativo
-        if (productoDTO.getUnidadesDisponibles() < 0) {
-            throw new Exception("El número de unidades disponibles del producto no puede ser negativo.");
-        }
-
         Producto producto = convertir(productoDTO);
 
         return productoRepo.save(producto).getIdProducto();
@@ -56,7 +46,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
 
-        validarExistenciaProducto(idProducto);
+        //validarExistenciaProducto(idProducto);
 
         Producto producto = convertir(productoDTO);
         producto.setIdProducto(idProducto);
@@ -102,8 +92,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) {
-
-        List<Producto> lista = productoRepo.listarProductosCategoria(categoria);
+        List<Producto> lista = productoRepo.listarProductosPorCategoria(categoria);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
@@ -112,6 +101,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return respuesta;
     }
+
 
     @Override
     public List<ProductoGetDTO> listarProductosEstado(EstadoAutorizacion estadoAutorizacion) throws Exception {
@@ -162,7 +152,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Optional<Producto> producto = productoRepo.findById(idProducto);
 
         if (producto.isEmpty()) {
-            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
+            throw new Exception("El código2 " + idProducto + " no está asociado a ningún producto");
         }
         return producto.get();
     }
@@ -171,7 +161,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         boolean existe = productoRepo.existsById(idProducto);
 
         if (!existe) {
-            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
+            throw new Exception("El código1 " + idProducto + " no está asociado a ningún producto");
         }
 
     }

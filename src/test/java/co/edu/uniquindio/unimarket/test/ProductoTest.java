@@ -5,6 +5,7 @@ import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.entidades.Categoria;
+import co.edu.uniquindio.unimarket.entidades.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,12 +31,13 @@ public class ProductoTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void crearProductoTest() throws Exception {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO(
                 "Pepito 77",
-                "pepe12239@email.com",
-                "100023000",
+                "pepe129@email.com",
+                "1000000",
                 "Calle 12 #12",
                 "343",
                 "1234");
@@ -68,86 +71,32 @@ public class ProductoTest {
 
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void actualizarProductoTest() throws Exception {
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                "Pepito 77",
-                "pepe1234@email.com",
-                "1023007",
-                "Calle 12 #12",
-                "343",
-                "1234");
+        // Buscar un producto existente en el dataset para actualizarlo
+        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(2);
 
+        // Crear un objeto de tipo productoDTO con los datos a actualizar
+        ProductoDTO productoActualizado = new ProductoDTO();
+        productoActualizado.setPrecioActual(100000);
 
-        //El servicio del usuario nos retorna el código con el que quedó en la base de datos
-        int codigoVendedor = usuarioServicio.crearUsuario(usuarioDTO);
+        // Actualizar el producto encontrado
+        ProductoGetDTO productoActualizadoDTO = productoServicio.actualizarProducto(productoDTO.getIdProducto(), productoActualizado);
 
-        //Se crea la colección de imágenes para el producto.
-        Map<String, String> imagenes = new HashMap<>();
-        imagenes.put("im1", "http://www.google.com/images/imagenasus.png");
-        imagenes.put("im2", "http://www.google.com/images/imagenasus_original.png");
-
-        //Se crea el producto y se usa el código dado por el servicio de registro de usuario para asignar el vendedor
-        ProductoDTO productoDTO = new ProductoDTO(
-                "Producto de prueba",
-                "Descripción del producto de prueba",
-                10,
-                10000,
-                codigoVendedor,
-                imagenes,
-                List.of(Categoria.ELECTRONICA));
-
-        //Se llama el servicio para crear el producto
-        int codigoProducto = productoServicio.crearProducto(productoDTO);
-
-        ProductoGetDTO productoActualizado = productoServicio.actualizarProducto(codigoProducto, new ProductoDTO(
-                "Producto de prueba",
-                "Descripción del producto de prueba",
-                10,
-                1000,
-                codigoVendedor,
-                imagenes,
-                List.of(Categoria.ELECTRONICA)));
-
-        Assertions.assertNotEquals("1234", productoActualizado.getPrecioActual());
+        Assertions.assertEquals(100000, productoActualizadoDTO.getPrecioActual());
 
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void eliminarProductoTest() throws Exception {
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                "Pepito 77",
-                "pepe127@email.com",
-                "123007007",
-                "Calle 12 #12",
-                "343",
-                "1234");
+        // Buscar un producto existente en el dataset para eliminarlo
+        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(1);
 
-
-        //El servicio del usuario nos retorna el código con el que quedó en la base de datos
-        int codigoVendedor = usuarioServicio.crearUsuario(usuarioDTO);
-
-        //Se crea la colección de imágenes para el producto.
-        Map<String, String> imagenes = new HashMap<>();
-        imagenes.put("im1", "http://www.google.com/images/imagenasus.png");
-        imagenes.put("im2", "http://www.google.com/images/imagenasus_original.png");
-
-        //Se crea el producto y se usa el código dado por el servicio de registro de usuario para asignar el vendedor
-        ProductoDTO productoDTO = new ProductoDTO(
-                "Producto de prueba",
-                "Descripción del producto de prueba",
-                10,
-                10000,
-                codigoVendedor,
-                imagenes,
-                List.of(Categoria.ELECTRONICA));
-
-        //Se llama el servicio para crear el producto
-        int codigoProducto = productoServicio.crearProducto(productoDTO);
-
-        // una vez creado el producto se elimina
-        int productoEliminado = productoServicio.eliminarProducto(codigoProducto);
+        // Eliminar el producto encontrado
+        int productoEliminado = productoServicio.eliminarProducto(productoDTO.getIdProducto());
 
         // se espera que el producto no exista
         Assertions.assertThrows(Exception.class, () -> productoServicio.obtenerProducto(productoEliminado));
@@ -156,48 +105,19 @@ public class ProductoTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void obtenerProductoTest() throws Exception {
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                "Pepito 77",
-                "pepe127@email.com",
-                "123007007",
-                "Calle 12 #12",
-                "343",
-                "1234");
 
+        ProductoGetDTO productoObtenido = productoServicio.obtenerProducto(1);
 
-        //El servicio del usuario nos retorna el código con el que quedó en la base de datos
-        int codigoVendedor = usuarioServicio.crearUsuario(usuarioDTO);
-
-        //Se crea la colección de imágenes para el producto.
-        Map<String, String> imagenes = new HashMap<>();
-        imagenes.put("im1", "http://www.google.com/images/imagenasus.png");
-        imagenes.put("im2", "http://www.google.com/images/imagenasus_original.png");
-
-        //Se crea el producto y se usa el código dado por el servicio de registro de usuario para asignar el vendedor
-        ProductoDTO productoDTO = new ProductoDTO(
-                "Producto de prueba",
-                "Descripción del producto de prueba",
-                10,
-                10000,
-                codigoVendedor,
-                imagenes,
-                List.of(Categoria.ELECTRONICA));
-
-        //Se llama el servicio para crear el producto
-        int codigoProducto = productoServicio.crearProducto(productoDTO);
-
-        // sa llama el servicio para obtener el producto dado su codigo
-
-        ProductoGetDTO productoObtenido = productoServicio.obtenerProducto(codigoProducto);
-
-        Assertions.assertEquals(10000, productoObtenido.getPrecioActual());
+        Assertions.assertEquals(50000, productoObtenido.getPrecioActual());
     }
 
 
     @Test
     public void actualizarPorUnidadesTest() throws Exception {
+
 
     }
 
@@ -205,20 +125,44 @@ public class ProductoTest {
     public void actualizarPorEstadoTest() throws Exception {
 
     }
+
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarProductosUsuarioTest() throws Exception {
+        // lISTAR PRODUCTOS DE UN USUARIO
+        List<ProductoGetDTO> productos = productoServicio.listarProductosUsuario(1);
+
+        Assertions.assertEquals(1, productos.size());
 
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarProductosCategoriaTest() throws Exception {
+        // Listar productos de una categoría
+        Categoria categoria = Categoria.HOGAR;
+        List<ProductoGetDTO> productos = productoServicio.listarProductosCategoria(categoria);
 
+        // Verificar que cada producto tenga la categoría buscada
+        for (ProductoGetDTO p : productos) {
+            Assertions.assertTrue(p.getCategorias().contains(categoria));
+        }
+
+        // Verificar que se encontraron la cantidad correcta de productos
+        Assertions.assertEquals(2, productos.size());
     }
+
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarProductosEstadoTest() throws Exception {
+        // Listar productos de un estado
+        EstadoAutorizacion estado = EstadoAutorizacion.AUTORIZADO;
+        List<ProductoGetDTO> productos = productoServicio.listarProductosEstado(estado);
 
+        Assertions.assertEquals(2, productos.size());
     }
+
 
     @Test
     public void listarFavoritosUsuarioTest() throws Exception {
@@ -226,15 +170,24 @@ public class ProductoTest {
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarProductosNombreTest() throws Exception {
+        // Listar productos por nombre
+        List<ProductoGetDTO> productos = productoServicio.listarProductosNombre("balon");
+
+        Assertions.assertEquals(2, productos.size());
 
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarProductosPrecioTest() throws Exception {
+        // Listar productos por precio
+        List<ProductoGetDTO> productos = productoServicio.listarProductosPrecio(10000, 50000);
+
+        Assertions.assertEquals(2, productos.size());
 
     }
-
 }
 
 

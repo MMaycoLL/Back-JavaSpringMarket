@@ -4,12 +4,14 @@ import co.edu.uniquindio.unimarket.entidades.Categoria;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 
@@ -45,7 +47,6 @@ public class ProductoDTO {
     @NotNull(message = "La lista de categorías no puede ser nula")
     @Size(min = 1, message = "El producto debe tener al menos una categoría")
     private List<Categoria> categorias;
-
 
 
 
