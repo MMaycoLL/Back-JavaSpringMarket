@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unimarket.security.jwt;
 
+import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

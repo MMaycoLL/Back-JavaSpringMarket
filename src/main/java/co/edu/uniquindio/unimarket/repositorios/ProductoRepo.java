@@ -23,7 +23,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
 
     // listar productos por categoria
-    @Query("select p from Producto p join p.categorias c where c = :categoria and p.estadoProducto <> 'INACTIVO'")
+    @Query("select p from Producto p join p.categorias c where c = :categoria and p.fechaLimite < CURRENT_DATE() and p.estadoProducto <> 'INACTIVO'")
     List<Producto> listarProductosPorCategoria(Categoria categoria);
 
 
@@ -41,5 +41,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("update Producto p set p.unidadesDisponibles = :unidades where p.idProducto = :idProducto")
     void actualizarUnidades(int idProducto, int unidades);
 
+    @Query("select p from Producto p where p.fechaLimite < CURRENT_DATE and p.estadoProducto <> 'INACTIVO'")
+    List<Producto> listarProductos();
 
 }

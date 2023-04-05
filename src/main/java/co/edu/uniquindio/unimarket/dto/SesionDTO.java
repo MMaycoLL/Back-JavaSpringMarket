@@ -21,6 +21,4 @@ public class SesionDTO {
     @NotBlank(message = "La contraseña no puede estar vacía")
     private String contrasenia;
 
-    @NotNull(message = "El tipo no puede ser nulo")
-    private int tipo;
 }

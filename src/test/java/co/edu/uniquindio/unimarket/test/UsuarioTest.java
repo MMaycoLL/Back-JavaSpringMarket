@@ -52,10 +52,10 @@ public class UsuarioTest {
         try {
 
             // Busca un usuario existente en el dataset para eliminarlo
-            UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+           UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
 
             // Elimina el usuario encontrado
-            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario());
+            int usuarioEliminado = usuarioServicio.eliminarUsuario(1);
 
             // Verifica que el usuario fue eliminado
             Assertions.assertThrows(Exception.class, () -> usuarioServicio.obtenerUsuario(usuarioEliminado));
