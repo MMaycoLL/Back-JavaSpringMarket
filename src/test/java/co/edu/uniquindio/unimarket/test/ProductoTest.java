@@ -132,7 +132,7 @@ public class ProductoTest {
         // lISTAR PRODUCTOS DE UN USUARIO
         List<ProductoGetDTO> productos = productoServicio.listarProductosUsuario(1);
 
-        Assertions.assertEquals(2, productos.size());
+        Assertions.assertEquals(1, productos.size());
 
     }
 

@@ -55,7 +55,7 @@ public class UsuarioTest {
            UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
 
             // Elimina el usuario encontrado
-            int usuarioEliminado = usuarioServicio.eliminarUsuario(1);
+            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario());
 
             // Verifica que el usuario fue eliminado
             Assertions.assertThrows(Exception.class, () -> usuarioServicio.obtenerUsuario(usuarioEliminado));
