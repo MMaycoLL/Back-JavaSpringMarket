@@ -2,6 +2,8 @@ package co.edu.uniquindio.unimarket.servicios.interfaces;
 
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
+import co.edu.uniquindio.unimarket.entidades.Producto;
+import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 
@@ -32,5 +34,10 @@ public interface ProductoServicio {
     List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
     List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception;
+
+    Producto obtener(int idUsuario) throws Exception;
+
+
+
 
 }

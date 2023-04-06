@@ -27,6 +27,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     List<Producto> listarProductosPorCategoria(Categoria categoria);
 
 
+
     // listar productos por estado moderador
     @Query("select p from ProductoModerador pm join pm.producto p where pm.estadoAutorizacion = :estadoAutorizacion")
     List<Producto> listarProductosEstado(EstadoAutorizacion estadoAutorizacion);

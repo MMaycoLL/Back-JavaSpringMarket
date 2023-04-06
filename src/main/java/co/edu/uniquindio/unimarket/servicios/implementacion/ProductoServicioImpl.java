@@ -2,10 +2,13 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
+import co.edu.uniquindio.unimarket.entidades.Favorito;
+import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.entidades.Producto;
+import co.edu.uniquindio.unimarket.repositorios.FavoritoRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
@@ -23,6 +26,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
     private final UsuarioServicio usuarioServicio;
+    private final FavoritoRepo favoritoRepo;
 
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
@@ -148,7 +152,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         return respuesta;
     }
 
-    private Producto obtener(int idProducto) throws Exception {
+    public Producto obtener(int idProducto) throws Exception {
         Optional<Producto> producto = productoRepo.findById(idProducto);
 
         if (producto.isEmpty()) {
@@ -200,4 +204,8 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return producto;
     }
+
+
+
+
 }
