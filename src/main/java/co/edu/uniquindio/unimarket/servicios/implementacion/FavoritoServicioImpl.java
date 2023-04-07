@@ -42,7 +42,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
     }
 
     @Override
-    public int eliminarFavorito(int idUsuario, int idProducto) throws Exception {
+    public void eliminarFavorito(int idUsuario, int idProducto) throws Exception {
         Usuario usuario = usuarioServicio.obtener(idUsuario);
         Producto producto = productoServicio.obtener(idProducto);
 
@@ -52,7 +52,6 @@ public class FavoritoServicioImpl implements FavoritoServicio {
         // Eliminar el favorito y guardar los cambios
         favoritoRepo.delete(favorito);
 
-        return favorito.getIdFavorito();
     }
 }
 

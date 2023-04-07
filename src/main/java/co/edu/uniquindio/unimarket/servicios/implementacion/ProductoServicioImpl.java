@@ -50,7 +50,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
 
-        //validarExistenciaProducto(idProducto);
+        validarExistenciaProducto(idProducto);
 
         Producto producto = convertir(productoDTO);
         producto.setIdProducto(idProducto);
@@ -123,7 +123,19 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception {
 
-        return null;
+        List<Producto> lista = productoRepo.listarFavoritosUsuarios(idUsuario);
+
+        if(lista.isEmpty()){
+            throw new Exception("El usuario no tiene productos favoritos");
+        }
+
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(Producto p : lista){
+            respuesta.add( convertir(p) );
+        }
+
+        return respuesta;
     }
 
     @Override
@@ -156,7 +168,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Optional<Producto> producto = productoRepo.findById(idProducto);
 
         if (producto.isEmpty()) {
-            throw new Exception("El código2 " + idProducto + " no está asociado a ningún producto");
+            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
         }
         return producto.get();
     }

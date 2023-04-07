@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
 
 @SpringBootTest
-
+@Transactional
 
 public class FavoritoTest {
 
@@ -37,6 +38,22 @@ public class FavoritoTest {
 
     @Test
     @Sql("classpath:dataset.sql")
+    public void crearFavoritoTest() throws Exception {
+        // Obtener un usuario y un producto existente del dataset
+        UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(3);
+
+        // Ejecutar el método crearFavorito
+        favoritoServicio.crearFavorito(usuarioDTO.getIdUsuario(), productoDTO.getIdProducto());
+
+        // Verificar que el producto se haya agregado a la lista de favoritos del usuario
+        List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(usuarioDTO.getIdUsuario());
+        Assertions.assertEquals(3, lista.size());
+    }
+
+
+    @Test
+    @Sql("classpath:dataset.sql")
     public void eliminarFavoritoTest() throws Exception {
         // Obtener un usuario y un producto existente del dataset
         UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
@@ -44,6 +61,10 @@ public class FavoritoTest {
 
         // Ejecutar el método eliminarFavorito
         favoritoServicio.eliminarFavorito(usuarioDTO.getIdUsuario(), productoDTO.getIdProducto());
+
+        // Verificar que el producto se haya eliminado de la lista de favoritos del usuario
+        List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(usuarioDTO.getIdUsuario());
+        Assertions.assertEquals(1, lista.size());
 
     }
 

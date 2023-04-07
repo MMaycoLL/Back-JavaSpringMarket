@@ -45,4 +45,8 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select p from Producto p where p.fechaLimite < CURRENT_DATE and p.estadoProducto <> 'INACTIVO'")
     List<Producto> listarProductos();
 
+    // Listar favoritos de un usuario
+    @Query("SELECT f.producto FROM Favorito f WHERE f.usuario.idPersona = :idUsuario")
+    List<Producto> listarFavoritosUsuarios(int idUsuario);
+
 }

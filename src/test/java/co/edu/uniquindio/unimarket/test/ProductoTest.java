@@ -72,20 +72,15 @@ public class ProductoTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarProductoTest() throws Exception {
+    public void actualizarProductoTest () throws Exception{
 
-        // Buscar un producto existente en el dataset para actualizarlo
-        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(2);
+        Map<String, String> imagenes = new HashMap<>();
+        imagenes.put("img1", "https://www.google.com/imagen1.jpg");
 
-        // Crear un objeto de tipo productoDTO con los datos a actualizar
-        ProductoDTO productoActualizado = new ProductoDTO();
-        productoActualizado.setPrecioActual(100000);
+        ProductoGetDTO productoActualizado = productoServicio.actualizarProducto(1, new ProductoDTO("pelota", "descripcion  producto v1", 10, 50000, 1, imagenes, List.of(Categoria.HOGAR)));
 
-        // Actualizar el producto encontrado
-        ProductoGetDTO productoActualizadoDTO = productoServicio.actualizarProducto(productoDTO.getIdProducto(), productoActualizado);
-
-        Assertions.assertEquals(100000, productoActualizadoDTO.getPrecioActual());
-
+        //Se comprueba que ahora el nombre del producto no es el mismo inicial
+        Assertions.assertNotEquals("balon", productoActualizado.getNombreProducto());
     }
 
     @Test
@@ -165,7 +160,12 @@ public class ProductoTest {
 
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void listarFavoritosUsuarioTest() throws Exception {
+        // Listar productos favoritos de un usuario
+        List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(1);
+
+        Assertions.assertEquals(2,lista.size());
 
     }
 

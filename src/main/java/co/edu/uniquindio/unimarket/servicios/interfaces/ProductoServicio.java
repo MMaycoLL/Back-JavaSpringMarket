@@ -35,7 +35,7 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception;
 
-    Producto obtener(int idUsuario) throws Exception;
+    Producto obtener(int idProducto) throws Exception;
 
 
 
