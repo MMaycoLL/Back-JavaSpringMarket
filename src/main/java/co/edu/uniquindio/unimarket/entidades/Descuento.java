@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 @Entity
@@ -22,13 +23,13 @@ public class Descuento implements Serializable {
     private int idDescuento;
 
     @Column(nullable = false)
-    private int porcentajeDescuento;
+    private BigDecimal porcentajeDescuento;
 
     @Column(nullable = false)
-    private LocalDateTime fechaInicioDescuento;
+    private LocalDate fechaInicioDescuento;
 
     @Column(nullable = false)
-    private LocalDateTime fechaFinalDescuento;
+    private LocalDate fechaFinalDescuento;
 
     @ManyToOne
     @JoinColumn(nullable = false)

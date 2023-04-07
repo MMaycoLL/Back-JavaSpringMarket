@@ -22,7 +22,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
 
 
     @Override
-// Crear un metodo para agragar un producto a favoritos dado un id de usuario y un id de producto
+// Metodo que permite agregar un producto a la lista de favoritos de un usuario
     public void crearFavorito(int idUsuario, int idProducto) throws Exception {
         Usuario usuario = usuarioServicio.obtener(idUsuario);
         Producto producto = productoServicio.obtener(idProducto);
@@ -42,6 +42,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
     }
 
     @Override
+    // Metodo que permite eliminar un producto de la lista de favoritos de un usuario
     public void eliminarFavorito(int idUsuario, int idProducto) throws Exception {
         Usuario usuario = usuarioServicio.obtener(idUsuario);
         Producto producto = productoServicio.obtener(idProducto);
