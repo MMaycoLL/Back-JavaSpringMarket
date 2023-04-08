@@ -2,12 +2,10 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Favorito;
-import co.edu.uniquindio.unimarket.entidades.Usuario;
+import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
-import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.FavoritoRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
@@ -125,14 +123,14 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         List<Producto> lista = productoRepo.listarFavoritosUsuarios(idUsuario);
 
-        if(lista.isEmpty()){
+        if (lista.isEmpty()) {
             throw new Exception("El usuario no tiene productos favoritos");
         }
 
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
-        for(Producto p : lista){
-            respuesta.add( convertir(p) );
+        for (Producto p : lista) {
+            respuesta.add(convertir(p));
         }
 
         return respuesta;
@@ -216,8 +214,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return producto;
     }
-
-
 
 
 }

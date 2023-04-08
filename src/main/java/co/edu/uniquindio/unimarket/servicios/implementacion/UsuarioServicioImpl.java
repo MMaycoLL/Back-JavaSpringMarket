@@ -8,7 +8,6 @@ import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.print.AttributeException;
 import java.util.Optional;
 
 @Service
@@ -59,7 +58,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
-       return crearUsuario(usuarioDTO);
+        return crearUsuario(usuarioDTO);
     }
 
     @Override
@@ -97,7 +96,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         return idUsuario;
     }
-
 
 
     @Override

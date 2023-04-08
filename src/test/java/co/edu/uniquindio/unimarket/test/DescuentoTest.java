@@ -1,6 +1,6 @@
 package co.edu.uniquindio.unimarket.test;
 
-import co.edu.uniquindio.unimarket.dto.DescuentoGetDTO;
+import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DescuentoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
@@ -14,11 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static java.sql.DriverManager.println;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @SpringBootTest
+@Transactional
 
 public class DescuentoTest {
 
@@ -34,33 +31,26 @@ public class DescuentoTest {
 
         try {
 
-            // Crea un objeto DescuentoGetDTO con los datos necesarios
-            DescuentoGetDTO descuentoGetDTO = new DescuentoGetDTO();
-            descuentoGetDTO.setIdProducto(1); // Id de un producto existente en el dataset
-            descuentoGetDTO.setPorcentajeDescuento(BigDecimal.valueOf(10)); // Descuento del 10%
-            descuentoGetDTO.setFechaInicioDescuento(LocalDate.now()); // Fecha de inicio del descuento es hoy
-            descuentoGetDTO.setFechaFinalDescuento(LocalDate.now().plusMonths(2)); // Fecha final del descuento es 2 meses desde hoy
-
-            // Obtiene el producto antes de aplicar el descuento
-            ProductoGetDTO productoObtenido = productoServicio.obtenerProducto(1); // Id del producto al que se le aplicó el descuento
-            System.out.println("Precio actual del producto antes del descuento: " + productoObtenido.getPrecioActual());
+            // Crea un objeto DescuentoDTO con los datos necesarios
+            DescuentoDTO descuentoDTO = new DescuentoDTO();
+            descuentoDTO.setIdProducto(1); // Id de un producto existente en el dataset
+            descuentoDTO.setPorcentajeDescuento(BigDecimal.valueOf(10)); // Descuento del 10%
+            descuentoDTO.setFechaInicioDescuento(LocalDate.now()); // Fecha de inicio del descuento es hoy
+            descuentoDTO.setFechaFinalDescuento(LocalDate.now().plusMonths(1)); // Fecha final del descuento es 2 meses desde hoy
 
             // Aplica el descuento al producto
-            descuentoServicio.aplicarDescuento(descuentoGetDTO);
+            descuentoServicio.aplicarDescuento(descuentoDTO);
 
             // Obtiene el producto actualizado
-            ProductoGetDTO productoDespuesGetDTO = productoServicio.obtenerProducto(1); // Id del producto al que se le aplicó el descuento
+            ProductoGetDTO productoActualizado = productoServicio.obtenerProducto(1); // Id del producto al que se le aplicó el descuento
 
             // Verifica que el descuento fue aplicado exitosamente
-            System.out.println("Precio actual del producto después del descuento: " + productoDespuesGetDTO.getPrecioActual());
-            Assertions.assertTrue(Math.abs(productoDespuesGetDTO.getPrecioActual() - 45000) < 0.00001); // Precio original - 10% de descuento
+            Assertions.assertTrue(Math.abs(productoActualizado.getPrecioActual() - 45000) < 0.00001); // Precio original - 10% de descuento
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

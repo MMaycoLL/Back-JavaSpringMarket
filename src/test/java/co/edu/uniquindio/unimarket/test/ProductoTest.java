@@ -72,7 +72,7 @@ public class ProductoTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarProductoTest () throws Exception{
+    public void actualizarProductoTest() throws Exception {
 
         Map<String, String> imagenes = new HashMap<>();
         imagenes.put("img1", "https://www.google.com/imagen1.jpg");
@@ -124,7 +124,7 @@ public class ProductoTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarProductosUsuarioTest() throws Exception {
-        // lISTAR PRODUCTOS DE UN USUARIO
+        // listar productos de un usuario
         List<ProductoGetDTO> productos = productoServicio.listarProductosUsuario(1);
 
         Assertions.assertEquals(1, productos.size());
@@ -165,7 +165,7 @@ public class ProductoTest {
         // Listar productos favoritos de un usuario
         List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(1);
 
-        Assertions.assertEquals(2,lista.size());
+        Assertions.assertEquals(2, lista.size());
 
     }
 

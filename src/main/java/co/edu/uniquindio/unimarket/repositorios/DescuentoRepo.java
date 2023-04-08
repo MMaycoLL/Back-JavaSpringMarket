@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface DescuentoRepo extends JpaRepository<Descuento, Integer> {
 
-    @Query("SELECT d FROM Descuento d WHERE d.producto.idProducto = :idProducto AND d.fechaInicioDescuento <= :fechaActual AND d.fechaFinalDescuento >= :fechaActual")
-    List<Descuento> buscarDescuentosAplicables(@Param("idProducto") int idProducto, @Param("fechaActual") LocalDate fechaActual);
+    @Query("SELECT p.fechaLimite FROM Producto p WHERE p.idProducto = :idProducto")
+    LocalDate obtenerFechaLimite(int idProducto);
 
 }

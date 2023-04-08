@@ -28,8 +28,7 @@ public class FavoritoServicioImpl implements FavoritoServicio {
         Producto producto = productoServicio.obtener(idProducto);
 
         // Verificar si el producto ya está en la lista de favoritos del usuario
-        boolean productoYaFavorito = usuario.getFavorito().stream()
-                .anyMatch(f -> f.getProducto().getIdProducto() == idProducto);
+        boolean productoYaFavorito = usuario.getFavorito().stream().anyMatch(f -> f.getProducto().getIdProducto() == idProducto);
 
         if (!productoYaFavorito) {
             // Crear un nuevo objeto Favorito y guardarlo en la base de datos

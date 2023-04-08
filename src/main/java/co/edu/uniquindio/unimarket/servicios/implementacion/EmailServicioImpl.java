@@ -2,7 +2,6 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.EmailDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EmailServicio;
-
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;

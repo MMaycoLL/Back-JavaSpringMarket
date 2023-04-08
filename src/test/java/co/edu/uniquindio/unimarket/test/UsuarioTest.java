@@ -2,7 +2,6 @@ package co.edu.uniquindio.unimarket.test;
 
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -52,7 +51,7 @@ public class UsuarioTest {
         try {
 
             // Busca un usuario existente en el dataset para eliminarlo
-           UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+            UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
 
             // Elimina el usuario encontrado
             int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario());

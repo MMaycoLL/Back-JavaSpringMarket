@@ -8,15 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Repository
 public interface FavoritoRepo extends JpaRepository<Favorito, Integer> {
 
     @Query("SELECT f FROM Favorito f WHERE f.usuario = :usuario AND f.producto = :producto")
-    Optional<Favorito> findByUsuarioAndProducto( Usuario usuario,  Producto producto);
-
-
+    Optional<Favorito> findByUsuarioAndProducto(Usuario usuario, Producto producto);
 
 
 }

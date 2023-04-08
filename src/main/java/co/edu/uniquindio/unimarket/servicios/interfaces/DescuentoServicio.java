@@ -1,12 +1,10 @@
 package co.edu.uniquindio.unimarket.servicios.interfaces;
 
-import co.edu.uniquindio.unimarket.dto.DescuentoGetDTO;
-
-import java.math.BigDecimal;
+import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
 
 public interface DescuentoServicio {
 
-    void aplicarDescuento(DescuentoGetDTO descuentoGetDTO) throws Exception;
+    void aplicarDescuento(DescuentoDTO descuentoDTO) throws Exception;
 
 }
 

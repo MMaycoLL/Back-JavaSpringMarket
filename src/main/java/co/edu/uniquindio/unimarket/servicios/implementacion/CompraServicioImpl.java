@@ -19,15 +19,15 @@ public class CompraServicioImpl implements CompraServicio {
     private UsuarioServicio usuarioServicio;
 
     @Override
-    public int crearCompra(CompraDTO compraDTO) throws Exception{
+    public int crearCompra(CompraDTO compraDTO) throws Exception {
         Compra compra = new Compra();
         compra.setMetodoPago(compraDTO.getMetodoPago());
         compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
 
         double total = 0;
 
-        for(DetalleCompraDTO dc : compraDTO.getDetalleCompraDTO()){
-            total += dc.getPrecioCompra()*dc.getCantidad();
+        for (DetalleCompraDTO dc : compraDTO.getDetalleCompraDTO()) {
+            total += dc.getPrecioCompra() * dc.getCantidad();
         }
 
 

@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unimarket.servicios.implementacion;
 
-import co.edu.uniquindio.unimarket.dto.DescuentoGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Descuento;
+import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.DescuentoRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
@@ -22,10 +21,12 @@ public class DescuentoServicioImpl implements DescuentoServicio {
 
     private final ProductoRepo productoRepo;
 
+    private final DescuentoRepo descuentoRepo;
+
     @Override
-    public void aplicarDescuento(DescuentoGetDTO descuentoGetDTO) throws Exception {
+    public void aplicarDescuento(DescuentoDTO descuentoDTO) throws Exception {
         // Buscar el producto
-        Optional<Producto> productoOptional = productoRepo.findById(descuentoGetDTO.getIdProducto());
+        Optional<Producto> productoOptional = productoRepo.findById(descuentoDTO.getIdProducto());
         if (productoOptional.isEmpty()) {
             throw new NoSuchElementException("Producto no encontrado");
         }
@@ -33,19 +34,32 @@ public class DescuentoServicioImpl implements DescuentoServicio {
         Producto producto = productoOptional.get();
 
         // Verificar que la fecha de fin del descuento sea posterior a la fecha actual
-        LocalDate fechaFin = descuentoGetDTO.getFechaFinalDescuento();
+        LocalDate fechaFin = descuentoDTO.getFechaFinalDescuento();
         if (LocalDate.now().isAfter(fechaFin)) {
             throw new IllegalArgumentException("La fecha de fin del descuento debe ser posterior a la fecha actual");
         }
 
+        // Verificar que la fecha de fin del descuento no sea mayor que la fecha límite del producto
+        LocalDate fechaLimite = descuentoRepo.obtenerFechaLimite(descuentoDTO.getIdProducto());
+        if (fechaFin.isAfter(fechaLimite)) {
+            throw new IllegalArgumentException("La fecha de fin del descuento debe ser anterior a la fecha límite del producto");
+        }
+
+        // Verificar que la fecha de inicio del descuento sea anterior a la fecha final del descuento
+        LocalDate fechaInicio = descuentoDTO.getFechaInicioDescuento();
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("La fecha de inicio del descuento debe ser anterior a la fecha final del descuento");
+        }
+
         // Aplicar el descuento al precio del producto
-        BigDecimal porcentajeDescuentoActual = descuentoGetDTO.getPorcentajeDescuento();
+        BigDecimal porcentajeDescuentoActual = descuentoDTO.getPorcentajeDescuento();
         BigDecimal precioActual = BigDecimal.valueOf(producto.getPrecioActual());
         BigDecimal descuento = porcentajeDescuentoActual.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
         BigDecimal precioConDescuento = precioActual.multiply(BigDecimal.ONE.subtract(descuento));
         producto.setPrecioActual(precioConDescuento.floatValue());
         productoRepo.save(producto);
     }
+
 
 }
 
