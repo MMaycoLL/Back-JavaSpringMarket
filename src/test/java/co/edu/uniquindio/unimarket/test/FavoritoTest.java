@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unimarket.test;
 
+import co.edu.uniquindio.unimarket.dto.FavoritoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.FavoritoServicio;
@@ -35,8 +36,13 @@ public class FavoritoTest {
         UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
         ProductoGetDTO productoDTO = productoServicio.obtenerProducto(3);
 
+        // Crear un objeto FavoritoDTO
+        FavoritoDTO favoritoDTO = new FavoritoDTO();
+        favoritoDTO.setIdUsuario(usuarioDTO.getIdUsuario());
+        favoritoDTO.setIdProducto(productoDTO.getIdProducto());
+
         // Ejecutar el método crearFavorito
-        favoritoServicio.crearFavorito(usuarioDTO.getIdUsuario(), productoDTO.getIdProducto());
+        favoritoServicio.crearFavorito(favoritoDTO);
 
         // Verificar que el producto se haya agregado a la lista de favoritos del usuario
         List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(usuarioDTO.getIdUsuario());

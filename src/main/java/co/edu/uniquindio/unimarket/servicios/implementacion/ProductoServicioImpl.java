@@ -24,8 +24,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
     private final UsuarioServicio usuarioServicio;
-    private final FavoritoRepo favoritoRepo;
-
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unimarket.servicios.implementacion;
 
+import co.edu.uniquindio.unimarket.dto.FavoritoDTO;
 import co.edu.uniquindio.unimarket.entidades.Favorito;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
@@ -23,12 +24,12 @@ public class FavoritoServicioImpl implements FavoritoServicio {
 
     @Override
 // Metodo que permite agregar un producto a la lista de favoritos de un usuario
-    public void crearFavorito(int idUsuario, int idProducto) throws Exception {
-        Usuario usuario = usuarioServicio.obtener(idUsuario);
-        Producto producto = productoServicio.obtener(idProducto);
+    public void crearFavorito(FavoritoDTO favoritoDTO) throws Exception {
+        Usuario usuario = usuarioServicio.obtener(favoritoDTO.getIdUsuario());
+        Producto producto = productoServicio.obtener(favoritoDTO.getIdProducto());
 
         // Verificar si el producto ya está en la lista de favoritos del usuario
-        boolean productoYaFavorito = usuario.getFavorito().stream().anyMatch(f -> f.getProducto().getIdProducto() == idProducto);
+        boolean productoYaFavorito = usuario.getFavorito().stream().anyMatch(f -> f.getProducto().getIdProducto() == favoritoDTO.getIdProducto());
 
         if (!productoYaFavorito) {
             // Crear un nuevo objeto Favorito y guardarlo en la base de datos

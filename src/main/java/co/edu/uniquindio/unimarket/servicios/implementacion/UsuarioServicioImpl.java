@@ -30,31 +30,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
 
-        // Verificar que el nombre no exceda un número máximo de caracteres permitidos
-        if (usuarioDTO.getNombreCompleto() != null && usuarioDTO.getNombreCompleto().length() > 100) {
-            throw new Exception("El nombre no debe exceder los 100 caracteres.");
-        }
-
-        // Verificar que la cédula no exceda un número máximo de caracteres permitidos
-        if (usuarioDTO.getCedula() != null && usuarioDTO.getCedula().length() > 10) {
-            throw new Exception("La cédula no debe exceder los 10 caracteres.");
-        }
-
-        // Verificar que el nombre no sea nulo
-        if (usuarioDTO.getNombreCompleto() == null) {
-            throw new Exception("El nombre no puede ser nulo.");
-        }
-
-        // Verificar que la cédula no sea nula
-        if (usuarioDTO.getCedula() == null) {
-            throw new Exception("La cédula no puede ser nula.");
-        }
 
         Usuario usuario = convertir(usuarioDTO);
 
         return usuarioRepo.save(usuario).getIdPersona();
     }
-
 
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
