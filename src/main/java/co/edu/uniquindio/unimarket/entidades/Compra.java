@@ -40,4 +40,7 @@ public class Compra implements Serializable {
     @ToString.Exclude
     private List<ProductoCompra> productoCompra;
 
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Envio envio;
 }

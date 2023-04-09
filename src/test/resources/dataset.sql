@@ -34,18 +34,28 @@ values
     (6, "descripcion  producto 6", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "celular", 50000, 15, 6);
 
 
+insert into envio
+values
+    -- id, ciudadEnvio, direccionEnvio, fechaEstimadaEntrega, telefono
+
+    (1, "CARTAGENA", "calle 54 # 11-21", "2023-04-05", "31238521"),
+    (2, "PEREIRA", "calle 52 # 12-22", "2023-04-06", "31238522"),
+    (3, "MANIZALES", "calle 51 # 13-23", "2023-04-07", "31238523"),
+    (4, "ARMENIA", "calle 55 # 14-24", "2023-04-08", "31238524"),
+    (5, "CUCUTA", "calle 56 # 15-25", "2023-04-09", "31238525"),
+    (6, "IBAGUE", "calle 57 # 16-26", "2023-04-05", "31238526");
+
+
 insert into compra
 values
-    -- id, fecha, metodo_pago, total_compra, id_persona
+    -- id, fecha, metodo_pago, total_compra, id_envio, id_persona
 
-    (1, "2023-04-05 14:37:12", "TARJETA_CREDITO", 100000, 1),
-    (2, "2023-04-05 14:37:12", "TARJETA_DEBITO", 110000, 2),
-    (3, "2023-04-05 14:37:12", "PAYPAL", 120000, 3),
-    (4, "2023-04-05 14:37:12", "EFECTIVO", 130000, 4),
-    (5, "2023-04-05 14:37:12", "TARJETA_DEBITO", 140000, 5),
-    (6, "2023-04-05 14:37:12", "TARJETA_CREDITO", 150000, 6);
-
-
+    (1, "2023-04-05 14:37:12", "TARJETA_CREDITO", 100000, 1, 1),
+    (2, "2023-04-05 14:37:12", "TARJETA_DEBITO", 110000, 2, 2),
+    (3, "2023-04-05 14:37:12", "PAYPAL", 120000, 3, 3),
+    (4, "2023-04-05 14:37:12", "EFECTIVO", 130000, 4, 4),
+    (5, "2023-04-05 14:37:12", "TARJETA_DEBITO", 140000, 5, 5),
+    (6, "2023-04-05 14:37:12", "TARJETA_CREDITO", 150000, 6, 6);
 insert into producto_moderador
 values
     -- id, estado,fecha, descripcion, id_moderador, id_producto
