@@ -74,9 +74,9 @@ insert into producto_compra
 values
     -- id, cantidad, precio, id_compra, id_producto
 
-    (1, 20, 50000, 1, 1),
-    (2, 20, 60000, 2, 2),
-    (3, 20, 70000, 3, 3),
+    (1, 20, 50000, 2, 1),
+    (2, 20, 60000, 1, 2),
+    (3, 20, 70000, 5, 3),
     (4, 20, 80000, 4, 4),
     (5, 20, 90000, 5, 5),
     (6, 20, 100000, 6, 6);
@@ -132,7 +132,7 @@ values
 
 insert into calificacion
 values
-    -- id, comentario_calificacion, valor_calificacion, id_producto, id_persona
+    -- id, comentario_calificacion, valor_calificacion, id_producto_compra, id_persona
 
     (1, "comentario calificacion 1", 1, 1, 1),
     (2, "comentario calificacion 2", 2, 2, 2),

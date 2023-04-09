@@ -5,6 +5,7 @@ import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,7 +28,6 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     List<Producto> listarProductosPorCategoria(Categoria categoria);
 
 
-
     // listar productos por estado moderador
     @Query("select p from ProductoModerador pm join pm.producto p where pm.estadoAutorizacion = :estadoAutorizacion")
     List<Producto> listarProductosEstado(EstadoAutorizacion estadoAutorizacion);
@@ -42,11 +42,14 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("update Producto p set p.unidadesDisponibles = :unidades where p.idProducto = :idProducto")
     void actualizarUnidades(int idProducto, int unidades);
 
-    @Query("select p from Producto p where p.fechaLimite < CURRENT_DATE and p.estadoProducto <> 'INACTIVO'")
-    List<Producto> listarProductos();
+
 
     // Listar favoritos de un usuario
     @Query("SELECT f.producto FROM Favorito f WHERE f.usuario.idPersona = :idUsuario")
     List<Producto> listarFavoritosUsuarios(int idUsuario);
+
+    @Query("SELECT pc.producto FROM ProductoCompra pc WHERE pc.idProductoCompra = :idProductoCompra")
+    Producto findProductoByIdCompra(@Param("idProductoCompra") int idProductoCompra);
+
 
 }

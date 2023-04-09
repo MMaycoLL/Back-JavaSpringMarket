@@ -8,6 +8,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class DetalleCompraDTO {
 
     @NotNull(message = "La cantidad no puede ser nula")

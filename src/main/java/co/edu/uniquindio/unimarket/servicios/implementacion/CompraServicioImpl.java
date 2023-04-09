@@ -37,13 +37,14 @@ public class CompraServicioImpl implements CompraServicio {
 
     @Override
     public List<CompraGetDTO> listarComprasUsuarios(int idUsuario) {
+
         return null;
     }
 
     @Override
     public CompraGetDTO obtenerCompra(int idCompra) {
+
         return null;
     }
-
 
 }

@@ -20,7 +20,7 @@ public class Calificacion implements Serializable {
     private int idCalificacion;
 
     @Column(nullable = false)
-    private int valorCalificacion;
+    private float valorCalificacion;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comentarioCalificacion;

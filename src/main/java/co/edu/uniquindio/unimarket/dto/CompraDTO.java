@@ -4,10 +4,7 @@ import co.edu.uniquindio.unimarket.entidades.enumeraciones.MetodoPago;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class CompraDTO {
 
     @NotBlank(message = "El metodo de pago no puede estar vacío")
