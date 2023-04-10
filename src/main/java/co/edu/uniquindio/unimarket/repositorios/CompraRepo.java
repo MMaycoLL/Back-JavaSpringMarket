@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
-    @Query("SELECT pc.compra.usuario FROM ProductoCompra pc WHERE pc.idProductoCompra = :idProductoCompra")
+    @Query("SELECT pc.compra.usuario FROM DetalleCompra pc WHERE pc.idProductoCompra = :idProductoCompra")
     Usuario findUsuarioByIdCompra(int idProductoCompra);
 
 

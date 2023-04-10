@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
-public class ProductoCompra implements Serializable {
+public class DetalleCompra implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
@@ -26,7 +26,7 @@ public class ProductoCompra implements Serializable {
     @Column(nullable = false)
     private float precioCompra;
 
-    @OneToMany(mappedBy = "productoCompra")
+    @OneToMany(mappedBy = "detalleCompra")
     @ToString.Exclude
     private List<Calificacion> calificacion;
 

@@ -68,7 +68,7 @@ public class Producto implements Serializable {
 
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private List<ProductoCompra> productoCompra;
+    private List<DetalleCompra> detalleCompra;
 
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude

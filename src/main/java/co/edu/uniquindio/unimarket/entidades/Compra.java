@@ -38,7 +38,7 @@ public class Compra implements Serializable {
 
     @OneToMany(mappedBy = "compra")
     @ToString.Exclude
-    private List<ProductoCompra> productoCompra;
+    private List<DetalleCompra> detalleCompra;
 
     @OneToOne
     @JoinColumn(nullable = false)

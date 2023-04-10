@@ -48,7 +48,7 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("SELECT f.producto FROM Favorito f WHERE f.usuario.idPersona = :idUsuario")
     List<Producto> listarFavoritosUsuarios(int idUsuario);
 
-    @Query("SELECT pc.producto FROM ProductoCompra pc WHERE pc.idProductoCompra = :idProductoCompra")
+    @Query("SELECT pc.producto FROM DetalleCompra pc WHERE pc.idProductoCompra = :idProductoCompra")
     Producto findProductoByIdCompra(@Param("idProductoCompra") int idProductoCompra);
 
 

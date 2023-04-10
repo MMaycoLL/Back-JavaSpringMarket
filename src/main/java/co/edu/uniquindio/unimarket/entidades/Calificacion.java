@@ -31,6 +31,6 @@ public class Calificacion implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private ProductoCompra productoCompra;
+    private DetalleCompra detalleCompra;
 
 }

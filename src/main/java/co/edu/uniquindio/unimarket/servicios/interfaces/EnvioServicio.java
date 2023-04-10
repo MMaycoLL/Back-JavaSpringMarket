@@ -1,13 +1,15 @@
 package co.edu.uniquindio.unimarket.servicios.interfaces;
 
 import co.edu.uniquindio.unimarket.dto.EnvioDTO;
-import co.edu.uniquindio.unimarket.entidades.Envio;
+import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
 
 public interface EnvioServicio {
 
-    Envio crearEnvio(EnvioDTO envioDTO, int idCompra) throws Exception;
+    EnvioGetDTO crearEnvio(EnvioDTO envioDTO, int idCompra) throws Exception;
 
-    Envio actualizarEnvio(EnvioDTO envioDTO, int idEnvio) throws Exception;
+    EnvioGetDTO actualizarEnvio(int idEnvio, EnvioDTO envioDTO) throws Exception;
 
-    void eliminarEnvio(int idEnvio) throws Exception;
+    int eliminarEnvio(int idEnvio) throws Exception;
+
+    EnvioGetDTO obtenerEnvio(int idEnvio) throws Exception;
 }

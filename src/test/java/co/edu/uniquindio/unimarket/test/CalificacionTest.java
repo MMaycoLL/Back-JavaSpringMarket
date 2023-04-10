@@ -1,8 +1,8 @@
 package co.edu.uniquindio.unimarket.test;
 
 import co.edu.uniquindio.unimarket.dto.CalificacionDTO;
-import co.edu.uniquindio.unimarket.entidades.ProductoCompra;
-import co.edu.uniquindio.unimarket.repositorios.ProductoCompraRepo;
+import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
+import co.edu.uniquindio.unimarket.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CalificacionServicio;
 import jakarta.transaction.Transactional;
@@ -15,11 +15,12 @@ import org.springframework.test.context.jdbc.Sql;
 import static java.sql.DriverManager.println;
 
 @SpringBootTest
+@Transactional
 
 public class CalificacionTest {
 
     @Autowired
-    private ProductoCompraRepo productoCompraRepo;
+    private DetalleCompraRepo detalleCompraRepo;
 
     @Autowired
     private CalificacionServicio calificacionServicio;
@@ -39,15 +40,15 @@ public class CalificacionTest {
         calificacionDTO.setValorCalificaion(3);
 
         // Obtener producto compra para asociar a la calificación
-        ProductoCompra productoCompra = productoCompraRepo.findById(3).orElse(null);
+        DetalleCompra detalleCompra = detalleCompraRepo.findById(3).orElse(null);
 
-        // Verificar que el productoCompra existe
-        if (productoCompra == null) {
+        // Verificar que el detalleCompra existe
+        if (detalleCompra == null) {
             Assertions.fail("No se encontró el producto compra con ID 1");
         }
-println("productoCompra.getIdProductoCompra() = " + productoCompra.getProducto().getNombreProducto());
+println("detalleCompra.getIdProductoCompra() = " + detalleCompra.getProducto().getNombreProducto());
         // Asociar producto compra a la calificación
-        calificacionDTO.setIdProductoCompra(productoCompra.getIdProductoCompra());
+        calificacionDTO.setIdProductoCompra(detalleCompra.getIdProductoCompra());
 
         // Asociar ID de usuario o persona a la calificación
         calificacionDTO.setIdUsuario(2);

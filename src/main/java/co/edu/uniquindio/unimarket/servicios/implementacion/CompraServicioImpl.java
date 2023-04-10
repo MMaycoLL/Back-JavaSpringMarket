@@ -37,14 +37,16 @@ public class CompraServicioImpl implements CompraServicio {
 
     @Override
     public List<CompraGetDTO> listarComprasUsuarios(int idUsuario) {
+        // Listar las compras de un usuario
+return null;
 
-        return null;
     }
 
     @Override
     public CompraGetDTO obtenerCompra(int idCompra) {
+        // Obtener una compra
+return null;
 
-        return null;
     }
 
 }

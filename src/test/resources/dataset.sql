@@ -80,7 +80,7 @@ values
     (6, "img6", "https://www.google.com/imagen6.jpg");
 
 
-insert into producto_compra
+insert into detalle_compra
 values
     -- id, cantidad, precio, id_compra, id_producto
 

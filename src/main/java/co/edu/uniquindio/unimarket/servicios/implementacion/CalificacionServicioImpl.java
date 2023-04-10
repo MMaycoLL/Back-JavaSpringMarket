@@ -3,11 +3,11 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 import co.edu.uniquindio.unimarket.dto.CalificacionDTO;
 import co.edu.uniquindio.unimarket.entidades.Calificacion;
 import co.edu.uniquindio.unimarket.entidades.Producto;
-import co.edu.uniquindio.unimarket.entidades.ProductoCompra;
+import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.CalificacionRepo;
 import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
-import co.edu.uniquindio.unimarket.repositorios.ProductoCompraRepo;
+import co.edu.uniquindio.unimarket.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CalificacionServicio;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
 
     private final CalificacionRepo calificacionRepo;
 
-    private final ProductoCompraRepo productoCompraRepo;
+    private final DetalleCompraRepo detalleCompraRepo;
 
     private final CompraRepo compraRepo;
 
@@ -49,11 +49,11 @@ public class CalificacionServicioImpl implements CalificacionServicio {
         calificacion.setComentarioCalificacion(calificacionDTO.getComentarioCalificacion());
         calificacion.setUsuario(usuario);
 
-        ProductoCompra productoCompra = productoCompraRepo.findById(calificacionDTO.getIdProductoCompra())
-                .orElseThrow(() -> new Exception("No se pudo encontrar el productoCompra"));
+        DetalleCompra detalleCompra = detalleCompraRepo.findById(calificacionDTO.getIdProductoCompra())
+                .orElseThrow(() -> new Exception("No se pudo encontrar el detalleCompra"));
 
-        productoCompra.setProducto(producto);
-        calificacion.setProductoCompra(productoCompra);
+        detalleCompra.setProducto(producto);
+        calificacion.setDetalleCompra(detalleCompra);
 
         return calificacionRepo.save(calificacion).getIdCalificacion();
     }
