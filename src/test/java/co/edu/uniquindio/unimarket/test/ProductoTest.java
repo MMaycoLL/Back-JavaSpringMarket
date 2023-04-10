@@ -77,7 +77,15 @@ public class ProductoTest {
         Map<String, String> imagenes = new HashMap<>();
         imagenes.put("img1", "https://www.google.com/imagen1.jpg");
 
-        ProductoGetDTO productoActualizado = productoServicio.actualizarProducto(1, new ProductoDTO("pelota", "descripcion  producto v1", 10, 50000, 1, imagenes, List.of(Categoria.HOGAR)));
+        ProductoGetDTO productoActualizado = productoServicio.actualizarProducto(1,
+                new ProductoDTO(
+                        "pelota",
+                        "descripcion  producto v1",
+                        10,
+                        50000,
+                        1,
+                        imagenes,
+                        List.of(Categoria.HOGAR)));
 
         //Se comprueba que ahora el nombre del producto no es el mismo inicial
         Assertions.assertNotEquals("balon", productoActualizado.getNombreProducto());
