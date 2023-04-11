@@ -34,7 +34,7 @@ public class Envio implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaEntregaEstimada;
 
-    @OneToOne(mappedBy = "envio", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "envio")
     @ToString.Exclude
     private Compra compra;
 

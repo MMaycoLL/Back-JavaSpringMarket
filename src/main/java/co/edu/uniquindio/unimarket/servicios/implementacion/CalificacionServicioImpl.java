@@ -29,7 +29,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
     public int crearCalificacion(CalificacionDTO calificacionDTO) throws Exception {
 
         // Obtener el usuario de la compra
-        Usuario usuario = compraRepo.findUsuarioByIdCompra(calificacionDTO.getIdProductoCompra());
+        Usuario usuario = compraRepo.findUsuarioByIdCompra(calificacionDTO.getIdDetalleCompra());
 
         // Verificar si el usuario es nulo
         if (usuario == null) {
@@ -37,7 +37,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
         }
 
         // Obtener el producto de la compra
-        Producto producto = productoRepo.findProductoByIdCompra(calificacionDTO.getIdProductoCompra());
+        Producto producto = productoRepo.findProductoByIdCompra(calificacionDTO.getIdDetalleCompra());
 
         // Verificar si el producto es nulo
         if (producto == null) {
@@ -49,7 +49,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
         calificacion.setComentarioCalificacion(calificacionDTO.getComentarioCalificacion());
         calificacion.setUsuario(usuario);
 
-        DetalleCompra detalleCompra = detalleCompraRepo.findById(calificacionDTO.getIdProductoCompra())
+        DetalleCompra detalleCompra = detalleCompraRepo.findById(calificacionDTO.getIdDetalleCompra())
                 .orElseThrow(() -> new Exception("No se pudo encontrar el detalleCompra"));
 
         detalleCompra.setProducto(producto);

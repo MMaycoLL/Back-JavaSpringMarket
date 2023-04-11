@@ -23,6 +23,6 @@ public class CalificacionDTO {
 
     private int idUsuario;
 
-    private int idProductoCompra;
+    private int idDetalleCompra;
 
 }

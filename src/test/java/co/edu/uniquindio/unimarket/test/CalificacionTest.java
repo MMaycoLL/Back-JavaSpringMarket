@@ -48,7 +48,7 @@ public class CalificacionTest {
         }
 println("detalleCompra.getIdProductoCompra() = " + detalleCompra.getProducto().getNombreProducto());
         // Asociar producto compra a la calificación
-        calificacionDTO.setIdProductoCompra(detalleCompra.getIdProductoCompra());
+        calificacionDTO.setIdDetalleCompra(detalleCompra.getIdDetalleCompra());
 
         // Asociar ID de usuario o persona a la calificación
         calificacionDTO.setIdUsuario(2);

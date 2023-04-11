@@ -26,5 +26,5 @@ public class CompraDTO {
     @Size(min = 1, message = "Debe haber al menos un elemento en la lista")
     private List<DetalleCompraDTO> detalleCompraDTO;
 
-
+    private int idEnvio;
 }

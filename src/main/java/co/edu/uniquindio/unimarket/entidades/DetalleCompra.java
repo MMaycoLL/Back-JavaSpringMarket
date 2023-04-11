@@ -18,7 +18,7 @@ public class DetalleCompra implements Serializable {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProductoCompra;
+    private int idDetalleCompra;
 
     @Column(nullable = false)
     private int cantidad;
