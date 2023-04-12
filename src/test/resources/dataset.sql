@@ -50,8 +50,8 @@ insert into compra
 values
     -- id, fecha, metodo_pago, total_compra, id_envio, id_persona
 
-    (1, "2023-04-05 14:37:12", "TARJETA_CREDITO", 100000, 1, 1),
-    (2, "2023-04-05 14:37:12", "TARJETA_DEBITO", 110000, 2, 1),
+    (1, "2023-04-05 14:37:12", "TARJETA_CREDITO", 100000, 1, 2),
+    (2, "2023-04-05 14:37:12", "TARJETA_DEBITO", 110000, 2, 2),
     (3, "2023-04-05 14:37:12", "PAYPAL", 120000, 3, 3),
     (4, "2023-04-05 14:37:12", "EFECTIVO", 130000, 4, 4),
     (5, "2023-04-05 14:37:12", "TARJETA_DEBITO", 140000, 5, 5),

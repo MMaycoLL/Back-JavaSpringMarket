@@ -2,6 +2,7 @@ package co.edu.uniquindio.unimarket.servicios.interfaces;
 
 import co.edu.uniquindio.unimarket.dto.CompraDTO;
 import co.edu.uniquindio.unimarket.dto.CompraGetDTO;
+import co.edu.uniquindio.unimarket.dto.EnvioDTO;
 
 import java.util.List;
 

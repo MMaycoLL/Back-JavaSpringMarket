@@ -27,35 +27,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
 
     @Override
     public int crearCalificacion(CalificacionDTO calificacionDTO) throws Exception {
-
-        // Obtener el usuario de la compra
-        Usuario usuario = compraRepo.findUsuarioByIdCompra(calificacionDTO.getIdDetalleCompra());
-
-        // Verificar si el usuario es nulo
-        if (usuario == null) {
-            throw new Exception("No se pudo encontrar el usuario de la compra");
-        }
-
-        // Obtener el producto de la compra
-        Producto producto = productoRepo.findProductoByIdCompra(calificacionDTO.getIdDetalleCompra());
-
-        // Verificar si el producto es nulo
-        if (producto == null) {
-            throw new Exception("No se pudo encontrar el producto de la compra");
-        }
-
-        Calificacion calificacion = new Calificacion();
-        calificacion.setValorCalificacion(calificacionDTO.getValorCalificaion());
-        calificacion.setComentarioCalificacion(calificacionDTO.getComentarioCalificacion());
-        calificacion.setUsuario(usuario);
-
-        DetalleCompra detalleCompra = detalleCompraRepo.findById(calificacionDTO.getIdDetalleCompra())
-                .orElseThrow(() -> new Exception("No se pudo encontrar el detalleCompra"));
-
-        detalleCompra.setProducto(producto);
-        calificacion.setDetalleCompra(detalleCompra);
-
-        return calificacionRepo.save(calificacion).getIdCalificacion();
+        return 0;
     }
 
 

@@ -13,6 +13,7 @@ import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +27,24 @@ public class CompraServicioImpl implements CompraServicio {
 
     @Override
     public int crearCompra(CompraDTO compraDTO) throws Exception {
+        Compra compra = new Compra();
+        compra.setMetodoPago(compraDTO.getMetodoPago());
+        compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
+        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()).orElse(null));
+        compra.setFechaCompra(LocalDate.now().atStartOfDay()); // Agregar la fecha de compra
 
-        return 0;
+        float total = 0;
+
+        for (DetalleCompraDTO dc : compraDTO.getDetalleCompraDTO()) {
+            total += dc.getPrecioCompra() * dc.getCantidad();
+        }
+
+        compra.setTotalCompra( total);
+
+        return compraRepo.save(compra).getIdCompra();
     }
+
+
 
 
     @Override
@@ -63,17 +79,19 @@ public class CompraServicioImpl implements CompraServicio {
         dto.setMetodoPago(compra.getMetodoPago());
 
         List<DetalleCompraDTO> detalleCompraDTOs = new ArrayList<>();
-        for (DetalleCompra detalleCompra : compra.getDetalleCompra()) {
-            DetalleCompraDTO detalleCompraDTO = new DetalleCompraDTO();
-            detalleCompraDTO.setCantidad(detalleCompra.getCantidad());
-            detalleCompraDTO.setPrecioCompra(detalleCompra.getPrecioCompra());
-            detalleCompraDTO.setIdProducto(detalleCompra.getProducto().getIdProducto());
-            detalleCompraDTOs.add(detalleCompraDTO);
+        if (compra.getDetalleCompra() != null) { // Verificar si la lista es nula
+            for (DetalleCompra detalleCompra : compra.getDetalleCompra()) {
+                DetalleCompraDTO detalleCompraDTO = new DetalleCompraDTO();
+                detalleCompraDTO.setCantidad(detalleCompra.getCantidad());
+                detalleCompraDTO.setPrecioCompra(detalleCompra.getPrecioCompra());
+                detalleCompraDTO.setIdProducto(detalleCompra.getProducto().getIdProducto());
+                detalleCompraDTOs.add(detalleCompraDTO);
+            }
         }
-
         dto.setDetalleCompraDTO(detalleCompraDTOs);
         return dto;
     }
+
 
 }
 

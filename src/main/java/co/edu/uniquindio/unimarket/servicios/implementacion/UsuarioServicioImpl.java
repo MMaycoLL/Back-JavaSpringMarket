@@ -6,6 +6,7 @@ import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
@@ -38,6 +41,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+
         return crearUsuario(usuarioDTO);
     }
 
