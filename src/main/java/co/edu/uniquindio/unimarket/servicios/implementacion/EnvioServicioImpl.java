@@ -2,11 +2,12 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.EnvioDTO;
 import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Compra;
 import co.edu.uniquindio.unimarket.entidades.Envio;
+import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,31 +19,20 @@ public class EnvioServicioImpl implements EnvioServicio {
 
     private final EnvioRepo envioRepo;
     private final CompraRepo compraRepo;
+    private final UsuarioServicio usuarioServicio;
 
     @Override
-    public EnvioGetDTO crearEnvio(EnvioDTO envioDTO, int idCompra) throws Exception {
+    public EnvioGetDTO crearEnvio(EnvioDTO envioDTO, int idUsuario) throws Exception {
 
-        // Verificar si el id de la compra es válido
-        if (!compraRepo.existsById(idCompra))
-            throw new Exception("No se encontró la compra con el id suministrado");
-
-        // Recuperar la compra de la base de datos
-        Compra compra = compraRepo.findById(idCompra).get();
+        // Verificar si el id del usuario es válido
+        Usuario usuario = usuarioServicio.obtener(idUsuario);
 
         Envio envio = convertir(envioDTO);
-
-        if (compra.getEnvio() != null) {
-            // Actualizar el envío existente con los nuevos datos
-            envio = compra.getEnvio();
-            envio.setDireccionEnvio(envioDTO.getDireccionEnvio());
-            envio.setCiudadEnvio(envioDTO.getCiudadEnvio());
-            envio.setTelefono(envioDTO.getTelefono());
-            envio.setFechaEntregaEstimada(envioDTO.getFechaEntregaEstimada());
-        } else {
-            // Establecer la relación entre el envío y la compra
-            compra.setEnvio(envio);
-            envio.setCompra(compra);
-        }
+        envio.setNombreDestinatario(envioDTO.getNombreDestinatario());
+        envio.setDireccionDestinatario(envioDTO.getDireccionDestinatario());
+        envio.setTelefonoDestinatario(envioDTO.getTelefonoDestinatario());
+        envio.setCiudadEnvio(envioDTO.getCiudadEnvio());
+        envio.setUsuario(usuario);
 
         envioRepo.save(envio);
 
@@ -100,20 +90,21 @@ public class EnvioServicioImpl implements EnvioServicio {
     private EnvioGetDTO convertir(Envio envio) {
         EnvioGetDTO envioGetDTO = new EnvioGetDTO();
         envioGetDTO.setIdEnvio(envio.getIdEnvio());
-        envioGetDTO.setDireccionEnvio(envio.getDireccionEnvio());
+        envioGetDTO.setNombreDestinatario(envio.getNombreDestinatario());
+        envioGetDTO.setDireccionDestinatario(envio.getDireccionDestinatario());
+        envioGetDTO.setTelefonoDestinatario(envio.getTelefonoDestinatario());
         envioGetDTO.setCiudadEnvio(envio.getCiudadEnvio());
-        envioGetDTO.setTelefono(envio.getTelefono());
-        envioGetDTO.setFechaEntregaEstimada(envio.getFechaEntregaEstimada());
+
         return envioGetDTO;
     }
 
     private Envio convertir(EnvioDTO envioDTO) throws Exception {
 
         Envio envio = new Envio();
-        envio.setDireccionEnvio(envioDTO.getDireccionEnvio());
+        envio.setNombreDestinatario(envioDTO.getNombreDestinatario());
+        envio.setDireccionDestinatario(envioDTO.getDireccionDestinatario());
+        envio.setTelefonoDestinatario(envioDTO.getTelefonoDestinatario());
         envio.setCiudadEnvio(envioDTO.getCiudadEnvio());
-        envio.setTelefono(envioDTO.getTelefono());
-        envio.setFechaEntregaEstimada(envioDTO.getFechaEntregaEstimada());
 
         return envio;
     }

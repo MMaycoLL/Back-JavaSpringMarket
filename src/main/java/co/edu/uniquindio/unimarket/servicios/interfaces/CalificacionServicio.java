@@ -7,7 +7,7 @@ public interface CalificacionServicio {
     int crearCalificacion(CalificacionDTO calificacionDTO) throws Exception;
 
 
-    int promedioCalificacion(int idProducto);
+    float promedioCalificacion(int idProducto);
 
 
 }

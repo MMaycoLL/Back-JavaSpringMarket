@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,20 +22,23 @@ public class Envio implements Serializable {
     private int idEnvio;
 
     @Column(length = 100, nullable = false)
-    private String direccionEnvio;
+    private String nombreDestinatario;
+
+    @Column(length = 100, nullable = false)
+    private String direccionDestinatario;
+
+    @Column(length = 20, nullable = false)
+    private String telefonoDestinatario;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Ciudades ciudadEnvio;
 
-    @Column(length = 20, nullable = false)
-    private String telefono;
-
-    @Column(nullable = false)
-    private LocalDate fechaEntregaEstimada;
-
-    @OneToOne(mappedBy = "envio")
+    @OneToMany(mappedBy = "envio")
     @ToString.Exclude
-    private Compra compra;
+    private List<Compra> compra;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 }

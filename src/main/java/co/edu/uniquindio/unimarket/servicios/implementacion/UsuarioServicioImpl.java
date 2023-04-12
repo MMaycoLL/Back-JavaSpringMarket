@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.print.AttributeException;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
-        return crearUsuario(usuarioDTO);
+        Optional<Usuario> buscado = usuarioRepo.findById(Integer.valueOf(usuarioDTO.getCedula()));
+        if(buscado.isPresent()){
+            throw new Exception("El usuario ya se encuentra registrado");
+        }
+        /*if(!estaDisponible(u.getEmail())){
+            throw new AttributeException("El email ya se encuentra en uso");
+        } */
+        Usuario nuevo = convertir(usuarioDTO);
+        nuevo.setContrasenia( passwordEncoder.encode(nuevo.getContrasenia()) );
+        Usuario registro = usuarioRepo.save(nuevo);
+        return registro.getIdPersona();
     }
 
     @Override

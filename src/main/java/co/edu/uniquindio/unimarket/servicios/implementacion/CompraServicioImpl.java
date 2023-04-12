@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class CompraServicioImpl implements CompraServicio {
         Compra compra = new Compra();
         compra.setMetodoPago(compraDTO.getMetodoPago());
         compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
-        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()).orElse(null));
+        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()) .orElseThrow(()-> new Exception("No se encontro el envio")));
         compra.setFechaCompra(LocalDate.now().atStartOfDay()); // Agregar la fecha de compra
 
         float total = 0;
@@ -58,6 +59,16 @@ public class CompraServicioImpl implements CompraServicio {
         }
 
         return compraGetDTOs;
+    }
+
+    public Compra obtener(int idCompra) throws Exception{
+        Optional<Compra> compra = compraRepo.findById(idCompra);
+
+        if(compra.isEmpty()){
+            throw new Exception("La compra no existe");
+        }
+
+        return compra.get();
     }
 
     @Override

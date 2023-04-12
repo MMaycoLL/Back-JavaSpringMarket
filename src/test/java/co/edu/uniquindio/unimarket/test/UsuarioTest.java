@@ -104,5 +104,4 @@ public class UsuarioTest {
             e.printStackTrace();
         }
     }
-
 }

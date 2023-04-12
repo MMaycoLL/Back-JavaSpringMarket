@@ -5,7 +5,7 @@ import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import jakarta.transaction.Transactional;
@@ -160,7 +160,7 @@ public class ProductoTest {
     @Sql("classpath:dataset.sql")
     public void listarProductosEstadoTest() throws Exception {
         // Listar productos de un estado
-        EstadoAutorizacion estado = EstadoAutorizacion.AUTORIZADO;
+        EstadoProducto estado = EstadoProducto.ACTIVO;
         List<ProductoGetDTO> productos = productoServicio.listarProductosEstado(estado);
 
         Assertions.assertEquals(2, productos.size());

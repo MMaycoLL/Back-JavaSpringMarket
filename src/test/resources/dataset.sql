@@ -36,14 +36,14 @@ values
 
 insert into envio
 values
-    -- id, ciudadEnvio, direccionEnvio, fechaEstimadaEntrega, telefono
+    -- id, ciudadEnvio, direccionDestinatario, nombreDestinatario, telefonoDestinatario, idUsuario
 
-    (1, "CARTAGENA", "calle 54 # 11-21", "2023-04-05", "31238521"),
-    (2, "PEREIRA", "calle 52 # 12-22", "2023-04-06", "31238522"),
-    (3, "MANIZALES", "calle 51 # 13-23", "2023-04-07", "31238523"),
-    (4, "ARMENIA", "calle 55 # 14-24", "2023-04-08", "31238524"),
-    (5, "CUCUTA", "calle 56 # 15-25", "2023-04-09", "31238525"),
-    (6, "IBAGUE", "calle 57 # 16-26", "2023-04-05", "31238526");
+    (1, "CARTAGENA", "calle 54 # 11-21", "pepito perez", "31238521", 1),
+    (2, "PEREIRA", "calle 52 # 12-22", "juan perez", "31238522", 2),
+    (3, "MANIZALES", "calle 51 # 13-23", "carlos perez", "31238523", 3),
+    (4, "ARMENIA", "calle 55 # 14-24", "andres perez", "31238524", 4),
+    (5, "CUCUTA", "calle 56 # 15-25", "julio perez", "31238525", 5),
+    (6, "IBAGUE", "calle 57 # 16-26", "alexis perez", "31238526", 6);
 
 
 insert into compra
@@ -56,6 +56,8 @@ values
     (4, "2023-04-05 14:37:12", "EFECTIVO", 130000, 4, 4),
     (5, "2023-04-05 14:37:12", "TARJETA_DEBITO", 140000, 5, 5),
     (6, "2023-04-05 14:37:12", "TARJETA_CREDITO", 150000, 6, 6);
+
+
 insert into producto_moderador
 values
     -- id, estado,fecha, descripcion, id_moderador, id_producto
@@ -145,8 +147,8 @@ values
     -- id, comentario_calificacion, valor_calificacion, id_producto_compra, id_persona
 
     (1, "comentario calificacion 1", 1, 1, 1),
-    (2, "comentario calificacion 2", 2, 2, 2),
-    (3, "comentario calificacion 3", 3, 3, 3),
-    (4, "comentario calificacion 4", 4, 4, 4),
-    (5, "comentario calificacion 5", 5, 5, 5),
+    (2, "comentario calificacion 2", 5, 2, 2),
+    (3, "comentario calificacion 3", 3, 2, 2),
+    (4, "comentario calificacion 4", 5, 2, 2),
+    (5, "comentario calificacion 5", 5, 2, 2),
     (6, "comentario calificacion 6", 6, 6, 6);

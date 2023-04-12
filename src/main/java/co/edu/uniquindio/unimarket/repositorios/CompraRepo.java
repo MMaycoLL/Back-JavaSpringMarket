@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
-    @Query("SELECT pc.compra.usuario FROM DetalleCompra pc WHERE pc.idDetalleCompra = :idDetalleCompra")
-    Usuario findUsuarioByIdCompra(int idDetalleCompra);
-
     @Query("SELECT c FROM Compra c WHERE c.usuario.idPersona = :idUsuario")
     List<Compra> findByUsuarioIdUsuario(int idUsuario);
 

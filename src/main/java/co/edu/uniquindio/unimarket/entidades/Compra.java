@@ -40,7 +40,7 @@ public class Compra implements Serializable {
     @ToString.Exclude
     private List<DetalleCompra> detalleCompra;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Envio envio;
 }

@@ -3,9 +3,8 @@ package co.edu.uniquindio.unimarket.servicios.interfaces;
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
-import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface ProductoServicio {
 
     ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO)throws Exception;
 
-    int actualizarPorEstado(int idProducto, EstadoAutorizacion estadoAutorizacion)throws Exception;
+    int actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion)throws Exception;
 
     int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception;
 
@@ -27,7 +26,7 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosCategoria(Categoria categoria)throws Exception;
 
-    List<ProductoGetDTO> listarProductosEstado(EstadoAutorizacion estadoAutorizacion) throws Exception;
+    List<ProductoGetDTO> listarProductosEstado(EstadoProducto estadoAutorizacion) throws Exception;
 
     List<ProductoGetDTO> listarProductosNombre(String nombreProducto);
 

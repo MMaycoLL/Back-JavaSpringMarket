@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 public interface CalificacionRepo extends JpaRepository<Calificacion, Integer> {
-    @Query("SELECT AVG(pc.calificacion) FROM DetalleCompra pc WHERE pc.producto.idProducto = :idProducto")
-    Float obtenerPromedioCalificacionesPorProducto( int idProducto);
 
-    @Query("SELECT pc FROM DetalleCompra pc WHERE pc.producto.idProducto = :idProducto")
-    List<DetalleCompra> findByProductoId(int idProducto);
+    // promedio de calificaciones de un producto
+    @Query("SELECT AVG(c.valorCalificacion) FROM Calificacion c WHERE c.detalleCompra.producto.idProducto = ?1")
+    int promedioCalificacion(int idProducto);
+
 }
 

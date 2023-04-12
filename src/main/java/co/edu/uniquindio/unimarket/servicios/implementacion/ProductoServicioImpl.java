@@ -4,7 +4,6 @@ import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
@@ -59,8 +58,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarPorEstado(int idProducto, EstadoAutorizacion estadoAutorizacion) throws Exception {
-        return 0;
+    public int actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
+        Producto producto = obtener(idProducto);
+        producto.setEstadoProducto(estadoAutorizacion);
+        return productoRepo.save(producto).getIdProducto();
     }
 
     @Override
@@ -103,7 +104,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
 
     @Override
-    public List<ProductoGetDTO> listarProductosEstado(EstadoAutorizacion estadoAutorizacion) throws Exception {
+    public List<ProductoGetDTO> listarProductosEstado(EstadoProducto estadoAutorizacion) throws Exception {
 
         List<Producto> lista = productoRepo.listarProductosEstado(estadoAutorizacion);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
@@ -205,7 +206,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setUsuario(usuarioServicio.obtener(productoDTO.getIdPersona()));
         producto.setImagen(productoDTO.getImagenes());
         producto.setCategorias(productoDTO.getCategorias());
-        producto.setEstadoProducto(EstadoProducto.ACTIVO);
+        producto.setEstadoProducto(EstadoProducto.SIN_REVISAR);
         producto.setFechaCreacion(LocalDateTime.now());
         producto.setFechaLimite(LocalDateTime.now().plusDays(60));
 

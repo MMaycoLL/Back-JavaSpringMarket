@@ -5,7 +5,7 @@ import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
 
 public interface EnvioServicio {
 
-    EnvioGetDTO crearEnvio(EnvioDTO envioDTO, int idCompra) throws Exception;
+    EnvioGetDTO crearEnvio(EnvioDTO envioDTO, int idUsuario) throws Exception;
 
     EnvioGetDTO actualizarEnvio(int idEnvio, EnvioDTO envioDTO) throws Exception;
 

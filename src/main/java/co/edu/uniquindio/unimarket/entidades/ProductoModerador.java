@@ -1,6 +1,6 @@
 package co.edu.uniquindio.unimarket.entidades;
 
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoAutorizacion;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class ProductoModerador implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EstadoAutorizacion estadoAutorizacion;
+    private EstadoProducto estadoAutorizacion;
 
     @ManyToOne
     @JoinColumn(name = "idModerador", nullable = false)

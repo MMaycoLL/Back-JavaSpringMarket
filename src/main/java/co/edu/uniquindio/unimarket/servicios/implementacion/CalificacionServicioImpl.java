@@ -2,14 +2,12 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.CalificacionDTO;
 import co.edu.uniquindio.unimarket.entidades.Calificacion;
-import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.CalificacionRepo;
-import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
-import co.edu.uniquindio.unimarket.repositorios.DetalleCompraRepo;
-import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CalificacionServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.DetalleCompraServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +17,32 @@ public class CalificacionServicioImpl implements CalificacionServicio {
 
     private final CalificacionRepo calificacionRepo;
 
-    private final DetalleCompraRepo detalleCompraRepo;
+    private final UsuarioServicio usuarioServicio;
 
-    private final CompraRepo compraRepo;
-
-    private final ProductoRepo productoRepo;
+    private final DetalleCompraServicio detalleCompraServicio;
 
     @Override
     public int crearCalificacion(CalificacionDTO calificacionDTO) throws Exception {
-        return 0;
+
+        Usuario usuario = usuarioServicio.obtener(calificacionDTO.getIdUsuario());
+        DetalleCompra detalleCompra = detalleCompraServicio.obtener(calificacionDTO.getIdDetalleCompra());
+
+        if (!detalleCompra.getCompra().getUsuario().equals(usuario)) {
+            throw new Exception("Ustes no tiene el permiso para calificar la compra");
+        }
+
+        Calificacion calificacion = new Calificacion();
+        calificacion.setValorCalificacion(calificacionDTO.getValorCalificaion());
+        calificacion.setComentarioCalificacion(calificacionDTO.getComentarioCalificacion());
+        calificacion.setUsuario(usuario);
+        calificacion.setDetalleCompra(detalleCompra);
+
+        return calificacionRepo.save(calificacion).getIdCalificacion();
     }
 
 
-
-
     @Override
-    public int promedioCalificacion(int idProducto) {
-       // return calificacionRepo.promedioCalificacion(idProducto);
-return 0;
+    public float promedioCalificacion(int idProducto) {
+        return calificacionRepo.promedioCalificacion(idProducto);
     }
 }

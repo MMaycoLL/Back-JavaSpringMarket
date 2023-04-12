@@ -9,29 +9,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 public class EnvioDTO {
 
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull(message = "El nombre no puede ser nulo")
+    @Length(max = 100, message = "El nombre no puede tener más de 100 caracteres")
+    private String nombreDestinatario;
+
     @NotBlank(message = "La direccion no puede estar vacía")
     @NotNull(message = "La direccion no puede ser nula")
     @Length(max = 100, message = "La direccion no puede tener más de 100 caracteres")
-    private String direccionEnvio;
-
-    @NotNull(message = "La ciudad no puede ser nula")
-    private Ciudades ciudadEnvio;
+    private String direccionDestinatario;
 
     @NotNull(message = "El telefono no puede ser nulo")
     @Length(max = 20, message = "El telefono no puede tener más de 20 caracteres")
     @NotBlank(message = "El telefono no puede estar vacío")
-    private String telefono;
+    private String telefonoDestinatario;
 
-    @NotNull(message = "La fecha de entrega estimada no puede ser nula")
-    private LocalDate fechaEntregaEstimada;
-
+    @NotNull(message = "La ciudad no puede ser nula")
+    private Ciudades ciudadEnvio;
 
 }
