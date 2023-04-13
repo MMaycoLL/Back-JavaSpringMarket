@@ -15,8 +15,8 @@ import java.util.Map;
 @Service
 public class CloudinaryServicioImpl implements CloudinaryServicio {
 
-    private Cloudinary cloudinary;
-    private Map<String, String> config;
+    private final Cloudinary cloudinary;
+    private final Map<String, String> config;
 
     public CloudinaryServicioImpl() {
         config = new HashMap<>();

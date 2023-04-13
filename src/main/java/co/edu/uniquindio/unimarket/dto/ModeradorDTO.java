@@ -21,5 +21,4 @@ public class ModeradorDTO {
     private String motivo;
 
 
-
 }

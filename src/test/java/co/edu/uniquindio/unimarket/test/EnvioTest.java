@@ -2,11 +2,8 @@ package co.edu.uniquindio.unimarket.test;
 
 import co.edu.uniquindio.unimarket.dto.EnvioDTO;
 import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Compra;
-import co.edu.uniquindio.unimarket.entidades.Envio;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Ciudades;
-import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
 import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
@@ -17,11 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @SpringBootTest
-
+@Transactional
 
 public class EnvioTest {
 
@@ -40,21 +36,21 @@ public class EnvioTest {
 
         // Obtener la compra existente
         int idUsuario = 2;
-       Optional<Usuario> usuario = usuarioRepo.findById(idUsuario);
+        Optional<Usuario> usuario = usuarioRepo.findById(idUsuario);
 
         // Crear un objeto DTO con los datos del envío a crear
         EnvioDTO envioDTO = new EnvioDTO(
                 "juan perez",
                 "Calle 13 #13",
-        "31238522",
+                "31238522",
                 Ciudades.CAUCASIA
-                );
+        );
 
         // Crear el envío a partir del DTO
         EnvioGetDTO envioGetDTO = envioServicio.crearEnvio(envioDTO, idUsuario);
 
         // Verificar que el envío se actualizó correctamente
-       Assertions.assertEquals("Calle 13 #13", envioGetDTO.getDireccionDestinatario());
+        Assertions.assertEquals("Calle 13 #13", envioGetDTO.getDireccionDestinatario());
         Assertions.assertEquals(Ciudades.CAUCASIA, envioGetDTO.getCiudadEnvio());
     }
 

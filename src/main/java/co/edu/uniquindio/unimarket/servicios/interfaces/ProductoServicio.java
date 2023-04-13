@@ -12,19 +12,19 @@ public interface ProductoServicio {
 
     int crearProducto(ProductoDTO productoDTO) throws Exception;
 
-    int eliminarProducto(int idProducto)throws Exception;
+    int eliminarProducto(int idProducto) throws Exception;
 
-    ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO)throws Exception;
+    ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception;
 
-    void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion)throws Exception;
+    void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception;
 
     int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception;
 
-    ProductoGetDTO obtenerProducto(int idProducto)throws Exception;
+    ProductoGetDTO obtenerProducto(int idProducto) throws Exception;
 
-    List<ProductoGetDTO> listarProductosUsuario(int idUsuario)throws Exception;
+    List<ProductoGetDTO> listarProductosUsuario(int idUsuario) throws Exception;
 
-    List<ProductoGetDTO> listarProductosCategoria(Categoria categoria)throws Exception;
+    List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) throws Exception;
 
     List<ProductoGetDTO> listarProductosEstado(EstadoProducto estadoAutorizacion) throws Exception;
 
@@ -35,8 +35,6 @@ public interface ProductoServicio {
     List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception;
 
     Producto obtener(int idProducto) throws Exception;
-
-
 
 
 }

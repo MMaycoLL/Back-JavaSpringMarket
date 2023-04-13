@@ -2,24 +2,30 @@ insert into usuario
 values
     -- id, contraseña, cedula, email, nombre_completo, direccion, telefono
 
-    (1, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111641", "pepe1@gmail.com", "pepito perez", "calle 54 # 11-21", "31238521"),
-    (2, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111642", "juan1@gmail.com", "juan perez", "calle 52 # 12-22", "31238522"),
-    (3, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111643", "carlos1@gmail.com", "carlos perez", "calle 51 # 13-23", "31238523"),
-    (4, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111644", "andres1@gmail.com", "andres perez", "calle 55 # 14-24", "31238524"),
-    (5, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111645", "julio1@gmail.com", "julio perez", "calle 56 # 15-25", "31238525"),
-    (6, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111646", "alexis1@gmail.com", "alexis perez", "calle 57 # 16-26", "31238526");
+    (1, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111641", "pepe1@gmail.com", "pepito perez",
+     "calle 54 # 11-21", "31238521"),
+    (2, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111642", "juan1@gmail.com", "juan perez",
+     "calle 52 # 12-22", "31238522"),
+    (3, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111643", "carlos1@gmail.com", "carlos perez",
+     "calle 51 # 13-23", "31238523"),
+    (4, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111644", "andres1@gmail.com", "andres perez",
+     "calle 55 # 14-24", "31238524"),
+    (5, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111645", "julio1@gmail.com", "julio perez",
+     "calle 56 # 15-25", "31238525"),
+    (6, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111646", "alexis1@gmail.com", "alexis perez",
+     "calle 57 # 16-26", "31238526");
 
 
 insert into moderador
 values
     -- id, contraseña, cedula, email, nombre_completo
 
-    (7, "123457", "111647", "camilo1@gmail.com", "camilo perez"),
-    (8, "123458", "111648", "andrea1@gmail.com", "andrea perez"),
-    (9, "123459", "111649", "juliana1@gmail.com", "juliana perez"),
-    (10, "1234510", "1116410", "mariana1@gmail.com", "mariana perez"),
-    (11, "1234511", "1116411", "tatiana1@gmail.com", "tatiana perez"),
-    (12, "1234512", "1116412", "yuliana1@gmail.com", "yuliana perez");
+    (7, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111647", "camilo1@gmail.com", "camilo perez"),
+    (8, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111648", "andrea1@gmail.com", "andrea perez"),
+    (9, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111649", "juliana1@gmail.com", "juliana perez"),
+    (10, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "1116410", "mariana1@gmail.com", "mariana perez"),
+    (11, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "1116411", "tatiana1@gmail.com", "tatiana perez"),
+    (12, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "1116412", "yuliana1@gmail.com", "yuliana perez");
 
 
 insert into producto
@@ -27,11 +33,11 @@ values
     -- id, descripcion, estado, fecha_creacion, fecha_limite, nombre, precio, stock, id_persona
 
     (1, "descripcion  producto 1", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "balon", 50000, 10, 1),
-    (2, "descripcion  producto 2", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "balon", 60000, 11, 2),
+    (2, "descripcion  producto 2", "INACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "balon", 60000, 11, 2),
     (3, "descripcion  producto 1", "INACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "balon", 70000, 12, 3),
     (4, "descripcion  producto 4", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "libro1", 80000, 13, 4),
     (5, "descripcion  producto 5", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "CD", 90000, 14, 5),
-    (6, "descripcion  producto 6", "ACTIVO", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "celular", 50000, 15, 6);
+    (6, "descripcion  producto 6", "SIN_REVISAR", "2023-04-05 14:37:12", "2023-6-05 14:37:12", "celular", 50000, 15, 6);
 
 
 insert into envio
@@ -62,11 +68,11 @@ insert into producto_moderador
 values
     -- id, estado,fecha, descripcion, id_moderador, id_producto
 
-    (1, "DENEGADO", "2023-04-05 14:37:12", "se denega por falta de descripcion", 7, 1),
-    (2, "AUTORIZADO", "2023-04-05 14:37:12", "se autoriza", 8, 2),
-    (3, "SIN_REVISAR", "2023-04-05 14:37:12", "no se revisa aun", 9, 3),
-    (4, "DENEGADOS", "2023-04-05 14:37:12", "se denega por falta de descripcion", 10, 4),
-    (5, "AUTORIZADO", "2023-04-05 14:37:12", "se autoriza", 11, 5),
+    (1, "ACTIVO", "2023-04-05 14:37:12", "se denega por falta de descripcion", 7, 1),
+    (2, "INACTIVO", "2023-04-05 14:37:12", "se autoriza", 8, 2),
+    (3, "INACTIVO", "2023-04-05 14:37:12", "no se revisa aun", 9, 3),
+    (4, "ACTIVO", "2023-04-05 14:37:12", "se denega por falta de descripcion", 10, 4),
+    (5, "ACTIVO", "2023-04-05 14:37:12", "se autoriza", 11, 5),
     (6, "SIN_REVISAR", "2023-04-05 14:37:12", "no se revisa_aun", 12, 6);
 
 

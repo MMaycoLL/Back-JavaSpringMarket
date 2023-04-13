@@ -23,6 +23,8 @@ public class DescuentoServicioImpl implements DescuentoServicio {
 
     private final DescuentoRepo descuentoRepo;
 
+    private final ProductoServicioImpl productoServicio;
+
     @Override
     public void aplicarDescuento(DescuentoDTO descuentoDTO) throws Exception {
         // Buscar el producto

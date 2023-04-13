@@ -1,6 +1,6 @@
 package co.edu.uniquindio.unimarket.entidades.enumeraciones;
 
-public enum Categoria   {
+public enum Categoria {
 
     ELECTRONICA,
     HOGAR,

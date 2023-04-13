@@ -170,7 +170,7 @@ public class ProductoTest {
         EstadoProducto estado = EstadoProducto.ACTIVO;
         List<ProductoGetDTO> productos = productoServicio.listarProductosEstado(estado);
 
-        Assertions.assertEquals(2, productos.size());
+        Assertions.assertEquals(3, productos.size());
     }
 
 
@@ -198,7 +198,7 @@ public class ProductoTest {
     @Sql("classpath:dataset.sql")
     public void listarProductosPrecioTest() throws Exception {
         // Listar productos por precio
-        List<ProductoGetDTO> productos = productoServicio.listarProductosPrecio(10000, 50000);
+        List<ProductoGetDTO> productos = productoServicio.listarProductosPrecio(10000, 80000);
 
         Assertions.assertEquals(2, productos.size());
 
