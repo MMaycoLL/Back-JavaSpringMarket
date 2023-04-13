@@ -15,8 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import static java.sql.DriverManager.println;
 
 @SpringBootTest
-
-
+@Transactional
 public class CalificacionTest {
 
     @Autowired
@@ -31,22 +30,15 @@ public class CalificacionTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void crearCalificacionTest() throws Exception {
-        // ID de usuario o persona que realiza la prueba
-        int idUsuario = 2;
 
         // Crear calificación
         CalificacionDTO calificacionDTO = new CalificacionDTO();
         calificacionDTO.setComentarioCalificacion("Muy buen producto");
         calificacionDTO.setValorCalificaion(3);
 
-        // Obtener producto compra para asociar a la calificación
+        // Obtener detalle compra para asociar a la calificación
         DetalleCompra detalleCompra = detalleCompraRepo.findById(2).orElse(null);
 
-        // Verificar que el detalleCompra existe
-        if (detalleCompra == null) {
-            Assertions.fail("No se encontró el producto compra con ID 1");
-        }
-println("detalleCompra.getIdProductoCompra() = " + detalleCompra.getProducto().getNombreProducto());
         // Asociar producto compra a la calificación
         calificacionDTO.setIdDetalleCompra(detalleCompra.getIdDetalleCompra());
 
@@ -58,6 +50,7 @@ println("detalleCompra.getIdProductoCompra() = " + detalleCompra.getProducto().g
 
         // Verificar que la calificación fue creada exitosamente
         Assertions.assertNotEquals(0, calificacion);
+
     }
 
 

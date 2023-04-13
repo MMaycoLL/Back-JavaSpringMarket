@@ -2,12 +2,12 @@ insert into usuario
 values
     -- id, contraseña, cedula, email, nombre_completo, direccion, telefono
 
-    (1, "123451", "111641", "pepe1@gmail.com", "pepito perez", "calle 54 # 11-21", "31238521"),
-    (2, "123452", "111642", "juan1@gmail.com", "juan perez", "calle 52 # 12-22", "31238522"),
-    (3, "123453", "111643", "carlos1@gmail.com", "carlos perez", "calle 51 # 13-23", "31238523"),
-    (4, "123454", "111644", "andres1@gmail.com", "andres perez", "calle 55 # 14-24", "31238524"),
-    (5, "123455", "111645", "julio1@gmail.com", "julio perez", "calle 56 # 15-25", "31238525"),
-    (6, "123456", "111646", "alexis1@gmail.com", "alexis perez", "calle 57 # 16-26", "31238526");
+    (1, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111641", "pepe1@gmail.com", "pepito perez", "calle 54 # 11-21", "31238521"),
+    (2, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111642", "juan1@gmail.com", "juan perez", "calle 52 # 12-22", "31238522"),
+    (3, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111643", "carlos1@gmail.com", "carlos perez", "calle 51 # 13-23", "31238523"),
+    (4, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111644", "andres1@gmail.com", "andres perez", "calle 55 # 14-24", "31238524"),
+    (5, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111645", "julio1@gmail.com", "julio perez", "calle 56 # 15-25", "31238525"),
+    (6, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111646", "alexis1@gmail.com", "alexis perez", "calle 57 # 16-26", "31238526");
 
 
 insert into moderador

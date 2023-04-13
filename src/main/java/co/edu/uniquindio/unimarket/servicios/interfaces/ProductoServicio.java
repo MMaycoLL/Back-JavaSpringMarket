@@ -16,7 +16,7 @@ public interface ProductoServicio {
 
     ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO)throws Exception;
 
-    int actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion)throws Exception;
+    void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion)throws Exception;
 
     int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception;
 

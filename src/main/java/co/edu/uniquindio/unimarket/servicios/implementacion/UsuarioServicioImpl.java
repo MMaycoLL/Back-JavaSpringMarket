@@ -29,27 +29,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
         // Verificar que la cédula no esté en uso
-        Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
-        if (cedulaExistente != null) {
+        Optional<Usuario> cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
+        if (cedulaExistente.isPresent()) {
             throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
 
-
-        Usuario usuario = convertir(usuarioDTO);
-
-        return usuarioRepo.save(usuario).getIdPersona();
-    }
-
-    @Override
-    public int registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
-
-        Optional<Usuario> buscado = usuarioRepo.findById(Integer.valueOf(usuarioDTO.getCedula()));
-        if(buscado.isPresent()){
-            throw new Exception("El usuario ya se encuentra registrado");
-        }
-        /*if(!estaDisponible(u.getEmail())){
-            throw new AttributeException("El email ya se encuentra en uso");
-        } */
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setContrasenia( passwordEncoder.encode(nuevo.getContrasenia()) );
         Usuario registro = usuarioRepo.save(nuevo);
@@ -65,14 +49,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
         // Verificar que la cédula no esté en uso
-        Usuario cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
-        if (cedulaExistente != null && cedulaExistente.getIdPersona() != idUsuario) {
+        Optional<Usuario> cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
+        if (cedulaExistente.isPresent() && cedulaExistente.get().getIdPersona() != idUsuario) {
             throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
 
-
         validarExiste(idUsuario);
-
 
         Usuario usuario = convertir(usuarioDTO);
         usuario.setIdPersona(idUsuario);

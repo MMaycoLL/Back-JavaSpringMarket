@@ -2,6 +2,7 @@ package co.edu.uniquindio.unimarket.test;
 
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
+import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -33,6 +34,10 @@ public class UsuarioTest {
                     "1234");
 
             int codigo = usuarioServicio.crearUsuario(usuarioDTO);
+
+            Usuario usuario = usuarioServicio.obtener(codigo);
+            System.out.println(usuario.getContrasenia());
+
         /*
         Se espera que si se registra correctamente entonces el servicio
         no debe retornar 0

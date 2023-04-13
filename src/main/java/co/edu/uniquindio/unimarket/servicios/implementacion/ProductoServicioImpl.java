@@ -54,15 +54,18 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception {
-        return 0;
+        Producto producto = obtener(idProducto);
+        producto.setUnidadesDisponibles(unidadesDisponibles);
+        return productoRepo.save(producto).getIdProducto();
     }
 
     @Override
-    public int actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
+    public void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
         Producto producto = obtener(idProducto);
         producto.setEstadoProducto(estadoAutorizacion);
-        return productoRepo.save(producto).getIdProducto();
+        productoRepo.save(producto);
     }
+
 
     @Override
     public int eliminarProducto(int idProducto) throws Exception {

@@ -4,6 +4,7 @@ package co.edu.uniquindio.unimarket.test;
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
+import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
@@ -41,7 +42,6 @@ public class ProductoTest {
                 "Calle 12 #12",
                 "343",
                 "1234");
-
 
         //El servicio del usuario nos retorna el código con el que quedó en la base de datos
         int codigoVendedor = usuarioServicio.crearUsuario(usuarioDTO);
@@ -91,6 +91,7 @@ public class ProductoTest {
         Assertions.assertNotEquals("balon", productoActualizado.getNombreProducto());
     }
 
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarProductoTest() throws Exception {
@@ -104,8 +105,8 @@ public class ProductoTest {
         // se espera que el producto no exista
         Assertions.assertThrows(Exception.class, () -> productoServicio.obtenerProducto(productoEliminado));
 
-
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -121,13 +122,19 @@ public class ProductoTest {
     @Test
     public void actualizarPorUnidadesTest() throws Exception {
 
-
     }
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void actualizarPorEstadoTest() throws Exception {
+        //Actualizar el estado de un producto
+        productoServicio.actualizarPorEstado(1, EstadoProducto.INACTIVO);
+        Producto productoActualizado = productoServicio.obtener(1);
 
+        // se espera que el estado haya cambiado
+        Assertions.assertEquals(EstadoProducto.INACTIVO, productoActualizado.getEstadoProducto());
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
