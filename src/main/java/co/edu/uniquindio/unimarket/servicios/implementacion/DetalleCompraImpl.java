@@ -17,7 +17,7 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
 
     @Override
     public DetalleCompraGetDTO obtenerDetalleCompra(int idDetalleCompra) throws Exception {
-return convertir(obtener(idDetalleCompra));
+        return convertir(obtener(idDetalleCompra));
     }
 
 
@@ -29,7 +29,7 @@ return convertir(obtener(idDetalleCompra));
         return detalleCompra.get();
     }
 
-    private DetalleCompraGetDTO convertir (DetalleCompra detalleCompra){
+    private DetalleCompraGetDTO convertir(DetalleCompra detalleCompra) {
 
         DetalleCompraGetDTO detalleCompraGetDTO = new DetalleCompraGetDTO();
         detalleCompraGetDTO.setCantidad(detalleCompra.getCantidad());

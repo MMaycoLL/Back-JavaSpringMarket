@@ -31,7 +31,7 @@ public class CompraServicioImpl implements CompraServicio {
         Compra compra = new Compra();
         compra.setMetodoPago(compraDTO.getMetodoPago());
         compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
-        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()) .orElseThrow(()-> new Exception("No se encontro el envio")));
+        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()).orElseThrow(() -> new Exception("No se encontro el envio")));
         compra.setFechaCompra(LocalDate.now().atStartOfDay()); // Agregar la fecha de compra
 
         float total = 0;
@@ -40,12 +40,10 @@ public class CompraServicioImpl implements CompraServicio {
             total += dc.getPrecioCompra() * dc.getCantidad();
         }
 
-        compra.setTotalCompra( total);
+        compra.setTotalCompra(total);
 
         return compraRepo.save(compra).getIdCompra();
     }
-
-
 
 
     @Override
@@ -61,10 +59,10 @@ public class CompraServicioImpl implements CompraServicio {
         return compraGetDTOs;
     }
 
-    public Compra obtener(int idCompra) throws Exception{
+    public Compra obtener(int idCompra) throws Exception {
         Optional<Compra> compra = compraRepo.findById(idCompra);
 
-        if(compra.isEmpty()){
+        if (compra.isEmpty()) {
             throw new Exception("La compra no existe");
         }
 

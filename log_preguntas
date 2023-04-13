@@ -1,32 +1,11 @@
-@positiveOrZero
 
-utiliar element colection para la imagen utilizando un Map
+moderador aprobar y rechazar
 
-@ElementCollecion
-private Map<String>
-esto va en producto
+Validaciones de las consultas
 
-usuario producto hacerla de tipo many to many
+revision de excepciones
 
-@ManyToMany
-@JoinTable(name="favorito")
-@ToString.Exclude
-private List<Producto> favoritos;
+validacion de metodos
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-crear servicios
-package servicio;
-estos seran interfaces
-
-ejemplo ComentarioServicio y ProductoServicio
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Regularmente hay 2 DTOs por entidad, uno para crear y otro para actualizar.
-
-ver OPENAPI+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-El orden de las tablas por que estan en ese orden o se pueden ordenar
-
-
++++++++++++++++
+acciones

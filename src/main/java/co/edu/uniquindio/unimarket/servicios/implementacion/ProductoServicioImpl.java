@@ -22,6 +22,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
     private final UsuarioServicio usuarioServicio;
+
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
@@ -94,8 +95,8 @@ public class ProductoServicioImpl implements ProductoServicio {
 
 
     @Override
-    public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) {
-        List<Producto> lista = productoRepo.listarProductosPorCategoria(categoria);
+    public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) throws Exception {
+        List<Producto> lista = productoRepo.listarProductosCategoria(categoria);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {

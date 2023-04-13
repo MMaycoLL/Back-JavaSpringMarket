@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unimarket.repositorios;
 
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.Producto;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,8 +23,9 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
 
     // listar productos por categoria
-    @Query("select p from Producto p join p.categorias c where c = :categoria and p.fechaLimite < CURRENT_DATE() and p.estadoProducto <> 'INACTIVO'")
-    List<Producto> listarProductosPorCategoria(Categoria categoria);
+
+    @Query("select p from Producto p where :categoria member of p.categorias and p.fechaLimite > CURRENT_DATE() and p.estadoProducto = co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto.ACTIVO")
+    List<Producto> listarProductosCategoria(Categoria categoria);
 
 
     // listar productos por estado moderador
@@ -33,13 +34,13 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
 
 
     // listar productos por precio minimo y maximo
-    @Query("select p from Producto p where p.precioActual between :precioMinimo and :precioMaximo and p.estadoProducto <> 'INACTIVO'")
+    @Query("select p from Producto p where p.precioActual between :precioMinimo and :precioMaximo and p.fechaLimite > CURRENT_DATE() and p.estadoProducto = co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto.ACTIVO")
     List<Producto> listarProductosPrecio(float precioMinimo, float precioMaximo);
 
-    // Listar favoritos de un usuario
-    @Query("SELECT f.producto FROM Favorito f WHERE f.usuario.idPersona = :idUsuario")
-    List<Producto> listarFavoritosUsuarios(int idUsuario);
 
+    // Listar favoritos de un usuario
+    @Query("SELECT f.producto FROM Favorito f WHERE f.usuario.idPersona = :idUsuario  and f.producto.fechaLimite > CURRENT_DATE() and f.producto.estadoProducto = co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto.ACTIVO")
+    List<Producto> listarFavoritosUsuarios(int idUsuario);
 
 
 }

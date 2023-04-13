@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.print.AttributeException;
 import java.util.Optional;
 
 @Service
@@ -35,7 +34,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         Usuario nuevo = convertir(usuarioDTO);
-        nuevo.setContrasenia( passwordEncoder.encode(nuevo.getContrasenia()) );
+        nuevo.setContrasenia(passwordEncoder.encode(nuevo.getContrasenia()));
         Usuario registro = usuarioRepo.save(nuevo);
         return registro.getIdPersona();
     }

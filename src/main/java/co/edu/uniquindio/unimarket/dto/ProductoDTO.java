@@ -49,5 +49,4 @@ public class ProductoDTO {
     private List<Categoria> categorias;
 
 
-
 }

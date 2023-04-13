@@ -13,6 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootTest
 @Transactional
+
 public class UsuarioTest {
 
     @Autowired
