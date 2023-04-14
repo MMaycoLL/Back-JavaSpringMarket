@@ -12,13 +12,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ModeradorDTO {
+public class ProductoModeradorDTO {
 
-    private EstadoProducto estadoProducto;
+    private EstadoProducto estadoAutorizacion;
 
     private LocalDateTime fechaAutorizacion;
 
     private String motivo;
+
+    private int idModerador;
+
+    private int idProducto;
 
 
 }
