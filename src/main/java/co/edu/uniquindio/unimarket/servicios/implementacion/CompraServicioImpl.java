@@ -9,6 +9,7 @@ import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CompraServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,15 @@ import java.util.Optional;
 public class CompraServicioImpl implements CompraServicio {
     private final CompraRepo compraRepo;
     private final UsuarioServicio usuarioServicio;
-    private final EnvioRepo envioRepo;
-    private final ProductoRepo productoRepo;
+    private final EnvioServicio envioServicio;
 
     @Override
     public int crearCompra(CompraDTO compraDTO) throws Exception {
         Compra compra = new Compra();
         compra.setMetodoPago(compraDTO.getMetodoPago());
         compra.setUsuario(usuarioServicio.obtener(compraDTO.getIdPersona()));
-        compra.setEnvio(envioRepo.findById(compraDTO.getIdEnvio()).orElseThrow(() -> new Exception("No se encontro el envio")));
-        compra.setFechaCompra(LocalDate.now().atStartOfDay()); // Agregar la fecha de compra
+        compra.setEnvio(envioServicio.obtener(compraDTO.getIdEnvio()));
+        compra.setFechaCompra(LocalDate.now().atStartOfDay());
 
         float total = 0;
 

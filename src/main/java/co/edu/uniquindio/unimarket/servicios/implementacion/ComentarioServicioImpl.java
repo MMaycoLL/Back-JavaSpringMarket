@@ -7,6 +7,8 @@ import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.ComentarioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ComentarioServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ComentarioServicioImpl implements ComentarioServicio {
 
-    private final ProductoServicioImpl productoServicio;
-    private final UsuarioServicioImpl usuarioServicio;
+    private final ProductoServicio productoServicio;
+    private final UsuarioServicio usuarioServicio;
     private final ComentarioRepo comentarioRepo;
 
     @Override

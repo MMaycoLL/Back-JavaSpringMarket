@@ -18,7 +18,7 @@ import java.util.Optional;
 public class EnvioServicioImpl implements EnvioServicio {
 
     private final EnvioRepo envioRepo;
-    private final CompraRepo compraRepo;
+
     private final UsuarioServicio usuarioServicio;
 
     @Override

@@ -5,6 +5,7 @@ import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.DescuentoRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DescuentoServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,10 @@ public class DescuentoServicioImpl implements DescuentoServicio {
 
     private final ProductoRepo productoRepo;
 
+    private final ProductoServicio productoServicio;
+
     private final DescuentoRepo descuentoRepo;
 
-    private final ProductoServicioImpl productoServicio;
 
     @Override
     public void aplicarDescuento(DescuentoDTO descuentoDTO) throws Exception {
