@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
 @Setter
 public class ProductoModeradorDTO {
 
-    private EstadoProducto estadoAutorizacion;
-
     private LocalDateTime fechaAutorizacion;
 
     private String motivo;
@@ -23,6 +21,5 @@ public class ProductoModeradorDTO {
     private int idModerador;
 
     private int idProducto;
-
 
 }

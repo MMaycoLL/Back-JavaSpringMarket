@@ -4,6 +4,8 @@ import co.edu.uniquindio.unimarket.dto.ProductoModeradorDTO;
 
 public interface ProductoModeradorServicio {
 
-    void aprobarRechazar(ProductoModeradorDTO productoModeradorDTO) throws Exception;
+    void aprobarProducto(ProductoModeradorDTO productoModeradorDTO) throws Exception;
+
+    void rechazarProducto(ProductoModeradorDTO productoModeradorDTO) throws Exception;
 
 }
