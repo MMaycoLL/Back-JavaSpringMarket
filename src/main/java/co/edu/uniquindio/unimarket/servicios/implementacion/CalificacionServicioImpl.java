@@ -5,6 +5,7 @@ import co.edu.uniquindio.unimarket.entidades.Calificacion;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.CalificacionRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.calificacion.PermisoDenegadoCalificacionException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CalificacionServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DetalleCompraServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
@@ -28,7 +29,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
         DetalleCompra detalleCompra = detalleCompraServicio.obtener(calificacionDTO.getIdDetalleCompra());
 
         if (!detalleCompra.getCompra().getUsuario().equals(usuario)) {
-            throw new Exception("Ustes no tiene el permiso para calificar la compra");
+            throw new PermisoDenegadoCalificacionException("Usted no tiene el permiso para calificar la compra");
         }
 
         Calificacion calificacion = new Calificacion();
@@ -43,6 +44,8 @@ public class CalificacionServicioImpl implements CalificacionServicio {
 
     @Override
     public float promedioCalificacion(int idProducto) {
+
+
         return calificacionRepo.promedioCalificacion(idProducto);
     }
 }

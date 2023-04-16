@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @ToString
 public class DescuentoDTO {
 
+    @NotNull(message = "El id del producto no puede ser nulo")
     private int idProducto;
 
     @NotNull(message = "El porcentaje de descuento no puede ser nulo")

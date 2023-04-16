@@ -11,9 +11,4 @@ import java.util.List;
 @Repository
 public interface ProductoModeradorRepo extends JpaRepository<ProductoModerador, Integer> {
 
-    @Query("SELECT pm FROM ProductoModerador pm WHERE pm.producto.idProducto = :idProducto")
-    ProductoModerador findByProductoId(int idProducto);
-
-
-
 }

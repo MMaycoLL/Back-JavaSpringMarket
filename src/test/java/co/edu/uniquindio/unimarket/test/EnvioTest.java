@@ -20,10 +20,7 @@ import java.util.Optional;
 @Transactional
 
 public class EnvioTest {
-
-    @Autowired
-    private EnvioRepo envioRepo;
-
+    ;
     @Autowired
     private UsuarioRepo usuarioRepo;
 

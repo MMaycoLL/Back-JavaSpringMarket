@@ -5,6 +5,8 @@ import co.edu.uniquindio.unimarket.entidades.Favorito;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.FavoritoRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.favorito.ProductoYaFavoritoException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.producto.ProductoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.FavoritoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
@@ -38,6 +40,8 @@ public class FavoritoServicioImpl implements FavoritoServicio {
             favorito.setProducto(producto);
             favorito.setFechaAgregado(LocalDateTime.now());
             favoritoRepo.save(favorito);
+        } else {
+            throw new ProductoYaFavoritoException("El producto ya está en la lista de favoritos del usuario.");
         }
     }
 
@@ -48,7 +52,8 @@ public class FavoritoServicioImpl implements FavoritoServicio {
         Producto producto = productoServicio.obtener(idProducto);
 
         // Buscar el favorito correspondiente al usuario y al producto
-        Favorito favorito = favoritoRepo.findByUsuarioAndProducto(usuario, producto).orElseThrow(() -> new Exception("El producto no está en la lista de favoritos del usuario."));
+        Favorito favorito = favoritoRepo.findByUsuarioAndProducto(usuario, producto).orElseThrow(()
+                -> new ProductoNoEncontradoException("El producto no está en la lista de favoritos del usuario."));
 
         // Eliminar el favorito y guardar los cambios
         favoritoRepo.delete(favorito);

@@ -21,8 +21,10 @@ public class CalificacionDTO {
     @NotBlank(message = "El comentario no puede estar vacío")
     private String comentarioCalificacion;
 
+    @NotNull(message = "El id del usuario no puede ser nulo")
     private int idUsuario;
 
+    @NotNull(message = "El id de detalle compra no puede ser nulo")
     private int idDetalleCompra;
 
 }

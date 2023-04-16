@@ -6,8 +6,7 @@ import co.edu.uniquindio.unimarket.dto.DetalleCompraDTO;
 import co.edu.uniquindio.unimarket.entidades.Compra;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
-import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
-import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.compra.CompraNoEncontradaException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CompraServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
@@ -63,7 +62,7 @@ public class CompraServicioImpl implements CompraServicio {
         Optional<Compra> compra = compraRepo.findById(idCompra);
 
         if (compra.isEmpty()) {
-            throw new Exception("La compra no existe");
+            throw new CompraNoEncontradaException("La compra no existe");
         }
 
         return compra.get();

@@ -4,6 +4,9 @@ import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CedulaDuplicadaException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CodigoInexistenteException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.EmailDuplicadoException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,13 +28,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         // Verificar que el correo no esté en uso
         Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
         if (emailExistente != null) {
-            throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
+            throw new EmailDuplicadoException("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
         // Verificar que la cédula no esté en uso
         Optional<Usuario> cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
         if (cedulaExistente.isPresent()) {
-            throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
+            throw new CedulaDuplicadaException("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
+
 
         Usuario nuevo = convertir(usuarioDTO);
         nuevo.setContrasenia(passwordEncoder.encode(nuevo.getContrasenia()));
@@ -45,12 +49,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         // Verificar que el correo no esté en uso
         Usuario emailExistente = usuarioRepo.buscarUsuarioPorEmail(usuarioDTO.getEmail());
         if (emailExistente != null && emailExistente.getIdPersona() != idUsuario) {
-            throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
+            throw new EmailDuplicadoException("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
         // Verificar que la cédula no esté en uso
         Optional<Usuario> cedulaExistente = usuarioRepo.buscarUsuarioPorCedula(usuarioDTO.getCedula());
         if (cedulaExistente.isPresent() && cedulaExistente.get().getIdPersona() != idUsuario) {
-            throw new Exception("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
+            throw new CedulaDuplicadaException("La cédula " + usuarioDTO.getCedula() + " ya está en uso");
         }
 
         validarExiste(idUsuario);
@@ -83,7 +87,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
 
         if (usuario.isEmpty()) {
-            throw new Exception("El código " + codigoUsuario + " no está asociado a ningún usuario");
+            throw new CodigoInexistenteException("El código " + codigoUsuario + " no está asociado a ningún usuario");
         }
 
         return usuario.get();
@@ -93,7 +97,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         boolean existe = usuarioRepo.existsById(codigoUsuario);
 
         if (!existe) {
-            throw new Exception("El código " + codigoUsuario + " no está asociado a ningún usuario");
+            throw new CodigoInexistenteException("El código " + codigoUsuario + " no está asociado a ningún usuario");
         }
 
     }

@@ -3,9 +3,13 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
+import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.producto.PermisoDenegadoException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.producto.ProductoNoEncontradoException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.producto.SinProductosFavoritosException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -27,16 +31,6 @@ public class ProductoServicioImpl implements ProductoServicio {
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
 
-        // Verificar que la descripción del producto no exceda un número máximo de caracteres permitidos
-        if (productoDTO.getDescripcionProducto() != null && productoDTO.getDescripcionProducto().length() > 1000) {
-            throw new Exception("La descripción del producto no debe exceder los 1000 caracteres.");
-        }
-
-        // Verificar que el nombre del producto no exceda un número máximo de caracteres permitidos
-        if (productoDTO.getNombreProducto() != null && productoDTO.getNombreProducto().length() > 100) {
-            throw new Exception("El nombre del producto no debe exceder los 100 caracteres.");
-        }
-
         Producto producto = convertir(productoDTO);
 
         return productoRepo.save(producto).getIdProducto();
@@ -45,10 +39,18 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception {
 
+
         validarExistenciaProducto(idProducto);
 
         Producto producto = convertir(productoDTO);
         producto.setIdProducto(idProducto);
+
+        Usuario usuario = usuarioServicio.obtener(productoDTO.getIdPersona());
+
+
+        if (producto.getUsuario().getIdPersona() != usuario.getIdPersona()) {
+            throw new PermisoDenegadoException("No tiene permisos para actualizar este producto");
+        }
 
         return convertir(productoRepo.save(producto));
     }
@@ -126,7 +128,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         List<Producto> lista = productoRepo.listarFavoritosUsuarios(idUsuario);
 
         if (lista.isEmpty()) {
-            throw new Exception("El usuario no tiene productos favoritos");
+            throw new SinProductosFavoritosException("El usuario no tiene productos favoritos");
         }
 
         List<ProductoGetDTO> respuesta = new ArrayList<>();
@@ -168,7 +170,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Optional<Producto> producto = productoRepo.findById(idProducto);
 
         if (producto.isEmpty()) {
-            throw new Exception("El código " + idProducto + " no está asociado a ningún producto");
+            throw new ProductoNoEncontradoException("El código " + idProducto + " no está asociado a ningún producto");
         }
         return producto.get();
     }
@@ -177,7 +179,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         boolean existe = productoRepo.existsById(idProducto);
 
         if (!existe) {
-            throw new Exception("El código1 " + idProducto + " no está asociado a ningún producto");
+            throw new ProductoNoEncontradoException("El código " + idProducto + " no está asociado a ningún producto");
         }
 
     }
@@ -216,6 +218,5 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return producto;
     }
-
 
 }

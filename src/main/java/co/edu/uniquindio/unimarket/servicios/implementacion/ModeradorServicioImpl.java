@@ -2,6 +2,7 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.entidades.Moderador;
 import co.edu.uniquindio.unimarket.repositorios.ModeradorRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.moderador.ModeradorNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ModeradorServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class ModeradorServicioImpl implements ModeradorServicio {
         if (moderadorOpt.isPresent()) {
             return moderadorOpt.get();
         } else {
-            throw new Exception("Moderador no encontrado");
+            throw new ModeradorNoEncontradoException("Moderador no encontrado");
         }
     }
 

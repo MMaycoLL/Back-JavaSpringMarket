@@ -4,7 +4,6 @@ import co.edu.uniquindio.unimarket.dto.EnvioDTO;
 import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Envio;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
-import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
 import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
@@ -43,8 +42,7 @@ public class EnvioServicioImpl implements EnvioServicio {
     public EnvioGetDTO actualizarEnvio(int idEnvio, EnvioDTO envioDTO) throws Exception {
 
         // Verificar si el id del envío es válido
-        if (!envioRepo.existsById(idEnvio))
-            throw new Exception("No se encontró el envío con el id suministrado");
+        obtener(idEnvio);
 
         // Recuperar el envío de la base de datos
         Envio envio = convertir(envioDTO);
@@ -59,8 +57,7 @@ public class EnvioServicioImpl implements EnvioServicio {
     public int eliminarEnvio(int idEnvio) throws Exception {
 
         // Verificar si el id del envío es válido
-        if (!envioRepo.existsById(idEnvio))
-            throw new Exception("No se encontró el envío con el id suministrado");
+        obtener(idEnvio);
 
         // Recuperar el envío de la base de datos
         Envio envio = envioRepo.findById(idEnvio).get();
@@ -68,7 +65,7 @@ public class EnvioServicioImpl implements EnvioServicio {
         // Eliminar el envío
         envioRepo.delete(envio);
 
-        return idEnvio;
+        return envio.getIdEnvio();
     }
 
     @Override

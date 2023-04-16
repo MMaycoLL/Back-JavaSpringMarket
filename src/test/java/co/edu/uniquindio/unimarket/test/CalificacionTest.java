@@ -3,7 +3,6 @@ package co.edu.uniquindio.unimarket.test;
 import co.edu.uniquindio.unimarket.dto.CalificacionDTO;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.repositorios.DetalleCompraRepo;
-import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CalificacionServicio;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -23,8 +22,6 @@ public class CalificacionTest {
     @Autowired
     private CalificacionServicio calificacionServicio;
 
-    @Autowired
-    private UsuarioRepo usuarioRepo;
 
     @Test
     @Sql("classpath:dataset.sql")

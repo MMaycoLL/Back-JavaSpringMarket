@@ -26,5 +26,6 @@ public class CompraDTO {
     @Size(min = 1, message = "Debe haber al menos un elemento en la lista")
     private List<DetalleCompraDTO> detalleCompraDTO;
 
+    @NotNull(message = "El id del envio no puede ser nulo")
     private int idEnvio;
 }
