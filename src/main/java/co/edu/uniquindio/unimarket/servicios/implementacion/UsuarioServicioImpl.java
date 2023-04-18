@@ -37,9 +37,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
 
-        Usuario nuevo = convertir(usuarioDTO);
-        nuevo.setContrasenia(passwordEncoder.encode(nuevo.getContrasenia()));
-        Usuario registro = usuarioRepo.save(nuevo);
+        Usuario usuario = convertir(usuarioDTO);
+        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
+        Usuario registro = usuarioRepo.save(usuario);
         return registro.getIdPersona();
     }
 

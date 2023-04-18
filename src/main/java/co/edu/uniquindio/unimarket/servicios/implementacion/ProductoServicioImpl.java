@@ -86,6 +86,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<ProductoGetDTO> listarProductosUsuario(int idUsuario) throws Exception {
 
         List<Producto> lista = productoRepo.listarProductosUsuario(idUsuario);
+
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("El usuario no tiene productos");
+        }
+
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
@@ -99,6 +104,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<ProductoGetDTO> listarProductosCategoria(Categoria categoria) throws Exception {
         List<Producto> lista = productoRepo.listarProductosCategoria(categoria);
+
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos de esta categoria");
+        }
+
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
@@ -113,6 +123,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<ProductoGetDTO> listarProductosEstado(EstadoProducto estadoAutorizacion) throws Exception {
 
         List<Producto> lista = productoRepo.listarProductosEstado(estadoAutorizacion);
+
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos con este estado");
+        }
+
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
@@ -141,7 +156,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosNombre(String nombre) {
+    public List<ProductoGetDTO> listarProductosNombre(String nombre) throws Exception {
 
         List<Producto> lista = productoRepo.listarProductosNombre(nombre);
         List<ProductoGetDTO> respuesta = new ArrayList<>();
@@ -154,9 +169,14 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) {
+    public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) throws Exception{
 
         List<Producto> lista = productoRepo.listarProductosPrecio(precioMinimo, precioMaximo);
+
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos con este precio");
+        }
+
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
