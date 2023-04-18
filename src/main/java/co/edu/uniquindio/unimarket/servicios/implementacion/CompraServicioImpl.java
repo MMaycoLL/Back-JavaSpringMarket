@@ -3,13 +3,14 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 import co.edu.uniquindio.unimarket.dto.CompraDTO;
 import co.edu.uniquindio.unimarket.dto.CompraGetDTO;
 import co.edu.uniquindio.unimarket.dto.DetalleCompraDTO;
+import co.edu.uniquindio.unimarket.dto.EmailDTO;
 import co.edu.uniquindio.unimarket.entidades.Compra;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
+import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.CompraNoEncontradaException;
-import co.edu.uniquindio.unimarket.servicios.interfaces.CompraServicio;
-import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
-import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
+import co.edu.uniquindio.unimarket.servicios.excepciones.compra.UnidadesNoDisponiblesException;
+import co.edu.uniquindio.unimarket.servicios.interfaces.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class CompraServicioImpl implements CompraServicio {
     private final CompraRepo compraRepo;
     private final UsuarioServicio usuarioServicio;
     private final EnvioServicio envioServicio;
+    private final ProductoServicio productoServicio;
+    private final EmailServicio emailServicio;
 
     @Override
     public int crearCompra(CompraDTO compraDTO) throws Exception {
@@ -35,11 +38,26 @@ public class CompraServicioImpl implements CompraServicio {
 
         float total = 0;
 
-        for (DetalleCompraDTO dc : compraDTO.getDetalleCompraDTO()) {
-            total += dc.getPrecioCompra() * dc.getCantidad();
+        for (DetalleCompraDTO detalleCompra : compraDTO.getDetalleCompraDTO()) {
+            validarUnidadesDisponibles(detalleCompra);
+            total += detalleCompra.getPrecioCompra() * detalleCompra.getCantidad();
+
+
+            // Enviar email al vendedor
+            String emailVendedor = productoServicio.obtener(detalleCompra.getIdProducto()).getUsuario().getEmail();
+            String mensaje = "¡Enhorabuena! Has realizado una venta exitosa del siguiente producto:\n\n" + detalleCompra.toString() + "\n\nGracias por ser parte de nuestra plataforma.";
+            emailServicio.enviarEmail(new EmailDTO("Venta exitosa", mensaje, emailVendedor));
         }
 
         compra.setTotalCompra(total);
+
+        // Email para el comprador
+        String asunto = "Compra exitosa";
+        String detallesCompra = compra.toString();
+        String mensajeFinal = "¡Gracias por tu compra! Esperamos que disfrutes de tu producto. Si tienes alguna pregunta o problema, no dudes en ponerte en contacto con nosotros.";
+        String mensajeCompleto = detallesCompra + "\n\n" + mensajeFinal;
+        emailServicio.enviarEmail(new EmailDTO(asunto, mensajeCompleto, compra.getUsuario().getEmail()));
+
 
         return compraRepo.save(compra).getIdCompra();
     }
@@ -78,6 +96,13 @@ public class CompraServicioImpl implements CompraServicio {
         return convertir(compra);
     }
 
+    private void validarUnidadesDisponibles(DetalleCompraDTO detalleCompraDTO) throws Exception {
+        Producto producto = productoServicio.obtener(detalleCompraDTO.getIdProducto());
+        if (producto.getUnidadesDisponibles() < detalleCompraDTO.getCantidad())
+            throw new UnidadesNoDisponiblesException("La cantidad de unidades disponibles es menor a la solicitada");
+    }
+
+
     private CompraGetDTO convertir(Compra compra) {
         CompraGetDTO dto = new CompraGetDTO();
         dto.setIdCompra(compra.getIdCompra());
@@ -85,6 +110,7 @@ public class CompraServicioImpl implements CompraServicio {
         dto.setTotalCompra(compra.getTotalCompra());
         dto.setIdUsuario(compra.getUsuario().getIdPersona());
         dto.setMetodoPago(compra.getMetodoPago());
+
 
         List<DetalleCompraDTO> detalleCompraDTOs = new ArrayList<>();
         if (compra.getDetalleCompra() != null) { // Verificar si la lista es nula
