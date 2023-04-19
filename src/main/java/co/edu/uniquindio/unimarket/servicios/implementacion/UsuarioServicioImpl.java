@@ -77,27 +77,26 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return idUsuario;
     }
 
-
     @Override
-    public UsuarioGetDTO obtenerUsuario(int codigoUsuario) throws Exception {
-        return convertir(obtener(codigoUsuario));
+    public UsuarioGetDTO obtenerUsuario(int idUsuario) throws Exception {
+        return convertir(obtener(idUsuario));
     }
 
-    public Usuario obtener(int codigoUsuario) throws Exception {
-        Optional<Usuario> usuario = usuarioRepo.findById(codigoUsuario);
+    public Usuario obtener(int idUsuario) throws Exception {
+        Optional<Usuario> usuario = usuarioRepo.findById(idUsuario);
 
         if (usuario.isEmpty()) {
-            throw new CodigoInexistenteException("El código " + codigoUsuario + " no está asociado a ningún usuario");
+            throw new CodigoInexistenteException("El código " + idUsuario + " no está asociado a ningún usuario");
         }
 
         return usuario.get();
     }
 
-    private void validarExiste(int codigoUsuario) throws Exception {
-        boolean existe = usuarioRepo.existsById(codigoUsuario);
+    private void validarExiste(int idUsuario) throws Exception {
+        boolean existe = usuarioRepo.existsById(idUsuario);
 
         if (!existe) {
-            throw new CodigoInexistenteException("El código " + codigoUsuario + " no está asociado a ningún usuario");
+            throw new CodigoInexistenteException("El código " + idUsuario + " no está asociado a ningún usuario");
         }
 
     }

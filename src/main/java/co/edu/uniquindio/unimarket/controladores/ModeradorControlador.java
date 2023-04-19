@@ -12,4 +12,8 @@ public class ModeradorControlador {
 
     private final ModeradorServicio moderadorServicio;
 
+    public void obtenerModeradorPorId(int idModerador) throws Exception {
+
+    }
+
 }
