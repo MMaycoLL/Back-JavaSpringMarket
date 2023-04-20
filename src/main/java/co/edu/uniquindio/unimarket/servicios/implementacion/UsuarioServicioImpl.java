@@ -66,6 +66,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
 
+
     @Override
     public int eliminarUsuario(int idUsuario) throws Exception {
 

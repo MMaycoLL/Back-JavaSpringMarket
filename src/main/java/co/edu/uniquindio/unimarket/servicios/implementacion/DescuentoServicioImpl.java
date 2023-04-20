@@ -4,9 +4,9 @@ import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.DescuentoRepo;
 import co.edu.uniquindio.unimarket.repositorios.ProductoRepo;
-import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaActualException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaLimiteException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechasException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaActualIncorectaException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaLimiteIncorectaException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechasIncorectaException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DescuentoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
@@ -43,19 +43,19 @@ public class DescuentoServicioImpl implements DescuentoServicio {
         // Verificar que la fecha de fin del descuento sea posterior a la fecha actual
         LocalDate fechaFin = descuentoDTO.getFechaFinalDescuento();
         if (LocalDate.now().isAfter(fechaFin)) {
-            throw new DescuentoFechaActualException("La fecha de fin del descuento debe ser posterior a la fecha actual");
+            throw new DescuentoFechaActualIncorectaException("La fecha de fin del descuento debe ser posterior a la fecha actual");
         }
 
         // Verificar que la fecha de fin del descuento no sea mayor que la fecha límite del producto
         LocalDate fechaLimite = descuentoRepo.obtenerFechaLimite(descuentoDTO.getIdProducto());
         if (fechaFin.isAfter(fechaLimite)) {
-            throw new DescuentoFechaLimiteException("La fecha de fin del descuento debe ser anterior a la fecha límite del producto");
+            throw new DescuentoFechaLimiteIncorectaException("La fecha de fin del descuento debe ser anterior a la fecha límite del producto");
         }
 
         // Verificar que la fecha de inicio del descuento sea anterior a la fecha final del descuento
         LocalDate fechaInicio = descuentoDTO.getFechaInicioDescuento();
         if (fechaInicio.isAfter(fechaFin)) {
-            throw new DescuentoFechasException("La fecha de inicio del descuento debe ser anterior a la fecha final del descuento");
+            throw new DescuentoFechasIncorectaException("La fecha de inicio del descuento debe ser anterior a la fecha final del descuento");
         }
 
         // Aplicar el descuento al precio del producto
