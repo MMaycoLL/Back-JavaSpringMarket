@@ -1,10 +1,13 @@
 package co.edu.uniquindio.unimarket.controladores;
 
 import co.edu.uniquindio.unimarket.dto.FavoritoDTO;
+import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.FavoritoServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/favoritos")
@@ -13,13 +16,24 @@ public class FavoritoControlador {
 
     private final FavoritoServicio favoritoServicio;
 
-    public void crearFavorito(FavoritoDTO favoritoDTO) throws Exception {
-
+    @PostMapping("/crear")
+    public ResponseEntity<MensajeDTO> crearFavorito(@Valid @RequestBody FavoritoDTO favoritoDTO) throws Exception {
+        favoritoServicio.crearFavorito(favoritoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new MensajeDTO(
+                        HttpStatus.CREATED,
+                        true,
+                        "Favorito creado exitosamente"));
     }
 
-    public void eliminarFavorito(int idUsuario, int idProducto) throws Exception {
+    @DeleteMapping("/eliminar/{idUsuario}/{idProducto}")
+    public ResponseEntity<MensajeDTO> eliminarFavorito(@PathVariable int idUsuario, @PathVariable int idProducto) throws Exception {
+        favoritoServicio.eliminarFavorito(idUsuario, idProducto);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(
+                        HttpStatus.OK,
+                        false, "Favorito eliminado exitosamente"));
 
     }
-
 
 }
