@@ -1,12 +1,15 @@
 package co.edu.uniquindio.unimarket.controladores;
 
+import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -15,19 +18,37 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
-    public int crearUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        return 0;
+    @PostMapping("/crear")
+    public ResponseEntity<MensajeDTO> crearUsuario(@Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new MensajeDTO(
+                        HttpStatus.CREATED,
+                        false,
+                        usuarioServicio.crearUsuario(usuarioDTO)));
     }
 
-    public UsuarioGetDTO actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
-        return null;
+    @PutMapping("/actualizar/{idUsuario}")
+    public ResponseEntity<MensajeDTO>  actualizarUsuario(@PathVariable int idUsuario, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        usuarioServicio.actualizarUsuario(idUsuario, usuarioDTO)));
     }
 
-    public int eliminarUsuario(int idUsuario) throws Exception {
-        return 0;
+    @DeleteMapping("/eliminar/{idUsuario}")
+    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable  int idUsuario) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(
+                        HttpStatus.OK,
+                        false,
+                        usuarioServicio.eliminarUsuario(idUsuario)));
     }
 
-    public UsuarioGetDTO obtenerUsuario(int idUsuario) throws Exception {
-        return null;
+    @GetMapping("/obteber/{idUsuario}")
+    public ResponseEntity<MensajeDTO>  obtenerUsuario(@PathVariable int idUsuario) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        usuarioServicio.obtenerUsuario(idUsuario)));
     }
 }
