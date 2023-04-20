@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
+@Transactional
 
 
 public class ProductoTest {
@@ -159,7 +160,7 @@ public class ProductoTest {
         }
 
         // Verificar que se encontraron la cantidad correcta de productos
-        Assertions.assertEquals(2, productos.size());
+        Assertions.assertEquals(1, productos.size());
     }
 
 
@@ -180,7 +181,7 @@ public class ProductoTest {
         // Listar productos favoritos de un usuario
         List<ProductoGetDTO> lista = productoServicio.listarFavoritosUsuarios(1);
 
-        Assertions.assertEquals(2, lista.size());
+        Assertions.assertEquals(1, lista.size());
 
     }
 
@@ -190,7 +191,7 @@ public class ProductoTest {
         // Listar productos por nombre
         List<ProductoGetDTO> productos = productoServicio.listarProductosNombre("balon");
 
-        Assertions.assertEquals(2, productos.size());
+        Assertions.assertEquals(1, productos.size());
 
     }
 

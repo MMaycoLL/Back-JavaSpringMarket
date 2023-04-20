@@ -30,9 +30,4 @@ public class UsuarioControlador {
     public UsuarioGetDTO obtenerUsuario(int idUsuario) throws Exception {
         return null;
     }
-
-    public Usuario obtener(int idUsuario) throws Exception {
-        return null;
-    }
-
 }

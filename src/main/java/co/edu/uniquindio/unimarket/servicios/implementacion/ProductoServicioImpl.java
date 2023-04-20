@@ -57,6 +57,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception {
+        validarExistenciaProducto(idProducto);
         Producto producto = obtener(idProducto);
         producto.setUnidadesDisponibles(unidadesDisponibles);
         return productoRepo.save(producto).getIdProducto();
@@ -64,6 +65,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
+        validarExistenciaProducto(idProducto);
         Producto producto = obtener(idProducto);
         producto.setEstadoProducto(estadoAutorizacion);
         productoRepo.save(producto);
@@ -79,6 +81,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public ProductoGetDTO obtenerProducto(int idProducto) throws Exception {
+        validarExistenciaProducto(idProducto);
         return convertir(obtener(idProducto));
     }
 
@@ -159,6 +162,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<ProductoGetDTO> listarProductosNombre(String nombre) throws Exception {
 
         List<Producto> lista = productoRepo.listarProductosNombre(nombre);
+
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos con este nombre");
+        }
         List<ProductoGetDTO> respuesta = new ArrayList<>();
 
         for (Producto p : lista) {
