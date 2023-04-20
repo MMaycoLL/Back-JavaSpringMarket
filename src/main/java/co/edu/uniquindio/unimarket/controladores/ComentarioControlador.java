@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unimarket.controladores;
 
 import co.edu.uniquindio.unimarket.dto.ComentarioDTO;
-import co.edu.uniquindio.unimarket.dto.ComentarioGetDTO;
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ComentarioServicio;
 import jakarta.validation.Valid;
@@ -9,8 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/comentario")
@@ -28,6 +25,7 @@ public class ComentarioControlador {
                         false,
                         comentarioServicio.crearComentario(comentarioDTO)));
     }
+
     @GetMapping("/listar/{idProducto}")
     public ResponseEntity<MensajeDTO> listarComentariosProducto(@PathVariable int idProducto) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(

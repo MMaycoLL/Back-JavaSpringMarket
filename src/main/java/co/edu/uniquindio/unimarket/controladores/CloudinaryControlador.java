@@ -1,32 +1,42 @@
 package co.edu.uniquindio.unimarket.controladores;
 
+import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.CloudinaryServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/cloudinary")
+@RequestMapping("/api/imagenes")
 @AllArgsConstructor
 public class CloudinaryControlador {
 
     private final CloudinaryServicio cloudinaryServicio;
 
 
-    public Map subirImagen(File file, String carpeta) throws Exception {
-        return null;
+    @PostMapping("/subir")
+    public ResponseEntity<MensajeDTO> subirImagen(@RequestParam("file") MultipartFile file) throws Exception {
+        File imagen = cloudinaryServicio.convertir(file);
+        Map respuesta = cloudinaryServicio.subirImagen(imagen, "unimarket");
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        respuesta));
     }
 
-    public Map eliminarImagen(String idImagen) throws Exception {
-        return null;
+    @DeleteMapping("/eliminar/{idImagen}")
+    public ResponseEntity<MensajeDTO> eliminarImagen(@PathVariable String idImagen) throws Exception {
+        Map respuesta = cloudinaryServicio.eliminarImagen(idImagen);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        respuesta));
     }
 
-    public File convertir(MultipartFile imagen) throws IOException {
-        return null;
-    }
+
 }

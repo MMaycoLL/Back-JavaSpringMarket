@@ -31,6 +31,6 @@ public class CalificacionControlador {
                 new MensajeDTO(HttpStatus.OK,
                         false,
                         calificacionServicio.promedioCalificacion(idProducto)));
-        }
+    }
 
 }
