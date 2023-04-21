@@ -2,8 +2,6 @@ package co.edu.uniquindio.unimarket.controladores;
 
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.dto.UsuarioDTO;
-import co.edu.uniquindio.unimarket.dto.UsuarioGetDTO;
-import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.servicios.interfaces.UsuarioServicio;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,10 +16,8 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
-
-
     @PutMapping("/actualizar/{idUsuario}")
-    public ResponseEntity<MensajeDTO>  actualizarUsuario(@PathVariable int idUsuario, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
+    public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int idUsuario, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(HttpStatus.OK,
                         false,
@@ -29,7 +25,7 @@ public class UsuarioControlador {
     }
 
     @DeleteMapping("/eliminar/{idUsuario}")
-    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable  int idUsuario) throws Exception {
+    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable int idUsuario) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(
                         HttpStatus.OK,
@@ -38,7 +34,7 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/obteber/{idUsuario}")
-    public ResponseEntity<MensajeDTO>  obtenerUsuario(@PathVariable int idUsuario) throws Exception {
+    public ResponseEntity<MensajeDTO> obtenerUsuario(@PathVariable int idUsuario) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(HttpStatus.OK,
                         false,

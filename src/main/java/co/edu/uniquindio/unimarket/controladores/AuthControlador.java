@@ -9,17 +9,22 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("api/auth")
 @AllArgsConstructor
-public class AuthController {
+public class AuthControlador {
     private final UsuarioServicio usuarioServicio;
     private final SesionServicio sesionServicio;
+
     @PostMapping("/login")
     public ResponseEntity<MensajeDTO> login(@Valid @RequestBody SesionDTO sesionDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body( new MensajeDTO(HttpStatus.OK, false,
-                sesionServicio.login(sesionDTO)) );
+        return ResponseEntity.status(HttpStatus.OK).body(new MensajeDTO(HttpStatus.OK, false,
+                sesionServicio.login(sesionDTO)));
     }
 
     @PostMapping("/crear")

@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unimarket.controladores;
 
 import co.edu.uniquindio.unimarket.dto.EnvioDTO;
-import co.edu.uniquindio.unimarket.dto.EnvioGetDTO;
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EnvioServicio;
 import jakarta.validation.Valid;
@@ -17,7 +16,7 @@ public class EnvioControlador {
 
     private final EnvioServicio envioServicio;
 
-    @PostMapping("/crear")
+    @PostMapping("/crear/{idUsuario}")
     public ResponseEntity<MensajeDTO> crearEnvio(@Valid @RequestBody EnvioDTO envioDTO, @PathVariable int idUsuario) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 new MensajeDTO(HttpStatus.CREATED,
@@ -26,7 +25,7 @@ public class EnvioControlador {
     }
 
     @PutMapping("actualizar/{idEnvio}")
-    public ResponseEntity<MensajeDTO> actualizarEnvio(@PathVariable int idEnvio,@Valid @RequestBody EnvioDTO envioDTO) throws Exception {
+    public ResponseEntity<MensajeDTO> actualizarEnvio(@PathVariable int idEnvio, @Valid @RequestBody EnvioDTO envioDTO) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(HttpStatus.OK,
                         false,
@@ -34,7 +33,7 @@ public class EnvioControlador {
     }
 
     @DeleteMapping("/eliminar/{idEnvio}")
-    public ResponseEntity<MensajeDTO>  eliminarEnvio(@PathVariable int idEnvio) throws Exception {
+    public ResponseEntity<MensajeDTO> eliminarEnvio(@PathVariable int idEnvio) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(HttpStatus.OK,
                         false,
