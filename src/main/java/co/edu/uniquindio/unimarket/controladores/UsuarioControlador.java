@@ -18,14 +18,7 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
-    @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO> crearUsuario(@Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                new MensajeDTO(
-                        HttpStatus.CREATED,
-                        false,
-                        usuarioServicio.crearUsuario(usuarioDTO)));
-    }
+
 
     @PutMapping("/actualizar/{idUsuario}")
     public ResponseEntity<MensajeDTO>  actualizarUsuario(@PathVariable int idUsuario, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
