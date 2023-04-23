@@ -66,16 +66,6 @@ public class ProductoControlador {
                         "Actualizado correctamente"));
     }
 
-    @Operation(summary = "Actualizar unidades de un producto",
-            description = "Se actualiza las unidades disponibles del producto correspondiente al código o Id de producto especificado.")
-    @PutMapping("/actualizarUnidades/{idProducto}/{unidadesDisponibles}")
-    public ResponseEntity<MensajeDTO> actualizarPorUnidades(@PathVariable int idProducto, @PathVariable int unidadesDisponibles) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new MensajeDTO(HttpStatus.OK,
-                        false,
-                        productoServicio.actualizarPorUnidades(idProducto, unidadesDisponibles)));
-    }
-
     @Operation(summary = "Obtener producto",
             description = "Se obtiene la información del producto correspondiente al código o Id de producto especificado.")
     @GetMapping("/obtener/{idProducto}")
@@ -115,16 +105,6 @@ public class ProductoControlador {
                         false,
                         productoServicio.listarProductosEstado(estadoAutorizacion)));
 
-    }
-
-    @Operation(summary = "Listar productos favoritos de un usuario",
-            description = "Se obtiene la información de los productos favoritos correspondientes al código o Id de usuario especificado.")
-    @GetMapping("/listarFavoritos/{idUsuario}")
-    public ResponseEntity<MensajeDTO> listarFavoritosUsuarios(@PathVariable int idUsuario) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new MensajeDTO(HttpStatus.OK,
-                        false,
-                        productoServicio.listarFavoritosUsuarios(idUsuario)));
     }
 
     @Operation(summary = "Listar productos por nombre",

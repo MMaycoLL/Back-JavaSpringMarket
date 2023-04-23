@@ -15,6 +15,7 @@ public enum Categoria {
     HERRAMIENTAS,
     MUEBLES,
     VEHICULOS,
+    TECNOLOGIA,
     OTROS
 
 

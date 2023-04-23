@@ -6,6 +6,7 @@ import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.DetalleCompraRepo;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.DetalleCompraNotFoundException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.compra.UnidadesNoDisponiblesException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DetalleCompraServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,14 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
 
     @Override
     public DetalleCompra crearDetalleCompra(DetalleCompraDTO detalleCompraDTO) throws Exception {
+
+        validarUnidadesDisponibles(detalleCompraDTO);
+
         Producto producto = productoServicio.obtener(detalleCompraDTO.getIdProducto());
+
+        validarUnidadesDisponibles(detalleCompraDTO);
+
+        productoServicio.actualizarPorUnidades(producto.getIdProducto(), producto.getUnidadesDisponibles() - detalleCompraDTO.getCantidad());
 
         DetalleCompra detalleCompra = new DetalleCompra();
         detalleCompra.setCantidad(detalleCompraDTO.getCantidad());
@@ -47,6 +55,13 @@ public class DetalleCompraImpl implements DetalleCompraServicio {
         }
         return detalleCompra.get();
     }
+
+    private void validarUnidadesDisponibles(DetalleCompraDTO detalleCompraDTO) throws Exception {
+        Producto producto = productoServicio.obtener(detalleCompraDTO.getIdProducto());
+        if (producto.getUnidadesDisponibles() < detalleCompraDTO.getCantidad())
+            throw new UnidadesNoDisponiblesException("La cantidad de unidades disponibles es menor a la solicitada");
+    }
+
 
     private DetalleCompraGetDTO convertir(DetalleCompra detalleCompra) {
 

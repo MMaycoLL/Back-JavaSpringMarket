@@ -143,7 +143,8 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<ProductoGetDTO> listarFavoritosUsuarios(int idUsuario) throws Exception {
 
-        List<Producto> lista = productoRepo.listarFavoritosUsuarios(idUsuario);
+        List<Producto> lista = productoRepo.listarFavoritosUsuario(idUsuario);
+
 
         if (lista.isEmpty()) {
             throw new SinProductosFavoritosException("El usuario no tiene productos favoritos");

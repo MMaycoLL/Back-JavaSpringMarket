@@ -17,6 +17,7 @@ import co.edu.uniquindio.unimarket.servicios.excepciones.producto.ProductoNoEnco
 import co.edu.uniquindio.unimarket.servicios.excepciones.producto.SinProductosFavoritosException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CedulaDuplicadaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CodigoInexistenteException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.ContraseniaUsuarioNoCoincideException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.EmailDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -165,6 +166,12 @@ public class GlobalExceptions {
 
     @ExceptionHandler(EmailDuplicadoException.class)
     public ResponseEntity<MensajeDTO> throwEmailDuplicadoException(EmailDuplicadoException e) {
+        return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
+                e.getClass()));
+    }
+
+    @ExceptionHandler(ContraseniaUsuarioNoCoincideException.class)
+    public ResponseEntity<MensajeDTO> throwContraseniaUsuarioNoCoincideException(ContraseniaUsuarioNoCoincideException e) {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
                 e.getClass()));
     }

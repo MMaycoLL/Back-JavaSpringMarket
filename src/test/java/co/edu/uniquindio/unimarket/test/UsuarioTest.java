@@ -59,8 +59,9 @@ public class UsuarioTest {
             // Busca un usuario existente en el dataset para eliminarlo
             UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
 
+            String contrasenia = "1234";
             // Elimina el usuario encontrado
-            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario());
+            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario(), contrasenia);
 
             // Verifica que el usuario fue eliminado
             Assertions.assertThrows(Exception.class, () -> usuarioServicio.obtenerUsuario(usuarioEliminado));
@@ -80,12 +81,14 @@ public class UsuarioTest {
             // Busca un usuario existente en el dataset para modificarlo
             UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
 
+            String contrasenia = "1234";
+
             // Crear un objeto de tipo usuarioDTO con los datos a actualizar
             UsuarioDTO usuarioActualizado = new UsuarioDTO();
             usuarioActualizado.setCedula("12300010");
 
             // Actualiza el usuario encontrado
-            UsuarioGetDTO usuarioActualizadoDTO = usuarioServicio.actualizarUsuario(usuarioDTO.getIdUsuario(), usuarioActualizado);
+            UsuarioGetDTO usuarioActualizadoDTO = usuarioServicio.actualizarUsuario(usuarioDTO.getIdUsuario(), contrasenia, usuarioActualizado);
 
             // Verifica que el usuario fue actualizado
             Assertions.assertEquals("12300011", usuarioActualizadoDTO.getCedula());

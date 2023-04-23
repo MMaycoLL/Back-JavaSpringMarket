@@ -21,23 +21,23 @@ public class UsuarioControlador {
 
     @Operation(summary = "Actualizar un usuario",
             description = "Se actualiza la información del usuario correspondiente al código o Id de usuario especificado.")
-    @PutMapping("/actualizar/{idUsuario}")
-    public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int idUsuario, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
+    @PutMapping("/actualizar/{idUsuario}/{contrasenia}")
+    public ResponseEntity<MensajeDTO> actualizarUsuario(@PathVariable int idUsuario,@PathVariable String contrasenia, @Valid @RequestBody UsuarioDTO usuarioDTO) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(HttpStatus.OK,
                         false,
-                        usuarioServicio.actualizarUsuario(idUsuario, usuarioDTO)));
+                        usuarioServicio.actualizarUsuario(idUsuario, contrasenia, usuarioDTO)));
     }
 
     @Operation(summary = "Eliminar un usuario",
             description = "Se elimina la información del usuario correspondiente al código o Id de usuario especificado.")
-    @DeleteMapping("/eliminar/{idUsuario}")
-    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable int idUsuario) throws Exception {
+    @DeleteMapping("/eliminar/{idUsuario}/{contrasenia}")
+    public ResponseEntity<MensajeDTO> eliminarUsuario(@PathVariable int idUsuario, @PathVariable String  contrasenia) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new MensajeDTO(
                         HttpStatus.OK,
                         false,
-                        usuarioServicio.eliminarUsuario(idUsuario)));
+                        usuarioServicio.eliminarUsuario(idUsuario, contrasenia)));
     }
 
     @Operation(summary = "Obtener un usuario",

@@ -109,7 +109,7 @@ values
     (3, "DEPORTE"),
     (4, "LIBROS"),
     (5, "MUSICA"),
-    (6, "TECNOLOGIA");
+    (6, "HERRAMIENTAS");
 
 
 insert into favorito

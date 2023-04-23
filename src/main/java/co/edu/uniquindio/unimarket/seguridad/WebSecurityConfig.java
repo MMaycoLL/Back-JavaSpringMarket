@@ -24,8 +24,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
+        http.authorizeHttpRequests().requestMatchers("/api/producto/**").hasAuthority("CLIENTE");
+        http.authorizeHttpRequests().requestMatchers("/api/productoModerador/**").hasAuthority("MODERADOR");
         http.authorizeHttpRequests().requestMatchers("/doc/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll();
+        http.authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
+
+
         //http.authorizeHttpRequests().requestMatchers("/api/producto/**").permitAll().anyRequest().authenticated();
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

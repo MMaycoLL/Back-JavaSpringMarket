@@ -39,7 +39,6 @@ public class CompraServicioImpl implements CompraServicio {
         float total = 0;
 
         for (DetalleCompraDTO detalleCompra : compraDTO.getDetalleCompraDTO()) {
-            validarUnidadesDisponibles(detalleCompra);
             total += detalleCompra.getPrecioCompra() * detalleCompra.getCantidad();
 
 
@@ -94,12 +93,6 @@ public class CompraServicioImpl implements CompraServicio {
         }
 
         return convertir(compra);
-    }
-
-    private void validarUnidadesDisponibles(DetalleCompraDTO detalleCompraDTO) throws Exception {
-        Producto producto = productoServicio.obtener(detalleCompraDTO.getIdProducto());
-        if (producto.getUnidadesDisponibles() < detalleCompraDTO.getCantidad())
-            throw new UnidadesNoDisponiblesException("La cantidad de unidades disponibles es menor a la solicitada");
     }
 
 
