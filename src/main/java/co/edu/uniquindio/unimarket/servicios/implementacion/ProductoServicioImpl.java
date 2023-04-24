@@ -203,6 +203,15 @@ public class ProductoServicioImpl implements ProductoServicio {
         return producto.get();
     }
 
+    @Override
+    public void actualizarPrecio(int idProducto, float precio) throws Exception {
+
+        validarExistenciaProducto(idProducto);
+        Producto producto = obtener(idProducto);
+        producto.setPrecioActual(precio);
+        productoRepo.save(producto);
+    }
+
     private void validarExistenciaProducto(int idProducto) throws Exception {
         boolean existe = productoRepo.existsById(idProducto);
 

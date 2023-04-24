@@ -21,7 +21,7 @@ public class DescuentoDTO {
 
     @NotNull(message = "El porcentaje de descuento no puede ser nulo")
     @PositiveOrZero(message = "El porcentaje de descuento debe ser mayor o igual a 0")
-    private BigDecimal porcentajeDescuento;
+    private float porcentajeDescuento;
 
     @NotNull(message = "La fecha de inicio del descuento no puede ser nula")
     private LocalDate fechaInicioDescuento;

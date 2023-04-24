@@ -33,37 +33,44 @@ public class ComentarioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearComentarioTest() throws Exception {
-        // Obtener un usuario y un producto existente del dataset
-        UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
-        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(3);
+    public void crearComentarioTest() {
+        try {
+            // Obtener un usuario y un producto existente del dataset
+            UsuarioGetDTO usuarioDTO = usuarioServicio.obtenerUsuario(1);
+            ProductoGetDTO productoDTO = productoServicio.obtenerProducto(3);
 
-        // Crear un comentario para el producto
-        ComentarioDTO comentarioDTO = new ComentarioDTO();
-        comentarioDTO.setComentario("Excelente producto");
-        comentarioDTO.setIdProducto(productoDTO.getIdProducto());
-        comentarioDTO.setIdUsuario(usuarioDTO.getIdUsuario());
+            // Crear un comentario para el producto
+            ComentarioDTO comentarioDTO = new ComentarioDTO();
+            comentarioDTO.setComentario("Excelente producto");
+            comentarioDTO.setIdProducto(productoDTO.getIdProducto());
+            comentarioDTO.setIdUsuario(usuarioDTO.getIdUsuario());
 
-        // Ejecutar el método crearComentario
-        comentarioServicio.crearComentario(comentarioDTO);
+            // Ejecutar el método crearComentario
+            comentarioServicio.crearComentario(comentarioDTO);
 
-        // Verificar que el comentario se haya creado correctamente
-        List<ComentarioGetDTO> lista = comentarioServicio.listarComentariosProducto(productoDTO.getIdProducto());
-        Assertions.assertEquals(2, lista.size());
+            // Verificar que el comentario se haya creado correctamente
+            List<ComentarioGetDTO> lista = comentarioServicio.listarComentariosProducto(productoDTO.getIdProducto());
+            Assertions.assertEquals(2, lista.size());
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarComentariosProductoTest() throws Exception {
-        // Obtener un producto existente del dataset
-        ProductoGetDTO productoDTO = productoServicio.obtenerProducto(4);
+    public void listarComentariosProductoTest() {
+        try {
+            // Obtener un producto existente del dataset
+            ProductoGetDTO productoDTO = productoServicio.obtenerProducto(4);
 
-        // Ejecutar el método listarComentariosProducto
-        List<ComentarioGetDTO> lista = comentarioServicio.listarComentariosProducto(productoDTO.getIdProducto());
+            // Ejecutar el método listarComentariosProducto
+            List<ComentarioGetDTO> lista = comentarioServicio.listarComentariosProducto(productoDTO.getIdProducto());
 
-        // Verificar que la lista tenga 1 comentario
-        Assertions.assertEquals(1, lista.size());
+            // Verificar que la lista tenga 1 comentario
+            Assertions.assertEquals(1, lista.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
 }

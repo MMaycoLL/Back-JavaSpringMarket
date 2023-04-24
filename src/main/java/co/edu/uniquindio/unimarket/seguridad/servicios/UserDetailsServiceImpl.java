@@ -5,14 +5,13 @@ import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.ModeradorRepo;
 import co.edu.uniquindio.unimarket.repositorios.UsuarioRepo;
 import co.edu.uniquindio.unimarket.seguridad.modelo.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,13 +23,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> cliente = clienteRepo.findByEmail(email);
-        if (cliente.isEmpty()) {
-            Optional<Moderador> admin = adminRepo.findByEmail(email);
-            if (admin.isEmpty()) throw new UsernameNotFoundException("El usuario no existe");
-            return UserDetailsImpl.build(admin.get());
+        Usuario usuario = clienteRepo.buscarUsuarioPorEmail(email);
+        if (usuario == null) {
+            Moderador moderador = adminRepo.buscarModeradorPorEmail(email);
+
+            if (moderador == null) throw new UsernameNotFoundException("El usuario no existe");
+            return UserDetailsImpl.build(moderador);
         } else {
-            return UserDetailsImpl.build(cliente.get());
+            return UserDetailsImpl.build(usuario);
         }
     }
 }

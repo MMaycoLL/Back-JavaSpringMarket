@@ -2,17 +2,16 @@ package co.edu.uniquindio.unimarket.controladores;
 
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoModeradorDTO;
+import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoModeradorServicio;
+import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/productoModerador")
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductoModeradorControlador {
 
     private final ProductoModeradorServicio productoModeradorServicio;
+    private final ProductoServicio productoServicio;
 
     @Operation(summary = "Aprobar un producto",
             description = "Aprueba un producto existente para que sea visible para los usuarios finales. Se espera un objeto 'productoModeradorDTO' y se requiere autenticación y permisos de moderador.")
@@ -42,6 +42,18 @@ public class ProductoModeradorControlador {
                 new MensajeDTO(
                         HttpStatus.CREATED,
                         true, "Producto rechazado exitosamente"));
+    }
+
+
+    @Operation(summary = "Listar productos por estado",
+            description = "Se obtiene la información de los productos correspondientes al estado especificado.")
+    @GetMapping("/listarEstado/{estadoAutorizacion}")
+    public ResponseEntity<MensajeDTO> listarProductoEstado(@PathVariable EstadoProducto estadoAutorizacion) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        productoServicio.listarProductosEstado(estadoAutorizacion)));
+
     }
 
 }

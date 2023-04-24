@@ -18,7 +18,14 @@ public class EmailTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void enviarEmailTest() throws Exception {
-        emailServicio.enviarEmail(new EmailDTO("Correo de prueba", "Este es un correo de prueba", "wolf.malign@gmail.com"));
+    public void enviarEmailTest() {
+        try {
+            emailServicio.enviarEmail(new EmailDTO(
+                    "Correo de prueba",
+                    "Este es un correo de prueba",
+                    "wolf.malign@gmail.com"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

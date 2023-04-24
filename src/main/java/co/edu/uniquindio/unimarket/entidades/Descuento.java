@@ -23,7 +23,7 @@ public class Descuento implements Serializable {
     private int idDescuento;
 
     @Column(nullable = false)
-    private BigDecimal porcentajeDescuento;
+    private float porcentajeDescuento;
 
     @Column(nullable = false)
     private LocalDate fechaInicioDescuento;

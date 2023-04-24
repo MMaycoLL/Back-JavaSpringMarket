@@ -17,5 +17,4 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
     @Query("select u from Usuario u where u.cedula = :cedula")
     Optional<Usuario> buscarUsuarioPorCedula(String cedula);
 
-    Optional<Usuario> findByEmail(String email);
 }

@@ -36,5 +36,7 @@ public interface ProductoServicio {
 
     Producto obtener(int idProducto) throws Exception;
 
+    void actualizarPrecio(int idProducto, float precio) throws Exception;
+
 
 }

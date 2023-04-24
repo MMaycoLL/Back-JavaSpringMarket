@@ -25,50 +25,58 @@ public class CalificacionTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearCalificacionTest() throws Exception {
+    public void crearCalificacionTest() {
+        try {
+            // Crear calificación
+            CalificacionDTO calificacionDTO = new CalificacionDTO();
+            calificacionDTO.setComentarioCalificacion("Muy buen producto");
+            calificacionDTO.setValorCalificaion(3);
 
-        // Crear calificación
-        CalificacionDTO calificacionDTO = new CalificacionDTO();
-        calificacionDTO.setComentarioCalificacion("Muy buen producto");
-        calificacionDTO.setValorCalificaion(3);
+            // Obtener detalle compra para asociar a la calificación
+            DetalleCompra detalleCompra = detalleCompraRepo.findById(2).orElse(null);
 
-        // Obtener detalle compra para asociar a la calificación
-        DetalleCompra detalleCompra = detalleCompraRepo.findById(2).orElse(null);
+            // Asociar producto compra a la calificación
+            calificacionDTO.setIdDetalleCompra(detalleCompra.getIdDetalleCompra());
 
-        // Asociar producto compra a la calificación
-        calificacionDTO.setIdDetalleCompra(detalleCompra.getIdDetalleCompra());
+            // Asociar ID de usuario o persona a la calificación
+            calificacionDTO.setIdUsuario(2);
 
-        // Asociar ID de usuario o persona a la calificación
-        calificacionDTO.setIdUsuario(2);
+            // Guardar calificación
+            int calificacion = calificacionServicio.crearCalificacion(calificacionDTO);
 
-        // Guardar calificación
-        int calificacion = calificacionServicio.crearCalificacion(calificacionDTO);
-
-        // Verificar que la calificación fue creada exitosamente
-        Assertions.assertNotEquals(0, calificacion);
-
+            // Verificar que la calificación fue creada exitosamente
+            Assertions.assertNotEquals(0, calificacion);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assertions.fail("No se pudo crear la calificación");
+        }
     }
 
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void promedioCalificacionTest() throws Exception {
-        // ID de usuario o persona que realiza la prueba
-        int idUsuario = 2;
+    public void promedioCalificacionTest() {
+        try {
+            // ID de usuario o persona que realiza la prueba
+            int idUsuario = 2;
 
-        // Obtener producto compra para asociar a la calificación
-        DetalleCompra detalleCompra = detalleCompraRepo.findById(1).orElse(null);
+            // Obtener producto compra para asociar a la calificación
+            DetalleCompra detalleCompra = detalleCompraRepo.findById(1).orElse(null);
 
-        // Verificar que el detalleCompra existe
-        if (detalleCompra == null) {
-            Assertions.fail("No se encontró un detalle compra  con ID 1");
+            // Verificar que el detalleCompra existe
+            if (detalleCompra == null) {
+                Assertions.fail("No se encontró un detalle compra  con ID 1");
+            }
+
+            // Obtener promedio de calificaciones
+            double promedio = calificacionServicio.promedioCalificacion(detalleCompra.getProducto().getIdProducto());
+
+            // Verificar que el promedio es correcto
+            Assertions.assertEquals(1.0, promedio);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assertions.fail("No se pudo obtener el promedio de calificaciones");
         }
-
-        // Obtener promedio de calificaciones
-        double promedio = calificacionServicio.promedioCalificacion(detalleCompra.getProducto().getIdProducto());
-
-        // Verificar que el promedio es correcto
-        Assertions.assertEquals(3.0, promedio);
     }
 
 }

@@ -55,16 +55,6 @@ public class ProductoControlador {
                         productoServicio.actualizarProducto(idProducto, productoDTO)));
     }
 
-    @Operation(summary = "Actualizar estado de un producto",
-            description = "Se actualiza el estado del producto correspondiente al código o Id de producto especificado.")
-    @PutMapping("/actualizarEstado/{idProducto}/{estadoAutorizacion}")
-    public ResponseEntity<MensajeDTO> actualizarPorEstado(@PathVariable int idProducto, @PathVariable EstadoProducto estadoAutorizacion) throws Exception {
-        productoServicio.actualizarPorEstado(idProducto, estadoAutorizacion);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
-                new MensajeDTO(HttpStatus.NO_CONTENT,
-                        false,
-                        "Actualizado correctamente"));
-    }
 
     @Operation(summary = "Obtener producto",
             description = "Se obtiene la información del producto correspondiente al código o Id de producto especificado.")
@@ -94,17 +84,6 @@ public class ProductoControlador {
                 new MensajeDTO(HttpStatus.OK,
                         false,
                         productoServicio.listarProductosCategoria(categoria)));
-    }
-
-    @Operation(summary = "Listar productos por estado",
-            description = "Se obtiene la información de los productos correspondientes al estado especificado.")
-    @GetMapping("/listarEstado/{estadoAutorizacion}")
-    public ResponseEntity<MensajeDTO> listarProductoEstado(@PathVariable EstadoProducto estadoAutorizacion) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new MensajeDTO(HttpStatus.OK,
-                        false,
-                        productoServicio.listarProductosEstado(estadoAutorizacion)));
-
     }
 
     @Operation(summary = "Listar productos por nombre",
