@@ -2,12 +2,14 @@ package co.edu.uniquindio.unimarket.controladores.excepciones;
 
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.servicios.excepciones.calificacion.PermisoDenegadoCalificacionException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.comentario.ComentaiosVaciosException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.CompraNoEncontradaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.DetalleCompraNotFoundException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.UnidadesNoDisponiblesException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaActualIncorectaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaLimiteIncorectaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechasIncorectaException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.envio.EnvioNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.favorito.FavoritoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.favorito.ProductoYaFavoritoException;
@@ -15,10 +17,7 @@ import co.edu.uniquindio.unimarket.servicios.excepciones.moderador.ModeradorNoEn
 import co.edu.uniquindio.unimarket.servicios.excepciones.producto.PermisoDenegadoException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.producto.ProductoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.producto.SinProductosFavoritosException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CedulaDuplicadaException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.CodigoInexistenteException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.ContraseniaUsuarioNoCoincideException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.EmailDuplicadoException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -74,6 +73,12 @@ public class GlobalExceptions {
                 e.getClass()));
     }
 
+    @ExceptionHandler(ComentaiosVaciosException.class)
+    public ResponseEntity<MensajeDTO> throwComentariosVaciosException(ComentaiosVaciosException e) {
+        return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
+                e.getClass()));
+    }
+
     @ExceptionHandler(CompraNoEncontradaException.class)
     public ResponseEntity<MensajeDTO> throwCompraNoEncontradaException(CompraNoEncontradaException e) {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
@@ -106,6 +111,12 @@ public class GlobalExceptions {
 
     @ExceptionHandler(DescuentoFechasIncorectaException.class)
     public ResponseEntity<MensajeDTO> throwDescuentoFechaActualIncorectaException(DescuentoFechasIncorectaException e) {
+        return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
+                e.getClass()));
+    }
+
+    @ExceptionHandler(DescuentoNoEncontradoException.class)
+    public ResponseEntity<MensajeDTO> throwDescuentoNoEncontradoException(DescuentoNoEncontradoException e) {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
                 e.getClass()));
     }
@@ -152,6 +163,12 @@ public class GlobalExceptions {
                 e.getClass()));
     }
 
+    @ExceptionHandler(CedulaNoCoincideConUsuarioException.class)
+    public ResponseEntity<MensajeDTO> throwCedulaNoCoincideConUsuarioException(CedulaNoCoincideConUsuarioException e) {
+        return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
+                e.getClass()));
+    }
+
     @ExceptionHandler(CedulaDuplicadaException.class)
     public ResponseEntity<MensajeDTO> throwCedulaDuplicadaException(CedulaDuplicadaException e) {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
@@ -175,5 +192,13 @@ public class GlobalExceptions {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
                 e.getClass()));
     }
+
+
+    @ExceptionHandler(UsuarioNoTieneComprasException.class)
+    public ResponseEntity<MensajeDTO> throwUsuarioNoTieneComprasException(UsuarioNoTieneComprasException e) {
+        return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
+                e.getClass()));
+    }
+
 
 }
