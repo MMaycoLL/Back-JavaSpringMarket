@@ -3,7 +3,6 @@ package co.edu.uniquindio.unimarket.servicios.interfaces;
 import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoDescuentoDTO;
 import co.edu.uniquindio.unimarket.entidades.Descuento;
-import co.edu.uniquindio.unimarket.entidades.Producto;
 
 import java.util.List;
 

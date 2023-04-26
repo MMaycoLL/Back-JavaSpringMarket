@@ -140,7 +140,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setDireccion(usuarioDTO.getDireccion());
         usuario.setCedula(usuarioDTO.getCedula());
         usuario.setTelefono(usuarioDTO.getTelefono());
-        usuario.setContrasenia(usuarioDTO.getContrasenia());
+        usuario.setContrasenia(passwordEncoder.encode(usuarioDTO.getContrasenia()));
 
         return usuario;
     }

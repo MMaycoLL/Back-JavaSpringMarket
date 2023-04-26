@@ -26,4 +26,6 @@ public class CompraGetDTO {
     private MetodoPago metodoPago;
 
     private List<DetalleCompraDTO> detalleCompraDTO;
+
+    private int idEnvio;
 }

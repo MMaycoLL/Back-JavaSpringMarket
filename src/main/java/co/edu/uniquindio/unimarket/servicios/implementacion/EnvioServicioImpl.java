@@ -73,7 +73,15 @@ public class EnvioServicioImpl implements EnvioServicio {
         return convertir(obtener(idEnvio));
     }
 
+    public Envio obtenerConUsuario(int idEnvio, int idUsuario) throws Exception {
+        Envio envio = envioRepo.findById(idEnvio).orElseThrow(() -> new Exception("Envío no encontrado"));
 
+        if (!(envio.getUsuario().getIdPersona() == (idUsuario))) {
+            throw new Exception("El envío no pertenece al usuario que hizo la compra");
+        }
+
+        return envio;
+    }
     public Envio obtener(int idEnvio) throws Exception {
         Optional<Envio> envio = envioRepo.findById(idEnvio);
 

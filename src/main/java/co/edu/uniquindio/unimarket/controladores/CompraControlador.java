@@ -21,7 +21,7 @@ public class CompraControlador {
     @Operation(summary = "Crear una compra",
             description = "Crea una nueva compra con la información proporcionada, incluyendo id de usuario, metodo de pago, id de envio y detalle compraDTO. Esta capturada en el DTO.")
     @PostMapping("/crear")
-    public ResponseEntity<MensajeDTO> crearCompra(CompraDTO compraDTO) throws Exception {
+    public ResponseEntity<MensajeDTO> crearCompra(@RequestBody CompraDTO compraDTO) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 new MensajeDTO(
                         HttpStatus.CREATED,

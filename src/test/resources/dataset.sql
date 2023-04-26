@@ -2,7 +2,7 @@ insert into usuario
 values
     -- id, contraseña, cedula, email, nombre_completo, direccion, telefono
 
-    (1, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111641", "pepe1@gmail.com", "pepito perez",
+    (1, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111641", "wolf.malign@gmail.com", "pepito perez",
      "calle 54 # 11-21", "31238521"),
     (2, "$2a$10$oeyqNNdUQ/fzOjdPcHMSNODnhEzYRW84ZrMqulWxXRbgjxSFRgywq", "111642", "juan1@gmail.com", "juan perez",
      "calle 52 # 12-22", "31238522"),
@@ -128,7 +128,7 @@ insert into descuento
 values
     -- id, fecha_inicio, fecha_fin, porcentaje, id_producto
 
-    (1, "2023-04-07", "2023-05-05", 10, 1),
+    (1, "2023-04-23", "2023-05-05", 10, 1),
     (2, "2023-04-05", "2023-05-05", 20, 2),
     (3, "2023-04-05", "2023-05-05", 30, 3),
     (4, "2023-04-05", "2023-05-05", 40, 4),

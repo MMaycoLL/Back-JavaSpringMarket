@@ -43,6 +43,7 @@ public class DescuentoServicioImpl implements DescuentoServicio {
         float precioActual = producto.getPrecioActual();
         float porcentajeDescuentoActual = descuentoDTO.getPorcentajeDescuento();
         float precioConDescuento = precioActual * (1 - (porcentajeDescuentoActual / 100));
+        
         producto.setPrecioActual(precioConDescuento);
 
         productoServicio.actualizarPrecio(producto.getIdProducto(), producto.getPrecioActual());

@@ -7,6 +7,7 @@ import co.edu.uniquindio.unimarket.entidades.Comentario;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.entidades.Usuario;
 import co.edu.uniquindio.unimarket.repositorios.ComentarioRepo;
+import co.edu.uniquindio.unimarket.servicios.excepciones.comentario.ComentaiosVaciosException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ComentarioServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EmailServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
@@ -56,22 +57,19 @@ public class ComentarioServicioImpl implements ComentarioServicio {
 
     @Override
     public List<ComentarioGetDTO> listarComentariosProducto(int idProducto) throws Exception {
-        // Buscar el producto correspondiente en la base de datos
-        Producto producto = productoServicio.obtener(idProducto);
+        List<Comentario> lista = comentarioRepo.listaComentarios(idProducto);
 
-        // Obtener la lista de comentarios del producto
-        List<Comentario> comentarios = producto.getComentario();
-
-        /*
-        Bucle for para convertir cada comentario en un objeto de tipo ComentarioGetDTO
-        utilizando el método "convertir(comentario)"
-         */
-        List<ComentarioGetDTO> comentarioDTO = new ArrayList<>();
-        for (Comentario comentario : comentarios) {
-            ComentarioGetDTO dto = convertir(comentario);
-            comentarioDTO.add(dto);
+        if(lista.isEmpty()){
+            throw new ComentaiosVaciosException("No hay comentarios para este producto");
         }
-        return comentarioDTO;
+
+        List<ComentarioGetDTO> comentario = new ArrayList<>();
+
+        for (Comentario c : lista){
+            comentario.add(convertir(c));
+        }
+
+        return comentario;
     }
 
 
@@ -82,6 +80,8 @@ public class ComentarioServicioImpl implements ComentarioServicio {
         comentarioDTO.setIdComentario(comentario.getIdComentario());
         comentarioDTO.setComentario(comentario.getComentario());
         comentarioDTO.setFechaComentario(comentario.getFechaComentario());
+        comentarioDTO.setIdProducto(comentario.getProducto().getIdProducto());
+        comentarioDTO.setIdUsuario(comentario.getUsuario().getIdPersona());
 
         return comentarioDTO;
     }

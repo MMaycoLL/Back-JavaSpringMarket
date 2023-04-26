@@ -24,19 +24,36 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeHttpRequests()
+        http.authorizeHttpRequests().requestMatchers(
+                        "/doc/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/api/auth/**",
+                        "/api/cambiarContrasenia/**").permitAll()
                 .requestMatchers(
                         "/api/productoModerador/**").hasAuthority("MODERADOR")
                 .requestMatchers(
-                        "/doc/**",
-                        "/swagger-ui/**",
-                        "/v3/api-docs/**").permitAll()
+                        "/api/usuario/**",
+                        "/api/comentario/**",
+                        "/api/producto/actualizar/**",
+                        "/api/producto/crear/**",
+                        "/api/producto/obtener/**",
+                        "/api/producto/listarUsuario/**",
+                        "/api/producto/listarFavoritosUsuario/**",
+                        "/api/descuento/**",
+                        "/api/envio/**",
+                        "/api/descuento/**",
+                        "/api/favoritos/**",
+                        "/api/detalleCompra/**",
+                        "/api/compra/**",
+                        "/api/comentario/crear/**",
+                        "/api/calificacion/crear/**").hasAuthority("CLIENTE")
                 .requestMatchers(
                         "/api/producto/listarCategoria/**",
                         "/api/producto/listarPrecio/**",
                         "/api/producto/listarNombre/**",
-                        "/api/auth/**").permitAll().anyRequest().authenticated();
-
+                        "/api/comentario/listar/**",
+                        "/api/calificacion/promedio/**").permitAll().anyRequest().authenticated();
 
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

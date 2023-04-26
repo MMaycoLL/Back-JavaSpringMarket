@@ -6,10 +6,13 @@ import co.edu.uniquindio.unimarket.dto.DetalleCompraDTO;
 import co.edu.uniquindio.unimarket.dto.EmailDTO;
 import co.edu.uniquindio.unimarket.entidades.Compra;
 import co.edu.uniquindio.unimarket.entidades.DetalleCompra;
+import co.edu.uniquindio.unimarket.entidades.Envio;
 import co.edu.uniquindio.unimarket.entidades.Producto;
 import co.edu.uniquindio.unimarket.repositorios.CompraRepo;
+import co.edu.uniquindio.unimarket.repositorios.EnvioRepo;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.CompraNoEncontradaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.compra.UnidadesNoDisponiblesException;
+import co.edu.uniquindio.unimarket.servicios.excepciones.usuario.UsuarioNoTieneComprasException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,7 @@ import java.util.Optional;
 public class CompraServicioImpl implements CompraServicio {
     private final CompraRepo compraRepo;
     private final UsuarioServicio usuarioServicio;
-    private final EnvioServicio envioServicio;
+    private final EnvioServicioImpl envioServicio;
     private final ProductoServicio productoServicio;
     private final EmailServicio emailServicio;
 
@@ -63,9 +66,13 @@ public class CompraServicioImpl implements CompraServicio {
 
 
     @Override
-    public List<CompraGetDTO> listarComprasUsuarios(int idUsuario) {
+    public List<CompraGetDTO> listarComprasUsuarios(int idUsuario) throws Exception {
         List<Compra> compras = compraRepo.findByUsuarioIdUsuario(idUsuario);
         List<CompraGetDTO> compraGetDTOs = new ArrayList<>();
+
+        if (compras.isEmpty()){
+            throw new UsuarioNoTieneComprasException("El usuario no tiene compras");
+        }
 
         for (Compra compra : compras) {
             CompraGetDTO dto = convertir(compra);
@@ -79,7 +86,7 @@ public class CompraServicioImpl implements CompraServicio {
         Optional<Compra> compra = compraRepo.findById(idCompra);
 
         if (compra.isEmpty()) {
-            throw new CompraNoEncontradaException("La compra no existe");
+            throw new CompraNoEncontradaException("La compra no existe en la base de datos");
         }
 
         return compra.get();
@@ -103,6 +110,7 @@ public class CompraServicioImpl implements CompraServicio {
         dto.setTotalCompra(compra.getTotalCompra());
         dto.setIdUsuario(compra.getUsuario().getIdPersona());
         dto.setMetodoPago(compra.getMetodoPago());
+        dto.setIdEnvio(compra.getEnvio().getIdEnvio());
 
 
         List<DetalleCompraDTO> detalleCompraDTOs = new ArrayList<>();
