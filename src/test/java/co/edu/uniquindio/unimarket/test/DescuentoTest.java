@@ -53,37 +53,6 @@ public class DescuentoTest {
         }
     }
 
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void eliminarDescuentoTest() {
-        try {
-            // Elimina el descuento del producto con ID 1
-            descuentoServicio.eliminarDescuento(1);
-
-            // Verifica que el descuento se eliminó correctamente
-            Assertions.assertThrows(DescuentoNoEncontradoException.class, () -> descuentoServicio.obtener(1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void obtenerProductosConDescuentoTest() {
-        try {
-            // Obtiene la lista de productos con descuento
-            List<ProductoDescuentoDTO> productosConDescuento = descuentoServicio.obtenerProductosConDescuento();
-
-            // Verifica que se encontraron los productos con descuento esperados
-            Assertions.assertEquals(1, productosConDescuento.size());
-            ProductoDescuentoDTO productoDescuento = productosConDescuento.get(0);
-            Assertions.assertEquals(1, productoDescuento.getIdProducto());
-            Assertions.assertEquals(50000.0, productoDescuento.getPrecioActual(), 0.00001);
-            Assertions.assertEquals(10.0, productoDescuento.getPorcentajeDescuento(), 0.00001);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 

@@ -10,10 +10,6 @@ public interface DescuentoServicio {
 
     void aplicarDescuento(DescuentoDTO descuentoDTO) throws Exception;
 
-    void eliminarDescuento(int  idProducto) throws Exception;
 
-    Descuento obtener(int idDescuento) throws Exception;
-
-    List<ProductoDescuentoDTO> obtenerProductosConDescuento() throws Exception;
 }
 

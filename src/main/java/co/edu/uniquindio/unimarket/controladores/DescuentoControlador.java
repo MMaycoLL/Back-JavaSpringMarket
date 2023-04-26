@@ -31,26 +31,4 @@ public class DescuentoControlador {
                         "Descuento aplicado"));
     }
 
-    @Operation(summary = "Eliminar un descuento",
-            description = "Se elimina el descuento correspondiente al producto especificado en el DTO.")
-    @PutMapping("/eliminarDCTO/{idProducto}")
-    public ResponseEntity<MensajeDTO> eliminarDescuento(@PathVariable int idProducto) throws Exception {
-        descuentoServicio.eliminarDescuento(idProducto);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
-                new MensajeDTO(
-                        HttpStatus.NO_CONTENT,
-                        false,
-                        "Descuento eliminado"));
-    }
-
-    @Operation(summary = "obtenerProductosConDescuento",
-            description = "Se obtiene la información de los productos que tienen descuento.")
-    @GetMapping("/obtenerProductosConDescuento")
-    public ResponseEntity<MensajeDTO> obtenerProductosConDescuento() throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(
-                new MensajeDTO(
-                        HttpStatus.OK,
-                        false,
-                        descuentoServicio.obtenerProductosConDescuento()));
-    }
 }

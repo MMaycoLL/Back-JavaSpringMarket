@@ -49,44 +49,6 @@ public class DescuentoServicioImpl implements DescuentoServicio {
         productoServicio.actualizarPrecio(producto.getIdProducto(), producto.getPrecioActual());
     }
 
-    @Override
-    public void eliminarDescuento(int idProducto) throws Exception {
-        Descuento descuento = obtener(idProducto);
-        descuentoRepo.delete(descuento);
-    }
-
-
-    @Override
-    public Descuento obtener(int idDescuento) throws Exception {
-        return descuentoRepo.findById(idDescuento).orElseThrow(() -> new DescuentoNoEncontradoException("No se encontró el descuento"));
-    }
-
-    @Override
-    public List<ProductoDescuentoDTO> obtenerProductosConDescuento() throws Exception {
-        // Busca en la base de datos todos los productos que tengan un descuento aplicado
-        List<ProductoDescuentoDTO> productosConDescuento = new ArrayList<>();
-
-        // Llama a la consulta JPQL para obtener los descuentos y productos asociados
-        List<Object[]> descuentosVigentes = descuentoRepo.findDescuentosVigentes(LocalDate.now());
-
-        // Itera sobre los resultados de la consulta y agrega los productos con descuento a la lista
-        for (Object[] resultado : descuentosVigentes) {
-            Descuento descuento = (Descuento) resultado[0];
-            Producto producto = (Producto) resultado[1];
-
-            ProductoDescuentoDTO productoDescuento = new ProductoDescuentoDTO();
-            productoDescuento.setIdProducto(producto.getIdProducto());
-            productoDescuento.setNombre(producto.getNombreProducto());
-            productoDescuento.setPrecioActual(producto.getPrecioActual());
-            productoDescuento.setPorcentajeDescuento(descuento.getPorcentajeDescuento());
-
-            productosConDescuento.add(productoDescuento);
-        }
-
-        return productosConDescuento;
-    }
-
-
     private void validarFechaInicioDescuento(LocalDate fechaInicioDescuento) throws Exception {
         LocalDate fechaInicio = LocalDate.now();
         if (fechaInicioDescuento.isBefore(fechaInicio)) {

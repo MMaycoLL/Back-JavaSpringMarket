@@ -46,8 +46,7 @@ public class WebSecurityConfig {
                         "/api/favoritos/**",
                         "/api/detalleCompra/**",
                         "/api/compra/**",
-                        "/api/comentario/crear/**",
-                        "/api/calificacion/crear/**").hasAuthority("CLIENTE")
+                        "/api/comentario/crear/**").hasAuthority("CLIENTE")
                 .requestMatchers(
                         "/api/producto/listarCategoria/**",
                         "/api/producto/listarPrecio/**",

@@ -110,6 +110,8 @@ public class EnvioServicioImpl implements EnvioServicio {
         envio.setDireccionDestinatario(envioDTO.getDireccionDestinatario());
         envio.setTelefonoDestinatario(envioDTO.getTelefonoDestinatario());
         envio.setCiudadEnvio(envioDTO.getCiudadEnvio());
+        envio.setUsuario(usuarioServicio.obtener(envioDTO.getIdUsuario()));
+
 
         return envio;
     }

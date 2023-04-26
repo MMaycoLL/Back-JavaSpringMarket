@@ -109,7 +109,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         List<Producto> lista = productoRepo.listarProductosCategoria(categoria);
 
         if (lista.isEmpty()) {
-            throw new ProductoNoEncontradoException("No hay productos de esta categoria");
+            throw new ProductoNoEncontradoException("No hay productos en esta categoria");
         }
 
         List<ProductoGetDTO> respuesta = new ArrayList<>();

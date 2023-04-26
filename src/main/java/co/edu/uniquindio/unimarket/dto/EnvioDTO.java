@@ -33,4 +33,5 @@ public class EnvioDTO {
     @NotNull(message = "La ciudad no puede ser nula")
     private Ciudades ciudadEnvio;
 
+    private int idUsuario;
 }
