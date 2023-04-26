@@ -1,7 +1,7 @@
 
-# UniMarket
+# JavaSpringMarket
 
-UniMarket es una tienda en línea que permite a los usuarios comprar y vender productos de diversas categorías. Este proyecto se ha desarrollado utilizando Spring Boot y se ha utilizado Gradle como herramienta de construcción y Hibernate para la base de datos con MySQL. Además, se ha utilizado Java 17 para el desarrollo del proyecto.
+JavaSpringMarket es una tienda en línea que permite a los usuarios comprar y vender productos de diversas categorías. Este proyecto se ha desarrollado utilizando Spring Boot y se ha utilizado Gradle como herramienta de construcción y Hibernate para la base de datos con MySQL. Además, se ha utilizado Java 17 para el desarrollo del proyecto.
 
 ## Funcionalidades
 ### Usuario
