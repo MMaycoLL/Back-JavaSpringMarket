@@ -42,5 +42,22 @@ public interface ProductoRepo extends JpaRepository<Producto, Integer> {
     @Query("select f.producto from Favorito f where f.usuario.idPersona = :idUsuario and f.producto.fechaLimite > CURRENT_DATE() and f.producto.estadoProducto = co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto.ACTIVO and f.usuario.idPersona = :idUsuario")
     List<Producto> listarFavoritosUsuario(int idUsuario);
 
+    // Contar productos de las categorias
+    @Query("SELECT p.categorias, COUNT(p) FROM Producto p GROUP BY p.categorias")
+    List<Object[]> contarProductosPorCategoria();
 
+    // obtener precio minimo de una categoria
+    @Query("SELECT MIN(p.precioActual) FROM Producto p WHERE p.categorias = :categoria")
+    float obtenerPrecioMinimoCategoria( Categoria categoria);
+
+    // obtener precio maximo de una categoria
+    @Query("SELECT MAX(p.precioActual) FROM Producto p WHERE p.categorias = :categoria")
+    float obtenerPrecioMaximoCategoria( Categoria categoria);
+    // Listar producto precio mayor dada una categoria
+    @Query("select p from Producto p where p.precioActual = (select max(p.precioActual) from Producto p where :categoria member of p.categorias and p.fechaLimite > CURRENT_DATE() and p.estadoProducto = co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto.ACTIVO)")
+    List<Producto> productoPrecioMayor(Categoria categoria);
+
+    // listar categorias
+    @Query("select distinct p.categorias from Producto p")
+    List<Categoria> listarCategorias();
 }

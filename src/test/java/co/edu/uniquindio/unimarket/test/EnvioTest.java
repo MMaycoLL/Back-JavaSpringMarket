@@ -40,7 +40,8 @@ public class EnvioTest {
                     "juan perez",
                     "Calle 13 #13",
                     "31238522",
-                    Ciudades.CAUCASIA
+                    Ciudades.CAUCASIA,
+                    1
             );
 
             // Crear el envío a partir del DTO
@@ -63,7 +64,8 @@ public class EnvioTest {
                             "pepito perez",
                             "Calle 13 #20",
                             "31238522",
-                            Ciudades.CALI
+                            Ciudades.CALI,
+                            1
                     ));
 
             // Se comprueba que el envío se actualizó correctamente

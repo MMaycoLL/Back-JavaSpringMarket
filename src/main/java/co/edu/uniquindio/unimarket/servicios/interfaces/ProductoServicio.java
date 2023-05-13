@@ -7,18 +7,29 @@ import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductoServicio {
 
     int crearProducto(ProductoDTO productoDTO) throws Exception;
 
+    float obtenerPrecioMinimoCategoria(Categoria categoria) throws Exception;
+
+    float obtenerPrecioMaximoCategoria(Categoria categoria) throws Exception;
+
+    // listar categorias
+    List<Categoria> listarCategorias() throws Exception;
+
+    Map<Categoria, Integer> obtenerCantidadProductosPorCategoria() throws Exception;
+
     int eliminarProducto(int idProducto) throws Exception;
 
     ProductoGetDTO actualizarProducto(int idProducto, ProductoDTO productoDTO) throws Exception;
 
+
     void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception;
 
-    int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception;
+    void actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception;
 
     ProductoGetDTO obtenerProducto(int idProducto) throws Exception;
 

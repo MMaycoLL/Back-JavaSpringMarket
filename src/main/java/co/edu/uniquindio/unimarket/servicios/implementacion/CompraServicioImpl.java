@@ -82,6 +82,9 @@ public class CompraServicioImpl implements CompraServicio {
         return compraGetDTOs;
     }
 
+
+
+// buscar producto mas caro
     public Compra obtener(int idCompra) throws Exception {
         Optional<Compra> compra = compraRepo.findById(idCompra);
 

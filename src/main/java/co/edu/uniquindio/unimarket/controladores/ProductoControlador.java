@@ -3,7 +3,6 @@ package co.edu.uniquindio.unimarket.controladores;
 import co.edu.uniquindio.unimarket.dto.MensajeDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoDTO;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.Categoria;
-import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductoControlador {
 
     private final ProductoServicio productoServicio;
+
 
     @Operation(summary = "Crear un producto",
             description = "Se crea un nuevo producto con la información especificada.")
@@ -116,6 +116,33 @@ public class ProductoControlador {
                 new MensajeDTO(HttpStatus.OK,
                         false,
                         productoServicio.listarProductosUsuario(idUsuario)));
+
+    }
+
+
+    @GetMapping("/obtenerCantidadProductosPorCategoria")
+    public ResponseEntity<MensajeDTO> obtenerCantidadProductosPorCategoria() throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        productoServicio.obtenerCantidadProductosPorCategoria()));
+    }
+
+    @GetMapping("/listarProductoPrecioMax/{categoria}")
+    public ResponseEntity<MensajeDTO> listarProductoPrecioMax(@PathVariable Categoria categoria) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        productoServicio.obtenerPrecioMaximoCategoria(categoria)));
+
+    }
+
+    @GetMapping("/listarProductoPrecioMin/{categoria}")
+    public ResponseEntity<MensajeDTO> listarProductoPrecioMin(@PathVariable Categoria categoria) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new MensajeDTO(HttpStatus.OK,
+                        false,
+                        productoServicio.obtenerPrecioMinimoCategoria(categoria)));
 
     }
 }

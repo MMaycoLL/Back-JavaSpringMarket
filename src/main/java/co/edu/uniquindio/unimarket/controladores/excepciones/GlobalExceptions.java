@@ -184,7 +184,7 @@ public class GlobalExceptions {
     @ExceptionHandler(EmailDuplicadoException.class)
     public ResponseEntity<MensajeDTO> throwEmailDuplicadoException(EmailDuplicadoException e) {
         return ResponseEntity.badRequest().body(new MensajeDTO(HttpStatus.BAD_REQUEST, true,
-                e.getClass()));
+                e.getMessage()));
     }
 
     @ExceptionHandler(ContraseniaUsuarioNoCoincideException.class)

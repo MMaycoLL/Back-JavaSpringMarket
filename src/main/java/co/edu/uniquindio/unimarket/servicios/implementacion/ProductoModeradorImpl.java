@@ -3,17 +3,12 @@ package co.edu.uniquindio.unimarket.servicios.implementacion;
 import co.edu.uniquindio.unimarket.dto.EmailDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoModeradorDTO;
 import co.edu.uniquindio.unimarket.entidades.Producto;
-import co.edu.uniquindio.unimarket.entidades.ProductoModerador;
 import co.edu.uniquindio.unimarket.entidades.enumeraciones.EstadoProducto;
-import co.edu.uniquindio.unimarket.repositorios.ProductoModeradorRepo;
 import co.edu.uniquindio.unimarket.servicios.interfaces.EmailServicio;
-import co.edu.uniquindio.unimarket.servicios.interfaces.ModeradorServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoModeradorServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +16,6 @@ public class ProductoModeradorImpl implements ProductoModeradorServicio {
 
 
     private final ProductoServicio productoServicio;
-    private final ModeradorServicio moderadorServicio;
-    private final ProductoModeradorRepo productoModeradorRepo;
     private final EmailServicio emailServicio;
 
     public void aprobarProducto(ProductoModeradorDTO productoModeradorDTO) throws Exception {
@@ -35,16 +28,6 @@ public class ProductoModeradorImpl implements ProductoModeradorServicio {
         Producto producto = productoServicio.obtener(productoModeradorDTO.getIdProducto());
         productoServicio.actualizarPorEstado(producto.getIdProducto(), EstadoProducto.INACTIVO);
         enviarCorreo(producto, EstadoProducto.INACTIVO, productoModeradorDTO.getMotivo());
-    }
-
-    private ProductoModerador crearProductoModerador(ProductoModeradorDTO productoModeradorDTO, Producto producto, EstadoProducto estadoProducto) throws Exception {
-        ProductoModerador productoModerador = new ProductoModerador();
-        productoModerador.setProducto(producto);
-        productoModerador.setFechaAutorizacion(LocalDateTime.now());
-        productoModerador.setMotivo(productoModeradorDTO.getMotivo());
-        productoModerador.setModerador(moderadorServicio.obtenerModeradorPorId(productoModeradorDTO.getIdModerador()));
-        productoModerador.setEstadoAutorizacion(estadoProducto);
-        return productoModeradorRepo.save(productoModerador);
     }
 
     private void enviarCorreo(Producto producto, EstadoProducto estadoProducto, String motivo) throws Exception {

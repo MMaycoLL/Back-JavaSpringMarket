@@ -260,6 +260,21 @@ public class ProductoTest {
             e.printStackTrace();
         }
     }
+
+    // test listar categorias
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCategoriasTest() {
+        try {
+            // Listar categorias
+            List<Categoria> categorias = productoServicio.listarCategorias();
+
+            Assertions.assertEquals(5, categorias.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

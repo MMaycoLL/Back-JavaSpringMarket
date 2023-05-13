@@ -16,9 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -56,12 +54,13 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception {
+    public void actualizarPorUnidades(int idProducto, int unidadesDisponibles) throws Exception {
         validarExistenciaProducto(idProducto);
         Producto producto = obtener(idProducto);
         producto.setUnidadesDisponibles(unidadesDisponibles);
-        return productoRepo.save(producto).getIdProducto();
+        productoRepo.save(producto);
     }
+
 
     @Override
     public void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
@@ -71,6 +70,51 @@ public class ProductoServicioImpl implements ProductoServicio {
         productoRepo.save(producto);
     }
 
+    @Override
+    public float obtenerPrecioMinimoCategoria(Categoria categoria) throws Exception {
+        float precioMinimo = productoRepo.obtenerPrecioMinimoCategoria(categoria);
+        if (precioMinimo == 0) {
+            throw new ProductoNoEncontradoException("No hay productos en esta categoría");
+        }
+        return precioMinimo;
+    }
+
+    @Override
+    public float obtenerPrecioMaximoCategoria(Categoria categoria) throws Exception {
+        float precioMaximo = productoRepo.obtenerPrecioMaximoCategoria(categoria);
+        if (precioMaximo == 0) {
+            throw new ProductoNoEncontradoException("No hay productos en esta categoría");
+        }
+        return precioMaximo;
+    }
+// listar categorias
+    @Override
+    public List<Categoria> listarCategorias() throws Exception {
+        List<Categoria> lista = productoRepo.listarCategorias();
+        if (lista.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos en ninguna categoría");
+        }
+        return lista;
+    }
+
+    @Override
+    public Map<Categoria, Integer> obtenerCantidadProductosPorCategoria() throws Exception {
+        List<Object[]> resultados = productoRepo.contarProductosPorCategoria();
+
+        if (resultados.isEmpty()) {
+            throw new ProductoNoEncontradoException("No hay productos en ninguna categoría");
+        }
+
+        Map<Categoria, Integer> cantidadProductosPorCategoria = new HashMap<>();
+
+        for (Object[] resultado : resultados) {
+            Categoria categoria = (Categoria) resultado[0];
+            Long cantidadProductos = (Long) resultado[1];
+            cantidadProductosPorCategoria.put(categoria, cantidadProductos.intValue());
+        }
+
+        return cantidadProductosPorCategoria;
+    }
 
     @Override
     public int eliminarProducto(int idProducto) throws Exception {
@@ -120,6 +164,9 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return respuesta;
     }
+
+
+    // contar productos de las categorias usando contarProductosCategoria
 
 
     @Override
@@ -175,6 +222,8 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return respuesta;
     }
+
+// obtener productos mas barato y mas caro dada una categoria
 
     @Override
     public List<ProductoGetDTO> listarProductosPrecio(float precioMinimo, float precioMaximo) throws Exception {
