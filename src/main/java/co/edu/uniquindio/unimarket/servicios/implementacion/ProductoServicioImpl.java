@@ -62,6 +62,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
 
+
     @Override
     public void actualizarPorEstado(int idProducto, EstadoProducto estadoAutorizacion) throws Exception {
         validarExistenciaProducto(idProducto);
@@ -88,14 +89,14 @@ public class ProductoServicioImpl implements ProductoServicio {
         return precioMaximo;
     }
 // listar categorias
-    @Override
-    public List<Categoria> listarCategorias() throws Exception {
-        List<Categoria> lista = productoRepo.listarCategorias();
-        if (lista.isEmpty()) {
-            throw new ProductoNoEncontradoException("No hay productos en ninguna categoría");
-        }
-        return lista;
-    }
+@Override
+public List<Categoria> listarCategorias() {
+    List<Categoria> categorias = Arrays.asList(Categoria.values());
+    return categorias;
+}
+
+
+
 
     @Override
     public Map<Categoria, Integer> obtenerCantidadProductosPorCategoria() throws Exception {

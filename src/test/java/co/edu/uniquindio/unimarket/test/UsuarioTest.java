@@ -61,7 +61,7 @@ public class UsuarioTest {
 
             String contrasenia = "1234";
             // Elimina el usuario encontrado
-            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario(), contrasenia);
+            int usuarioEliminado = usuarioServicio.eliminarUsuario(usuarioDTO.getIdUsuario());
 
             // Verifica que el usuario fue eliminado
             Assertions.assertThrows(Exception.class, () -> usuarioServicio.obtenerUsuario(usuarioEliminado));
@@ -88,7 +88,7 @@ public class UsuarioTest {
             usuarioActualizado.setCedula("12300010");
 
             // Actualiza el usuario encontrado
-            UsuarioGetDTO usuarioActualizadoDTO = usuarioServicio.actualizarUsuario(usuarioDTO.getIdUsuario(), contrasenia, usuarioActualizado);
+            UsuarioGetDTO usuarioActualizadoDTO = usuarioServicio.actualizarUsuario(usuarioDTO.getIdUsuario(), usuarioActualizado);
 
             // Verifica que el usuario fue actualizado
             Assertions.assertEquals("12300011", usuarioActualizadoDTO.getCedula());

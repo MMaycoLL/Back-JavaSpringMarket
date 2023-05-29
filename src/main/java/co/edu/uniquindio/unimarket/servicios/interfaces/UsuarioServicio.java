@@ -8,10 +8,10 @@ public interface UsuarioServicio {
 
     int crearUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
-    UsuarioGetDTO actualizarUsuario(int idUsuario,String contrasenia, UsuarioDTO usuarioDTO) throws Exception;
+    UsuarioGetDTO actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception;
 
 
-    int eliminarUsuario(int idUsuario, String contrasenia) throws Exception;
+    int eliminarUsuario(int idUsuario) throws Exception;
 
     UsuarioGetDTO obtenerUsuario(int idUsuario) throws Exception;
 

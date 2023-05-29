@@ -1,29 +1,21 @@
 package co.edu.uniquindio.unimarket.servicios.implementacion;
 
 import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
-import co.edu.uniquindio.unimarket.dto.ProductoDescuentoDTO;
-import co.edu.uniquindio.unimarket.entidades.Descuento;
 import co.edu.uniquindio.unimarket.entidades.Producto;
-import co.edu.uniquindio.unimarket.repositorios.DescuentoRepo;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaActualIncorectaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechaLimiteIncorectaException;
 import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoFechasIncorectaException;
-import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DescuentoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
 @AllArgsConstructor
 public class DescuentoServicioImpl implements DescuentoServicio {
-
-    private final DescuentoRepo descuentoRepo;
 
     private final ProductoServicio productoServicio;
 
@@ -43,7 +35,7 @@ public class DescuentoServicioImpl implements DescuentoServicio {
         float precioActual = producto.getPrecioActual();
         float porcentajeDescuentoActual = descuentoDTO.getPorcentajeDescuento();
         float precioConDescuento = precioActual * (1 - (porcentajeDescuentoActual / 100));
-        
+
         producto.setPrecioActual(precioConDescuento);
 
         productoServicio.actualizarPrecio(producto.getIdProducto(), producto.getPrecioActual());

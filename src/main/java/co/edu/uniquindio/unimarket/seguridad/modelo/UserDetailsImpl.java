@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
     private String username, password;
+    private int codigo;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(Persona user) {
@@ -24,7 +25,7 @@ public class UserDetailsImpl implements UserDetails {
         } else if (user instanceof Moderador) {
             authorities.add(new SimpleGrantedAuthority("MODERADOR"));
         }
-        return new UserDetailsImpl(user.getEmail(), user.getContrasenia(), authorities);
+        return new UserDetailsImpl(user.getEmail(), user.getContrasenia(), user.getIdPersona(), authorities);
     }
 
     @Override
@@ -60,5 +61,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 }

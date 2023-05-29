@@ -1,9 +1,7 @@
 package co.edu.uniquindio.unimarket.test;
 
 import co.edu.uniquindio.unimarket.dto.DescuentoDTO;
-import co.edu.uniquindio.unimarket.dto.ProductoDescuentoDTO;
 import co.edu.uniquindio.unimarket.dto.ProductoGetDTO;
-import co.edu.uniquindio.unimarket.servicios.excepciones.descuento.DescuentoNoEncontradoException;
 import co.edu.uniquindio.unimarket.servicios.interfaces.DescuentoServicio;
 import co.edu.uniquindio.unimarket.servicios.interfaces.ProductoServicio;
 import jakarta.transaction.Transactional;
@@ -14,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 @Transactional

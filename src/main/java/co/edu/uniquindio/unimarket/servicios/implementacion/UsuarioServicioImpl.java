@@ -31,13 +31,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         validarCedulaExistente(usuarioDTO);
 
         Usuario usuario = convertir(usuarioDTO);
-        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
+        usuario.setContrasenia(passwordEncoder.encode(usuarioDTO.getContrasenia()));
         Usuario registro = usuarioRepo.save(usuario);
         return registro.getIdPersona();
     }
 
     @Override
-    public UsuarioGetDTO actualizarUsuario(int idUsuario, String contrasenia, UsuarioDTO usuarioDTO) throws Exception {
+    public UsuarioGetDTO actualizarUsuario(int idUsuario, UsuarioDTO usuarioDTO) throws Exception {
 
         validarEmailExistente(usuarioDTO);
 
@@ -45,7 +45,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         validarExistenciaUsuario(idUsuario);
 
-        validarContraseniaUsuario(idUsuario, contrasenia);
 
         Usuario usuario = convertir(usuarioDTO);
 
@@ -56,13 +55,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
     @Override
-    public int eliminarUsuario(int idUsuario, String contrasenia) throws Exception {
+    public int eliminarUsuario(int idUsuario) throws Exception {
 
 
         // Verificar que el usuario exista
         validarExistenciaUsuario(idUsuario);
-
-        validarContraseniaUsuario(idUsuario, contrasenia);
 
         usuarioRepo.deleteById(idUsuario);
 
@@ -82,14 +79,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario.get();
-    }
-
-    private void validarContraseniaUsuario(int idUsuario, String contrasenia) throws Exception {
-        Usuario usuario = obtener(idUsuario);
-
-        if (!passwordEncoder.matches(contrasenia, usuario.getContrasenia())) {
-            throw new ContraseniaUsuarioNoCoincideException("La contraseña no coincide con la del usuario");
-        }
     }
 
     // Metodo para verificar que el email no este duplicado

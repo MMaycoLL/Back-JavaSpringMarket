@@ -50,4 +50,5 @@ public interface ProductoServicio {
     void actualizarPrecio(int idProducto, float precio) throws Exception;
 
 
+
 }

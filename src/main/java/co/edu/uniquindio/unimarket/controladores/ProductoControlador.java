@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/producto")
 @SecurityRequirement(name = "bearerAuth")
@@ -145,4 +148,13 @@ public class ProductoControlador {
                         productoServicio.obtenerPrecioMinimoCategoria(categoria)));
 
     }
+
+    // listar categorias
+    @GetMapping("/listarCategorias")
+    public ResponseEntity<MensajeDTO> listarCategorias() throws Exception {
+        List<Categoria> categorias = Arrays.asList(Categoria.values());
+        MensajeDTO mensajeDTO = new MensajeDTO(HttpStatus.OK, false, categorias);
+        return ResponseEntity.status(HttpStatus.OK).body(mensajeDTO);
+    }
+
 }

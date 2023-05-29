@@ -24,9 +24,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeHttpRequests().anyRequest().permitAll();
 
-        /*
         http.authorizeHttpRequests().requestMatchers(
                         "/doc/**",
                         "/swagger-ui/**",
@@ -55,10 +53,9 @@ public class WebSecurityConfig {
                         "/api/producto/listarPrecio/**",
                         "/api/producto/listarNombre/**",
                         "/api/comentario/listar/**",
-                        "/api/calificacion/promedio/**").permitAll().anyRequest().authenticated();
+                        "/api/calificacion/promedio/**",
+                        "/api/imagenes/**").permitAll().anyRequest().authenticated();
 
-
-         */
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(authenticationProvider);

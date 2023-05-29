@@ -80,12 +80,12 @@ insert into producto_imagen
 values
     -- id, nombre, url
 
-    (1, "img1", "https://www.google.com/imagen1.jpg"),
-    (2, "img2", "https://www.google.com/imagen2.jpg"),
-    (3, "img3", "https://www.google.com/imagen3.jpg"),
-    (4, "img4", "https://www.google.com/imagen4.jpg"),
-    (5, "img5", "https://www.google.com/imagen5.jpg"),
-    (6, "img6", "https://www.google.com/imagen6.jpg");
+    (1, "img1", "https://picsum.photos/450/225"),
+    (2, "img2", "https://picsum.photos/450/225"),
+    (3, "img3", "https://picsum.photos/450/225"),
+    (4, "img4", "https://picsum.photos/450/225"),
+    (5, "img5", "https://picsum.photos/450/225"),
+    (6, "img6", "https://picsum.photos/450/225");
 
 
 insert into detalle_compra
